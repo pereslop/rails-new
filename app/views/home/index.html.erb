@@ -1,0 +1,45 @@
+<table class = "table table-striped">
+  <caption>Striped Table Layout</caption>
+
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>City</th>
+    <th>Pincode</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr>
+    <td>Tanmay</td>
+    <td>Bangalore</td>
+    <td>560001</td>
+  </tr>
+
+  <tr>
+    <td>Sachin</td>
+    <td>Mumbai</td>
+    <td>400003</td>
+  </tr>
+
+  <tr>
+    <td>Uma</td>
+    <td>Pune</td>
+    <td>411027</td>
+  </tr>
+  </tbody>
+
+</table>
+<% if user_signed_in? %>
+    <div class="page-header">
+    <h3 class="">you have succesfully signed in</h3>
+    <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+      </div>
+<% else %>
+
+    <button CLASS="btn btn-danger">DFGDF</button>
+    <h1> welcom to rails community</h1>
+    <%= link_to "Sign In", new_user_session_path, :method => :get %>
+    <%= link_to "Sign up", new_user_registration_path, :method => :get %>
+
+<% end %>
