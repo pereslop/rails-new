@@ -1,13 +1,13 @@
 <% if user_signed_in? %>
-    <div class="page-header">
+    <div class="page-header center text">
     <h3 class="">you have succesfully signed in</h3>
     <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
-      </div>
+    </div>
 <% else %>
-
-    <button CLASS="btn btn-danger">DFGDF</button>
-    <h1> welcom to rails community</h1>
-    <button class="btn btn-primary"><%= link_to "Sign In", new_user_session_path, :method => :get %></button>
-    <button class="btn btn-success"><%= link_to "Sign up", new_user_registration_path, :method => :get %></button>
+    <div class="center-text">
+      <h1> Welcome guest, please sign up or sing in</h1>
+      <button class="btn btn-primary"><%= link_to "Sign In", new_user_session_path, :method => :get %></button>
+      <button class="btn btn-success"><%= link_to "Sign up", new_user_registration_path, :method => :get %></button>
+    </div>
 
 <% end %>

@@ -1,2 +1,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+a {
+  color: white;
+}
+h1 {
+  text-align: center;
+}
+.center-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
