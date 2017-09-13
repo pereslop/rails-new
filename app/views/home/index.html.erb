@@ -1,7 +1,8 @@
 <% if user_signed_in? %>
     <div class="page-header center text">
-    <h3 class="">you have succesfully signed in</h3>
-    <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+    <h3 class="">Hello <strong><%= current_user.username %></strong></h3>
+    <button class="btn btn-danger"><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></button>
+      <button class="btn btn-success"><%= link_to "Edit profile", edit_user_registration_path, :method => :get %></button>
     </div>
 <% else %>
     <div class="center-text">
