@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   # get 'home/index'
   #
   root 'home#index'
+  get 'admin', to: 'home#admin'
 end

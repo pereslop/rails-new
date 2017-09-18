@@ -210,7 +210,7 @@ Devise.setup do |config|
   # config.sign_in_after_reset_password = true
 
   # ==> Configuration for :encryptable
-  # Allow you to use another hashing or encryption algorithm besides bcrypt (default).
+  # Allow you to use admin hashing or encryption algorithm besides bcrypt (default).
   # You can use :sha1, :sha512 or algorithms from others authentication tools as
   # :clearance_sha1, :authlogic_sha512 (then you should set stretches above to 20
   # for default behavior) and :restful_authentication_sha1 (then you should set
