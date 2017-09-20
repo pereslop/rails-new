@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+  before_action :admin?
+
   def index
     @users = collection
   end
@@ -45,7 +47,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:user_name, :role)
+    params.require(:user).permit(:username, :role)
   end
 
   def collection
