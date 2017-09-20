@@ -9,9 +9,14 @@
             th name
             th email
             th role
+            th action
         tbody
           tr
           -@users.each do |user|
             td = user.username
             td = user.email
             td = user.role
+            th
+              button
+              button
+              button

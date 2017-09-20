@@ -1,0 +1,15 @@
+body
+  header.navbar.navbar-inverse
+    .container
+      = link_to "Rails new", root_path, id: "logo"
+      nav
+        ul.nav.navbar-nav.navbar-right
+          - if user_signed_in?
+            - if current_user&.admin?
+                li
+                  = link_to "Users", admin_users_path, :method => :get
+            li
+              = link_to "Log out", destroy_user_session_path, method: :delete
+          - else
+            li
+              = link_to "Login", new_user_session_path, :method => :get
