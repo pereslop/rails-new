@@ -23,7 +23,11 @@
                   button.btn.btn-success.btn-sm
                     | edit
                   button.btn.btn-danger.btn-sm
-                    | delete
+                     = link_to 'delete',
+                             admin_user_path(user),
+                                        method: :delete,
+                                        data: { confirm: 'You sure' }
+
       - else
         h3
           | no items found

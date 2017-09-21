@@ -39,7 +39,6 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user = resource
-
     @user.destroy
     redirect_to admin_users_path
   end
