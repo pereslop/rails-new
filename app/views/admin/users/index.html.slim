@@ -3,15 +3,33 @@
     .col-md-3.col-lg-2
       h3 USERS
     .col-md-9.col-lg-10
-      table.table.table-striped
-        thead
-          tr
-            th name
-            th email
-            th role
-        tbody
-          tr
-          -@users.each do |user|
-            td = user.username
-            td = user.email
-            td = user.role
+      - unless @users.length < 1
+        table.table.table-striped
+          thead
+            tr
+              th name
+              th email
+              th role
+              th action
+          tbody
+            - @users.each do |user|
+              tr
+                td.username= link_to user.username, admin_user_path(user)
+                td.email= user.email
+                td.role= user.role
+                td
+                  button.btn.btn-success.btn-sm
+                    = link_to 'edit',
+                            edit_admin_user_url(user)
+                  button.btn.btn-danger.btn-sm
+                    = link_to 'delete',
+                             admin_user_path(user),
+                             method: :delete,
+                             data: { confirm: 'You sure' }
+        button.btn.btn-success
+          = link_to 'new user',
+                  new_admin_user_url
+
+      - else
+        h3
+          | no items found

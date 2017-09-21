@@ -39,7 +39,6 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user = resource
-
     @user.destroy
     redirect_to admin_users_path
   end
@@ -47,7 +46,9 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :role)
+    parameters = params.require(:user).permit(:username, :role, :email, :password)
+    parameters.delete(:password) if parameters[:password].empty?
+    parameters
   end
 
   def collection
