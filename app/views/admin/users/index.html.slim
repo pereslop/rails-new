@@ -29,7 +29,7 @@
         button.btn.btn-success
           = link_to 'new user',
                   new_admin_user_url
-
+        = will_paginate
       - else
         h3
           | no items found

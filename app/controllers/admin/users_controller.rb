@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :admin?
 
   def index
-    @users = collection
+    @users = User.paginate(page: params[:page])
   end
 
   def new
