@@ -14,7 +14,7 @@ RSpec.describe Admin::UsersController, type: :controller do
   end
 
   context 'user is logged as admin' do
-
+    # let(:user) { FactoryGirl.create(:user)}
     user = FactoryGirl.create(:user)
     sign_in user
 
