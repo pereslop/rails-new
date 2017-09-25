@@ -3,7 +3,16 @@ FactoryGirl.define do
   factory :user do
     email { Faker::Internet.email }
     username { Faker::Name.first_name }
-    password { Devise.friendly_token.first(8) }
     role 'user'
+    password 'qqqqqq'
+    password_confirmation 'qqqqqq'
+  end
+
+  factory :admin, class: User do
+    email { Faker::Internet.email }
+    username { Faker::Name.first_name }
+    role 'admin'
+    password 'qqqqqq'
+    password_confirmation 'qqqqqq'
   end
 end
