@@ -23,30 +23,36 @@ RSpec.describe Admin::UsersController, type: :controller do
       expect(response.status).to eq(200)
     end
 
+    it 'GET #show' do
+      get :index, params: {id: admin.id }
+      expect(response.status).to eq(200)
+    end
+
+    it 'GET #edit' do
+      get :index, params: {id: admin.id }
+      expect(response.status).to eq(200)
+    end
+
     it 'GET #new' do
       get :new
       expect(response.status).to eq(200)
     end
+    it 'DELETE #destroy' do
 
-  end
-
-  context 'admin can destroy' do
-    let(:user) { FactoryGirl.create(:admin) }
-    before(:each) do
-      sign_in user
-      delete :destroy, params: {id: user.id}
+      expect{ delete :destroy, params: { id: admin.id } }.to change(User, :count).by(-1)
     end
 
-    it 'success' do
-      expect{user.destroy}.to change(User, :count).by(0)
+    it 'POST #create' do
+      expect do
+        post :create, params: { user: FactoryGirl.attributes_for(:user) }
+      end.to change(User, :count).by(1)
     end
-    it 'shoold redirect root' do
-      expect redirect_to root_path
+
+    it  'Patch #update' do
+      new_name = Faker::Name.first_name
+      patch :update, params: { id: admin.id, user: { username: new_name } }
+      expect(admin.reload.username).to eq(new_name)
+      expect(response).to have_http_status(302)
     end
-  end
-
-  context 'admin can edit' do
-
-
   end
 end
