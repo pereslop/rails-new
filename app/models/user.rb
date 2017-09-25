@@ -26,5 +26,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   ROLES = [:user, :admin]
 
+  scope :ordered, -> { order(username: :asc) }
+
   enum role: ROLES
 end
