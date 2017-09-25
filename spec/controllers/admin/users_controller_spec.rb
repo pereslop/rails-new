@@ -52,7 +52,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       new_name = Faker::Name.first_name
       patch :update, params: { id: admin.id, user: { username: new_name } }
       expect(admin.reload.username).to eq(new_name)
-      expect(response).to have_http_status(302)
+      expect(response.status).to eq(302)
     end
   end
 end
