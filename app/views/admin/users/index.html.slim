@@ -3,8 +3,8 @@
     .col-md-3.col-lg-2
       h3 USERS
     .col-md-9.col-lg-10
-      - unless @users.length < 1
-        table.table.table-striped
+      - if  @users.any?
+        table.table.stable-striped
           thead
             tr
               th name
@@ -29,7 +29,7 @@
         button.btn.btn-success
           = link_to 'new user',
                   new_admin_user_url
-
+        = will_paginate
       - else
         h3
           | no items found
