@@ -10,10 +10,6 @@ FactoryGirl.define do
       end
     end
   end
-  factory :post do
-    content { Faker::Lorem.sentence(5) }
-  end
-
 
   trait :admin  do
     role :admin
