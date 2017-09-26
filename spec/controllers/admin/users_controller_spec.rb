@@ -14,7 +14,7 @@ RSpec.describe Admin::UsersController, type: :controller do
   end
 
   context 'user is logged as admin' do
-    let(:admin) { FactoryGirl.create(:admin) }
+    let(:admin) { FactoryGirl.create(:user, :admin) }
     before(:each) do
       sign_in admin
     end
@@ -24,12 +24,12 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
 
     it 'GET #show' do
-      get :index, params: {id: admin.id }
+      get :show, params: {id: admin.id }
       expect(response.status).to eq(200)
     end
 
     it 'GET #edit' do
-      get :index, params: {id: admin.id }
+      get :edit, params: {id: admin.id }
       expect(response.status).to eq(200)
     end
 
