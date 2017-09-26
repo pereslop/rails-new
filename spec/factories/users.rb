@@ -3,16 +3,10 @@ FactoryGirl.define do
   factory :user do
     email { Faker::Internet.email }
     username { Faker::Name.first_name }
-    role 'user'
-    password 'qqqqqq'
-    password_confirmation 'qqqqqq'
+    password { Faker::Internet.password}
   end
 
-  factory :admin, class: User do
-    email { Faker::Internet.email }
-    username { Faker::Name.first_name }
-    role 'admin'
-    password 'qqqqqq'
-    password_confirmation 'qqqqqq'
+  trait :admin  do
+    role :admin
   end
 end
