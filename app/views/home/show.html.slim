@@ -2,11 +2,13 @@
   .col-md-2
     h1
       =  @user.username
+      section
+        = render 'posts/new_post'
   .col-md-10
-    - if current_user.posts.any?
+    - if @user.posts.any?
       h3
-        = " #{current_user.posts.count} posts "
-        = render@posts
+        = " #{@user.posts.count} posts "
+        = render @posts
     - else
       h3.alert-warning
         | you don't have posts, please add first one
