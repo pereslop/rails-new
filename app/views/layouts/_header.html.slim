@@ -9,7 +9,7 @@ body
                 li
                   = link_to "admin panel", admin_users_path, method: :get
             li
-              = link_to "My profile", show_path, method: :get
+              = link_to "My profile", account_users_path, method: :get
             li
               = link_to "Logout", destroy_user_session_path, method: :delete
           - else
