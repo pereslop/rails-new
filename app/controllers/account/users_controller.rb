@@ -6,6 +6,7 @@ class Account::UsersController < AccountController
   def show
     @user = resource
     @posts = resource.posts
+    @post = resource.posts.build
   end
 
   def accounts
