@@ -13,6 +13,9 @@ class Post < ApplicationRecord
   belongs_to :user
 
   scope :ordered, -> { order(created_at: :desc)}
+
+  mount_uploader :picture, PictureUploader
+
 end
 
 # def @post.toggle_like(user)

@@ -13,7 +13,7 @@
           h4 you dont have any post, please add first one
         - else
           - @posts.each do |post|
-            li= post.content
+              = image_tag post.picture.url
     - else
       h3.alert-warning
         | you don't have posts, please add first one
