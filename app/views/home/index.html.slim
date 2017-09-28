@@ -15,10 +15,10 @@
           = link_to "View profile", account_users_path, method: :get
       .container
         - if current_user&.username
-          .row
-            .col-md-4
-              section
-                = render 'posts/new_post'
+          /.row
+          /  .col-md-4
+          /    section
+          /      = render 'posts/new_post'
     - else
       .center-text
         h1

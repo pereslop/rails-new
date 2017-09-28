@@ -8,5 +8,6 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     = render 'layouts/header'
-    = yield
+    .container
+      = yield
   /= any_login_here if defined?(AnyLogin)

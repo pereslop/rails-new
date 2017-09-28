@@ -1,11 +1,11 @@
-class PostsController < ApplicationController
+class Account::PostsController < ApplicationController
 
   def create
-    @post = current_user.posts.build(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to show_path
+      redirect_to account_user_path(current_user)
     else
-      redirect_to show_path
+      # redirect_to
     end
   end
 

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   namespace :account do
-    resources :users, only: [:show, :index, :accounts]
+    resources :users, only: [:show, :index]
     root 'users#index'
     resources :posts, only: [:create, :destroy]
   end
