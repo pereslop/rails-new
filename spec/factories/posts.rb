@@ -12,5 +12,6 @@
 FactoryGirl.define do
   factory :post do
     content { Faker::Lorem.sentence(5) }
+    picture { Faker::Avatar.image("my-own-slug")}
   end
 end

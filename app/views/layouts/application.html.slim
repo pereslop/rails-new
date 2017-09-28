@@ -10,4 +10,4 @@ html
     = render 'layouts/header'
     .container
       = yield
-  /= any_login_here if defined?(AnyLogin)
+  = any_login_here if defined?(AnyLogin)
