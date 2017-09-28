@@ -13,6 +13,7 @@
           h4 you dont have any post, please add first one
         - else
           - @posts.each do |post|
+            - if post.picture.url
               = image_tag post.picture.url
     - else
       h3.alert-warning
