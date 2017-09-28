@@ -14,6 +14,9 @@ class Account::PostsController < ApplicationController
   end
 
   def destroy
+    @user = resource
+    @user.destroy
+    redirect_to account_user_path(current_user)
   end
 
 

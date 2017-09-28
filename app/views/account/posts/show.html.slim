@@ -1,1 +1,6 @@
 = image_tag @post.picture.url
+button.btn.btn-danger.btn-sm
+  = link_to 'delete',
+          account_post_path(@post),
+          method: :delete,
+          data: { confirm: 'You sure' }
