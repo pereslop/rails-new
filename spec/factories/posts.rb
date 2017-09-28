@@ -12,6 +12,6 @@
 FactoryGirl.define do
   factory :post do
     content { Faker::Lorem.sentence(5) }
-    picture { Faker::Avatar.image("my-own-slug")}
+    picture Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/factories/GIGA.jpeg')))
   end
 end

@@ -3,4 +3,4 @@
 
 FactoryGirl.create(:user, :with_posts, :admin, email: 'pereslop@gmail.com', password: 'qqqqqq')
 FactoryGirl.create(:user, :with_posts, email: 'kvas@gmail.com', password: 'qqqqqq')
-FactoryGirl.create_list(:user, 99, :with_posts)
+FactoryGirl.create_list(:user, 10, :with_posts)
