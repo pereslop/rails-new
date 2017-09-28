@@ -9,6 +9,10 @@ class Account::PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = resource
+  end
+
   def destroy
   end
 

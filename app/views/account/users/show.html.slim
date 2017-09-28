@@ -14,7 +14,10 @@
         - else
           - @posts.each do |post|
             - if post.picture.url
-              = image_tag post.picture.url
+              /= link_to (image_tag post.picture.url, alt: 'photo post') account_posts_path(post)
+              = link_to 'sddddd',
+                      account_post_path(post),
+                      method: :get
     - else
       h3.alert-warning
         | you don't have posts, please add first one
