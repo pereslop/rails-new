@@ -1,6 +1,18 @@
-h1 Account::Users#show
-p Find me in app/views/account/users/show.html.slim
 
-//if current_user == @user
-// render 'new post'
-//=render 'posts'
+.row
+  .col-md-2
+    h1=  @user.username
+      section
+        = render 'posts/new_post'
+  .col-md-10
+    - if current_user.posts.any?
+      h5
+        = " #{@user.posts.count} posts "
+        - if @user.posts.empty?
+          h4 you dont have any post, please add first one
+        - else
+          - @posts.each do |post|
+            li= post.content
+    - else
+      h3.alert-warning
+        | you don't have posts, please add first one

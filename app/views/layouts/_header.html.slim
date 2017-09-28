@@ -2,6 +2,7 @@ body
   header.navbar.navbar-inverse
     .container
       = link_to "Rails new", root_path, id: "logo"
+      = link_to 'users', account_users_path
       nav
         ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
@@ -9,7 +10,7 @@ body
                 li
                   = link_to "admin panel", admin_users_path, method: :get
             li
-              = link_to "My profile", account_users_path, method: :get
+              = link_to "My profile", account_user_path(current_user), method: :get
             li
               = link_to "Logout", destroy_user_session_path, method: :delete
           - else

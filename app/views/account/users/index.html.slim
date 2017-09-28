@@ -1,19 +1,5 @@
-.row
-  .col-md-2
-    h1
-      =  current_user.username
-      section
-        = render 'posts/new_post'
-  .col-md-10
-    - if current_user.posts.any?
-      h5
-        = " #{current_user.posts.count} posts "
-        - if current_user.posts.empty?
-          h4 you dont have any post, please add first one
-        - else
-          - @posts.each do |post|
-            li
-              = post.content
-    - else
-      h3.alert-warning
-        | you don't have posts, please add first one
+h1 for users account
+
+ul
+  - @users.each do |user|
+    li= link_to user.username, account_user_path(user)

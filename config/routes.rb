@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
+  root 'home#index'
   devise_for :users,
     controllers: {
         sessions: 'account/users/sessions'
     }
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # get 'home/index'
   #
-  root 'home#index'
   get 'show', to: 'home#show'
 
   namespace :admin do
@@ -16,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   namespace :account do
-    resources :users, only: [:show, :index]
+    resources :users, only: [:show, :index, :accounts]
     root 'users#index'
     resources :posts, only: [:create, :destroy]
   end
