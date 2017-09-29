@@ -1,12 +1,12 @@
 class Account::UsersController < AccountController
   def index
-    @users = User.ordered
+    @users = collection
   end
 
   def show
     @user = resource
-    @posts = resource.posts
-    @post = resource.posts.new
+    @posts = @user.posts
+    @post = @user.posts.new
   end
 
   private
@@ -15,7 +15,7 @@ class Account::UsersController < AccountController
   end
 
   def collection
-    User.all
+    User.ordered
   end
 
   def resource

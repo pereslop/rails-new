@@ -27,7 +27,7 @@ class Account::PostsController < ApplicationController
   end
 
   def collection
-    current_user.posts.ordered
+    Post.ordered
   end
 
   def resource
