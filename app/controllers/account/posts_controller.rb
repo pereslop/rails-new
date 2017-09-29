@@ -1,5 +1,4 @@
 class Account::PostsController < ApplicationController
-
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
@@ -19,11 +18,15 @@ class Account::PostsController < ApplicationController
     redirect_to account_user_path(current_user)
   end
 
-
+  def toggle_like
+    @post = resource
+    current_user.toggle_like!(@post)
+    redirect_back(fallback_location: account_post_path(@post))
+  end
   private
 
   def post_params
-    params.require(:post).permit(:content, :picture)
+    params.require(:post).permit(:content, :picture, :likees_count)
   end
 
   def collection

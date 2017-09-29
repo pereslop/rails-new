@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   namespace :account do
     resources :users, only: [:show, :index]
     root 'users#index'
-    resources :posts, only: [:create, :destroy, :show, :destroy] do
-      member
+    resources :posts, only: [:create, :destroy, :show, :likes] do
+      member do
+        get 'toggle_like', to: 'posts#toggle_like', as: :toggle_like
+      end
     end
   end
-
 end

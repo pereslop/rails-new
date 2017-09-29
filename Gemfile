@@ -70,3 +70,4 @@ gem 'simple_form'
 gem 'any_login'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem "socialization"

@@ -11,27 +11,9 @@
 
 class Post < ApplicationRecord
   belongs_to :user
-
+  acts_as_likeable
   scope :ordered, -> { order(created_at: :desc)}
 
   mount_uploader :picture, PictureUploader
 
 end
-
-# def @post.toggle_like(user)
-#   like = self.likes.find_by(:user_id, user.id)
-#
-#   if like.present?
-#     like.destroy
-#   else
-#     self.likes.create(user: user)
-#   end
-# end
-#
-# controller
-#
-# def toogle_like
-#   @post = Post.find(params[:id])
-#
-#   redirect_back(fallback_location: post_path(post))
-# end
