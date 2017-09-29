@@ -7,16 +7,18 @@
     = render 'account/post/form'
   .col-md-9
     - if current_user.posts.any?
-      h5
+      p
         = " #{@user.posts.count} posts "
         - if @user.posts.empty?
           h4 you dont have any post, please add first one
         - else
+          .collage
           - @posts.each do |post|
-            - if post.picture.url
-              /= link_to (image_tag post.picture.url, alt: 'photo post') account_posts_path(post)
-              = link_to account_post_path(post), method: :get do
-                = image_tag post.picture.url
+            .box
+              - if post.picture.url
+                /= link_to (image_tag post.picture.url, alt: 'photo post') account_posts_path(post)
+                = link_to account_post_path(post), method: :get do
+                  = image_tag post.picture.url
     - else
       h3.alert-warning
         | you don't have posts, please add first one
