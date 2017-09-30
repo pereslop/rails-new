@@ -1,4 +1,8 @@
 class Account::PostsController < ApplicationController
+  def index
+    @posts = collection
+  end
+
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
@@ -30,7 +34,7 @@ class Account::PostsController < ApplicationController
   end
 
   def collection
-    Post.ordered
+    Post.all.ordered
   end
 
   def resource
