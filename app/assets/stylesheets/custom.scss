@@ -6,9 +6,10 @@ h1 {
 }
 .center-text {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
 }
 button a {
   color: white;
@@ -27,7 +28,7 @@ button a {
   }
 }
 img {
-    margin-bottom:20px;
+    margin: 4px 0;
 }
 
 .button {
@@ -44,4 +45,21 @@ img {
   background-color: #1155ff;
 }
 
+.row {
+  margin-top: 5px;
+}
 
+.new_post {
+  overflow: hidden;
+  position: relative;
+}
+
+.new_post input[type=submit] {
+  background-color: #1155ff;
+  color: white;
+  font-size: 15px;
+  padding: 5px;
+  border-width: 0;
+  border-radius: 4px;
+  margin-top: 4px;
+}

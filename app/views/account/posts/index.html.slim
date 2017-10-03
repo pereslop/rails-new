@@ -6,4 +6,6 @@
         - if post.picture.url
           /= link_to (image_tag post.picture.url, alt: 'photo post') account_posts_path(post)
           = link_to account_post_path(post), method: :get do
-            = image_tag post.picture.url, class: 'img-responsive'  
+            = image_tag post.picture.url, class: 'img-responsive'
+          button.btn.btn-danger.btn-sm.center-block
+            = link_to "like #{post.likers_count}", toggle_like_account_post_path(post)
