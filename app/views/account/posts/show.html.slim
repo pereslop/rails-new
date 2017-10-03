@@ -1,11 +1,13 @@
-= image_tag @post.picture.url
-p
-  = @post.content
-button.btn.btn-danger.btn-sm
-  = link_to "like #{@post.likers_count}", toggle_like_account_post_path(@post)
-- if current_user.id == @post.user_id
-  button.btn.btn-danger.btn-sm
-    = link_to 'delete',
-            account_post_path(@post),
-            method: :delete,
-            data: { confirm: 'You sure' }
+.container
+  .row
+    p.post-content
+      = @post.content
+    - if current_user.id == @post.user_id
+      button.btn.btn-danger.btn-sm
+        = link_to 'delete',
+                account_post_path(@post),
+                method: :delete,
+                data: { confirm: 'You sure' }
+  = image_tag @post.picture.url, class: 'center-block'
+  button.btn.btn-danger.btn-sm.center-block
+    = link_to "like #{@post.likers_count}", toggle_like_account_post_path(@post)
