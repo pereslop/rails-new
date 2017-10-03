@@ -10,9 +10,10 @@
     .col-md-9
       .row
         - @posts.each do |post|
-          .col-md-3.col-sm-4.col-xs-6
+          .col-md-3.col-sm-4.col-xs-6.text-center
             - if post.picture.url
               = link_to account_post_path(post), method: :get do
                 = image_tag post.picture.url, class: 'img-responsive'
-                button.btn.btn-danger.btn-sm.center-block
-                  = link_to "like #{post.likers_count}", toggle_like_account_post_path(post)
+              = link_to "Like #{post.likers_count}",
+                toggle_like_account_post_path(post),
+                class: ['button', 'button-small']

@@ -5,20 +5,6 @@ class Admin::UsersController < ApplicationController
     @users = User.ordered.paginate(page: params[:page])
   end
 
-  def new
-    @user = collection.new
-  end
-
-  def create
-    @user = collection.new(user_params)
-
-    if @user.save
-      redirect_to admin_user_path(@user)
-    else
-      render :new
-    end
-  end
-
   def show
     @user = resource
   end
