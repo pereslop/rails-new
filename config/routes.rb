@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'show', to: 'home#show'
 
   namespace :admin do
-    resources :users
+    resources :users, only: [:index, :edit, :show, :delete]
     root 'users#index'
   end
 

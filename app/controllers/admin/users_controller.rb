@@ -46,7 +46,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    parameters = params.require(:user).permit(:username, :role, :email, :password)
+    parameters = params.require(:user).permit(:username, :role)
 
     if parameters[:password].nil? || parameters[:password].empty?
       parameters.delete(:password)
