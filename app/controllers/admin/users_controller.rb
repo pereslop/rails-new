@@ -2,21 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :admin?
 
   def index
-    @users = User.ordered.paginate(page: params[:page])
-  end
-
-  def new
-    @user = collection.new
-  end
-
-  def create
-    @user = collection.new(user_params)
-
-    if @user.save
-      redirect_to admin_user_path(@user)
-    else
-      render :new
-    end
+    @users = collection.page(params[:page]).per(24)
   end
 
   def show
@@ -46,7 +32,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    parameters = params.require(:user).permit(:username, :role, :email, :password)
+    parameters = params.require(:user).permit(:username, :role)
 
     if parameters[:password].nil? || parameters[:password].empty?
       parameters.delete(:password)

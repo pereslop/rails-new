@@ -26,10 +26,7 @@
                              admin_user_path(user),
                              method: :delete,
                              data: { confirm: 'You sure' }
-        button.btn.btn-success
-          = link_to 'new user',
-                  new_admin_user_url
-        = will_paginate
+        = paginate @users
       - else
         h3
           | no items found

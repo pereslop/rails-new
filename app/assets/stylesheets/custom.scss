@@ -9,6 +9,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-content: center;
+  text-align: center;
 }
 button a {
   color: white;
@@ -16,6 +17,7 @@ button a {
 #logo {
   float: left;
   margin-right: 10px;
+  margin-bottom: 4px;
   font-size: 1.7em;
   color: #fff;
   text-transform: uppercase;
@@ -25,4 +27,60 @@ button a {
   &:hover {
     color: white;
   }
+}
+img {
+    margin: 4px 0;
+    width: 100%;
+}
+
+.button {
+  font-size: 15px;
+  background-color: #1155ff;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 2px 0;
+}
+.button-green {
+  background-color: #208a12;
+}
+.button-blue {
+  background-color: #1155ff;
+}
+.button-small {
+  font-size: 10px;
+  padding: 4px;
+  margin: 5px 0;
+}
+
+.row {
+  margin-top: 5px;
+}
+
+.new_post {
+  overflow: hidden;
+  position: relative;
+}
+
+.new_post input[type=submit] {
+  background-color: #1155ff;
+  color: white;
+  font-size: 15px;
+  padding: 5px;
+  border-width: 0;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.post-content {
+  display: inline-block;
+  margin-left: 11.5%;
+}
+.post-image {
+  margin-bottom: 20px;
+  width: 80%;
+}
+.row button {
+  float: right;
+  margin-right: 11.5%;
 }

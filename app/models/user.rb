@@ -16,16 +16,21 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  username               :string
-#  role_id                :integer
+#  role                   :integer          default("user")
 #
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :posts, dependent: :destroy
+
+   validates :username, presence: true,
+    uniqueness: { case_sensitive: false},
+    length: { minimum: 3 }
+  acts_as_liker
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   ROLES = [:user, :admin]
-
   scope :ordered, -> { order(username: :asc) }
 
   enum role: ROLES
