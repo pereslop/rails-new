@@ -17,3 +17,4 @@
               = link_to "Like #{post.likers_count}",
                 toggle_like_account_post_path(post),
                 class: ['button', 'button-small']
+        = paginate @posts

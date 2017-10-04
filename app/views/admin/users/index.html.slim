@@ -26,6 +26,7 @@
                              admin_user_path(user),
                              method: :delete,
                              data: { confirm: 'You sure' }
+        = paginate @users
       - else
         h3
           | no items found

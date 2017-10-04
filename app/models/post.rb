@@ -12,8 +12,8 @@
 class Post < ApplicationRecord
   belongs_to :user
   acts_as_likeable
-  scope :ordered, -> { order(created_at: :desc)}
 
+  scope :ordered, -> { order(created_at: :desc)}
   mount_uploader :picture, PictureUploader
 
 end

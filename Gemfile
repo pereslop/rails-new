@@ -18,8 +18,8 @@ gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 gem 'bootstrap-sass', '3.3.7'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
-gem 'will_paginate',           '3.1.5'
-gem 'bootstrap-will_paginate', '1.0.0'
+# gem 'will_paginate',           '3.1.5'
+# gem 'bootstrap-will_paginate', '1.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -71,4 +71,5 @@ gem 'simple_form'
 gem 'any_login'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
-gem "socialization"
+gem 'socialization'
+gem 'kaminari'

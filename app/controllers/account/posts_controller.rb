@@ -1,6 +1,6 @@
 class Account::PostsController < ApplicationController
   def index
-    @posts = collection
+    @posts = collection.page(params[:page]).per(24)
   end
 
   def create
