@@ -1,4 +1,4 @@
-.container
+.container.post data-post-id=@post.id
   .row
     p.post-content
       = @post.content
@@ -10,6 +10,4 @@
                 data: { confirm: 'You sure' }
     = image_tag @post.picture.url, class: ['center-block', 'post-image']
     .text-center
-      = link_to "Like #{@post.likers_count}",
-        toggle_like_account_post_path(@post),
-        class: 'button'
+      = render 'account/posts/like_btn', post: @post

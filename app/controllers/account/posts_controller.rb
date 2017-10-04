@@ -26,7 +26,11 @@ class Account::PostsController < ApplicationController
   def toggle_like
     @post = resource
     current_user.toggle_like!(@post)
-    redirect_back(fallback_location: account_post_path(@post))
+    @post.reload
+
+    respond_to do |format|
+      format.js { render 'account/posts/update_button' }
+    end
   end
 
   private
