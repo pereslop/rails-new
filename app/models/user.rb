@@ -22,16 +22,21 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  has_many :posts, dependent: :destroy
-
-   validates :username, presence: true,
-    uniqueness: { case_sensitive: false},
-    length: { minimum: 3 }
-  acts_as_liker
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
   ROLES = [:user, :admin]
-  scope :ordered, -> { order(username: :asc) }
+
+  has_many :posts, dependent: :destroy
 
   enum role: ROLES
+
+  validates :username,
+    presence: true,
+    uniqueness: { case_sensitive: false },
+    length: { minimum: 3 }
+
+  scope :ordered, -> { order(username: :asc) }
+
+  acts_as_liker
 end
