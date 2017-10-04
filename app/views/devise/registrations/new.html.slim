@@ -6,7 +6,7 @@
         h4
           = t('.sign_up', default: 'Sign up')
       .panel-body
-        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form' }) do |f|
+        = form_for(resource, rails as: resource_name, url: registration_path(resource_name), html: { role: 'form' }) do |f|
           = devise_error_messages!
           .form-group
             = f.label :email
