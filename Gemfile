@@ -18,9 +18,6 @@ gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 gem 'bootstrap-sass', '3.3.7'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
-# gem 'will_paginate',           '3.1.5'
-# gem 'bootstrap-will_paginate', '1.0.0'
-
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes

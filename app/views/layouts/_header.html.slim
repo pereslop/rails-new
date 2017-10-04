@@ -14,8 +14,8 @@ body
                 b.caret
               ul.dropdown-menu
                 li= link_to "My profile", account_user_path(current_user), method: :get
-                li= link_to "Edit profile", edit_user_registration_path, :method => :get
+                li= link_to "Edit profile", edit_user_registration_path, method: :get
                 li.divider
-                li= link_to "Sign Out", destroy_user_session_path, :method => :delete
+                li= link_to "Sign Out", destroy_user_session_path, method: :delete
           - else
-            li= link_to "Login", new_user_session_path, :method => :get
+            li= link_to "Login", new_user_session_path, method: :get

@@ -24,9 +24,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :posts, dependent: :destroy
 
-   validates :username, :presence => true,
-    :uniqueness => {:case_sensitive => false},
-    :length => { :minimum => 3 }
+   validates :username, presence: true,
+    uniqueness: { case_sensitive: false},
+    length: { minimum: 3 }
   acts_as_liker
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
