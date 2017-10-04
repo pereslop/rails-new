@@ -10,7 +10,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
-!/log/.keepпь
+!/log/.keep
 !/tmp/.keep
 
 /node_modules
@@ -19,8 +19,4 @@
 .byebug_history
 .idea
 
-/public/uploads/
-!/public/uploads/
-!/public/uploads/post/
-!/public/uploads/tmp/
-
+/public/uploads/*

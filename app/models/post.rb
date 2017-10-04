@@ -14,11 +14,12 @@
 
 class Post < ApplicationRecord
   belongs_to :user
+
+  scope :ordered, -> { order(created_at: :desc) }
+
   acts_as_likeable
 
-  validates :picture, presence: true
-
-  scope :ordered, -> { order(created_at: :desc)}
   mount_uploader :picture, PictureUploader
 
+  validates :picture, presence: true
 end

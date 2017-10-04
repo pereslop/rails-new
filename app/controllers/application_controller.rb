@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  include ApplicationHelper
   protect_from_forgery with: :exception
+
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
 
-  def admin?
-    redirect_to root_path unless current_user&.admin?
+  def require_admin!
+    return if current_user.admin?
+
+    redirect_to root_path
   end
 end
