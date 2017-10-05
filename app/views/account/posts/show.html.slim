@@ -21,3 +21,5 @@
     = image_tag @post.picture.url, class: ['center-block', 'post-image']
     .text-center
       = render 'account/posts/like_btn', post: @post
+  .row
+    = render 'account/comment/form'

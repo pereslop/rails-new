@@ -34,7 +34,7 @@ class User < ApplicationRecord
   ROLES = [:user, :admin]
 
   has_many :posts, dependent: :destroy
-
+  has_many :comments
   enum role: ROLES
 
   validates :username,
