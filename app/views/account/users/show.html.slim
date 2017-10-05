@@ -2,6 +2,8 @@
   .row
     .col-md-3.text-center
       h1=  @user.username
+      - if @user.avatar.url.present?
+        = image_tag(@user.avatar.url)
       - if @user.id == current_user.id
         = link_to "Edit profile", edit_user_registration_path, method: :get
       - if @user.id == current_user.id

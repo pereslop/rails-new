@@ -6,7 +6,7 @@
         h4
           = t('.title', resource: resource_class.model_name.human , default: "Edit #{resource_name.to_s.humanize}")
       .panel-body
-        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f|
           = devise_error_messages!
           .form-group
             = f.label :email
@@ -14,6 +14,10 @@
           .form-group
             = f.label :username
             = f.text_field :username, autofocus: true, class: 'form-control'
+          - if current_user.avatar.url.present?
+            = image_tag(current_user.avatar.url)
+            = f.file_field :avatar
+            = f.hidden_field :avatar_cache
           .form-group
             = f.label :password
             i
