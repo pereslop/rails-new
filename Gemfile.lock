@@ -99,6 +99,8 @@ GEM
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
     ffi (1.9.18)
+    font-awesome-sass (4.7.0)
+      sass (>= 3.2)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     i18n (0.8.6)
@@ -275,6 +277,7 @@ DEPENDENCIES
   devise-bootstrap-views
   factory_girl_rails
   faker!
+  font-awesome-sass (~> 4.7.0)
   jbuilder (~> 2.5)
   jquery-rails
   kaminari
