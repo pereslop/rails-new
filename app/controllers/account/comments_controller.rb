@@ -4,7 +4,7 @@ class Account::CommentsController < ApplicationController
   def create
     @comment = @post.comments.create(comment_params)
     @comment.user_id = current_user.id
-    @comment.save
+    flash[:danger] = "Comment #{@comment.errors.messages}" unless @comment.save
     redirect_to account_post_path(find_post)
   end
 

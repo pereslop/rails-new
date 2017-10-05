@@ -4,5 +4,5 @@ class Comment < ApplicationRecord
 
   scope :ordered, -> { order(created_at: :desc) }
 
-  validates :content, presence: true
+  validates :content, presence: true, length: { maximum: 120}
 end
