@@ -1,2 +1,27 @@
-- @comments.each do |comment|
-  p= comment.content
+.container
+  .row
+    .col-md-2
+    .col-md-6
+      - @comments.each do |comment|
+        .row.comment
+          .col-xs-1
+            = link_to account_user_path(comment.user), method: :get do
+              - if comment.user.avatar.url
+                = image_tag comment.user.avatar.url, class: 'img-responsive'
+              - else
+                = image_tag ('britni.png'), class: 'img-responsive'
+            =link_to "#{comment.user.username}", account_user_path(comment.user), class: 'center-text'
+          .col-xs-10
+            p.post-time= "Created #{time_ago_in_words(comment.created_at)} ago"
+            p= comment.content
+          .col-xs-1
+            - if comment.user_id == current_user.id || current_user.admin?
+              button.btn.btn-danger.btn-xs
+                = link_to 'delete', account_post_comment_path(comment.post, comment),
+                        method: :delete
+              button.btn.btn-success.btn-xs
+                = link_to 'edit', url: '#'
+  .row
+    .col-md-6
+    .col-md-3
+      = render 'account/comment/form'
