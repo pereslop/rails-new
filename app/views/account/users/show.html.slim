@@ -16,8 +16,5 @@
             - if post.picture.url
               = link_to account_post_path(post), method: :get do
                 = image_tag post.picture.url, class: 'img-responsive'
-
-
-
               = render 'account/posts/like_btn', post: post
         = paginate @posts
