@@ -5,12 +5,8 @@ class Account::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    if @post.save
-      redirect_to account_user_path(current_user)
-    else
-      flash[:danger] = "Post #{@post.errors.messages}"
-      redirect_to account_user_path(current_user)
-    end
+    flash[:danger] = "Post #{@post.errors.messages}" unless @post.save
+    redirect_to account_user_path(current_user)
   end
 
   def show
