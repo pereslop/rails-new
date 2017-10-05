@@ -1,6 +1,6 @@
 class Account::CommentsController < ApplicationController
  before_action :find_post
- before_action :resource, only: [:destroy]
+ before_action :resource, only: [:destroy, :edit, :update]
 
   def create
     @comment = @post.comments.create(comment_params)
@@ -9,10 +9,23 @@ class Account::CommentsController < ApplicationController
     redirect_to account_post_path(find_post)
   end
 
- def destroy
+   def edit
+      @comment = resource
+   end
+
+  def update
+   @comment = resource
+    if @comment.update(comment_params)
+      redirect_to account_post_path(find_post)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
    @comment.destroy
    redirect_to account_post_path(@post)
- end
+  end
 
   private
 

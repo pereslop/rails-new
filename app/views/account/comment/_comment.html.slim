@@ -20,7 +20,8 @@
                 = link_to  account_post_comment_path(comment.post, comment), method: :delete do
                   i#my-icon.fa.fa-trash.strong
               button.btn.btn-success.btn-xs
-                i#my-icon.fa.fa-pencil.strong
+                =link_to  edit_account_post_comment_url(comment.post, comment) do
+                  i#my-icon.fa.fa-pencil.strong
   .row
     .col-md-6
     .col-md-3
