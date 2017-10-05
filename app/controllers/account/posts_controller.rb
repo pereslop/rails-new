@@ -27,6 +27,7 @@ class Account::PostsController < ApplicationController
     current_user.toggle_like!(@post)
     redirect_back(fallback_location: account_post_path(@post))
   end
+
   private
 
   def post_params

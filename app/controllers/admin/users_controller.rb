@@ -1,6 +1,4 @@
-class Admin::UsersController < ApplicationController
-  before_action :admin?
-
+class Admin::UsersController < AdminController
   def index
     @users = collection.page(params[:page]).per(24)
   end
