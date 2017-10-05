@@ -2,7 +2,10 @@
   .row
     .col-sm-1
       = link_to account_user_path(@post.user), method: :get do
-        = image_tag @post.user.avatar.url, class: 'img-responsive'
+        - if @post.user.avatar.url
+          = image_tag @post.user.avatar.url, class: 'img-responsive'
+        - else
+          = image_tag ('britni.png'), class: 'img-responsive'
     .col-sm-1
       h3=@post.user.username
     .col-sm-8
