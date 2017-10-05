@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-md-2
+    .col-md-6
+      = render post.comments
+
+  .row
+    .col-md-6
+    .col-md-3
+      = render 'account/comments/form', comment: post.comments.build

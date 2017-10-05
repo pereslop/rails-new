@@ -1,3 +1,1 @@
-= simple_form_for ([:account, @post, @comment]) do |f|
-  = f.text_area :content
-  = f.submit
+= render 'account/comments/form', comment: @comment
