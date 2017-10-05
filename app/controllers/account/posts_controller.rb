@@ -4,12 +4,9 @@ class Account::PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
-    if @post.save
-      redirect_to account_user_path(current_user)
-    else
-      # redirect_to
-    end
+    @post = current_user.posts.build(post_params)
+    flash[:danger] = "Post #{@post.errors.messages}" unless @post.save
+    redirect_to account_user_path(current_user)
   end
 
   def show
@@ -25,7 +22,11 @@ class Account::PostsController < ApplicationController
   def toggle_like
     @post = resource
     current_user.toggle_like!(@post)
-    redirect_back(fallback_location: account_post_path(@post))
+    @post.reload
+
+    respond_to do |format|
+      format.js { render 'account/posts/update_button' }
+    end
   end
 
   private
