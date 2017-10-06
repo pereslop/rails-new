@@ -1,4 +1,4 @@
-.row.comment
+.row
   .col-xs-1
     = link_to account_user_path(comment.user), method: :get do
       - if comment.user.avatar.url
@@ -12,8 +12,8 @@
   .col-xs-1
     - if comment.user_id == current_user.id || current_user.admin?
       button.btn.btn-danger.btn-xs
-        = link_to  account_post_comment_path(comment.post, comment), method: :delete do
-          i#my-icon.fa.fa-trash.strong
+        = link_to  account_post_comment_path(comment.post, comment), method: :delete, id: "#{comment.id}_delete", remote: true do
+          i.fa.fa-trash.strong
       button.btn.btn-success.btn-xs
         =link_to  edit_account_post_comment_url(comment.post, comment) do
-          i#my-icon.fa.fa-pencil.strong
+          i.fa.fa-pencil.strong

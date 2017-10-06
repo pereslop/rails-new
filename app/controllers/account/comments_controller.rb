@@ -24,7 +24,13 @@ class Account::CommentsController < ApplicationController
 
   def destroy
    @comment.destroy
-   redirect_to account_post_path(@post)
+   respond_to do |format|
+     format.html do
+    flash[:success] = 'Comment deleted.'
+    redirect_to account_post_path(@post)
+     end
+     format.js
+   end
   end
 
   private
