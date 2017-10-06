@@ -14,7 +14,7 @@ class Account::PostsController < ApplicationController
     @comments = Comment.where(post_id: @post).ordered
   end
 
-  def destro
+  def destroy
     @user = resource
     @user.destroy
     redirect_to account_user_path(current_user)

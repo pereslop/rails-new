@@ -7,10 +7,6 @@ class Account::CommentsController < ApplicationController
     @comment.user_id = current_user.id
     if @comment.save
       respond_to do |format|
-        format.html do
-          flash[:success] = 'Comment posted'
-           redirect_to account_post_path(find_post)
-        end
         format.js
       end
     end
@@ -19,12 +15,17 @@ class Account::CommentsController < ApplicationController
 
    def edit
       @comment = resource
+     respond_to do |format|
+       format.js
+     end
    end
 
   def update
    @comment = resource
     if @comment.update(comment_params)
-      redirect_to account_post_path(find_post)
+      respond_to do |format|
+        flash[:success] = 'Comment updated'
+      end
     else
       render :edit
     end
