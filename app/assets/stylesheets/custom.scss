@@ -58,12 +58,12 @@ img {
   margin-top: 5px;
 }
 
-.new_post {
-  overflow: hidden;
-  position: relative;
+.simple_form {
+  display: flex;
+  flex-direction: column;
 }
 
-.new_post input[type=submit] {
+.simple_form input[type=submit] {
   background-color: #1155ff;
   color: white;
   font-size: 15px;
@@ -71,6 +71,14 @@ img {
   border-width: 0;
   border-radius: 4px;
   margin-top: 4px;
+}
+.simple_form.edit_comment input[type=submit] {
+  background-color: #208a12;
+  color: white;
+  font-size: 10px;
+  margin: 2px;
+  width: 20%;
+  align-self: center;
 }
 
 .post-content {
@@ -90,6 +98,14 @@ img {
   font-size: 80%;
   color: rgba(67,61,72,0.56);
 }
-#comments {
+.comment {
   background-color: rgba(241, 240, 239, 0.89);
+}
+
+ul {
+  list-style-type: none;
+}
+
+.row[id^=this-comment-content-] {
+  padding-right: 25px;
 }

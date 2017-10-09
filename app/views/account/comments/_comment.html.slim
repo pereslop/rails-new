@@ -1,4 +1,4 @@
-.row id = "this-comment-content-#{comment.id}"
+.row.comment id = "this-comment-content-#{comment.id}"
   .col-xs-1
     = link_to account_user_path(comment.user), method: :get do
       - if comment.user.avatar.url
@@ -9,28 +9,13 @@
   .col-xs-10
     p.post-time= "Created #{time_ago_in_words(comment.created_at)} ago"
     p= comment.content
-    p= comment.id
   .col-xs-1
     - if comment.user_id == current_user.id || current_user.admin?
-      ul.comment-menu
-        li.dropdown
+      ul.comment-menu.menu-comment-line
+        li
           a.dropdown-toggle.menu-right-comment aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
             span.caret
               ul.dropdown-menu
                 li= link_to 'Delete', account_post_comment_path(comment.post, comment), method: :delete, id: "#{comment.id}_delete", remote: true
                 li.divider role="separator"
                 li=link_to 'Edit', edit_account_post_comment_path(comment.post, comment), remote: true
-
-
-
-
-
-
-
-
-      /button.btn.btn-danger.btn-xs
-      /  = link_to  account_post_comment_path(comment.post, comment), method: :delete, id: "#{comment.id}_delete", remote: true do
-      /    i.fa.fa-trash.strong
-      /button.btn.btn-success.btn-xs
-      /  =link_to  edit_account_post_comment_url(comment.post, comment) do
-      /    i.fa.fa-pencil.strong
