@@ -11,7 +11,7 @@ class Account::PostsController < ApplicationController
 
   def show
     @post = resource
-    @comments = Comment.where(post_id: @post).ordered
+    @comments = @post.comments.ordered
   end
 
   def destroy
