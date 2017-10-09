@@ -13,21 +13,22 @@ class Account::CommentsController < ApplicationController
     flash[:danger] = "Comment #{@comment.errors.messages}" unless @comment.save
   end
 
-   def edit
-      @comment = resource
-     respond_to do |format|
-       format.js
-     end
+  def edit
+    @comment = resource
+   respond_to do |format|
+     format.js
    end
+  end
 
   def update
    @comment = resource
     if @comment.update(comment_params)
       respond_to do |format|
         flash[:success] = 'Comment updated'
+        format.js
       end
     else
-      render :edit
+      flash[:alert] = 'Updating canseled'
     end
   end
 

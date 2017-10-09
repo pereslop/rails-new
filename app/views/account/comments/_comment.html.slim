@@ -1,4 +1,4 @@
-.row
+.row id = "this-comment-content-#{comment.id}"
   .col-xs-1
     = link_to account_user_path(comment.user), method: :get do
       - if comment.user.avatar.url
@@ -8,8 +8,7 @@
     =link_to "#{comment.user.username}", account_user_path(comment.user), class: 'center-text'
   .col-xs-10
     p.post-time= "Created #{time_ago_in_words(comment.created_at)} ago"
-    p id = "this-comment-content-#{comment.id}"
-      = comment.content
+    p= comment.content
     p= comment.id
   .col-xs-1
     - if comment.user_id == current_user.id || current_user.admin?
@@ -24,9 +23,6 @@
 
 
 
-
-
-s
 
 
 
