@@ -13,7 +13,6 @@ class Admin::UsersController < AdminController
 
   def update
     @user = resource
-
     if @user.update(user_params)
       redirect_to admin_users_path
     else
