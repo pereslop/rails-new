@@ -29,7 +29,6 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
 
     it 'DELETE #destroy' do
-
       expect{ delete :destroy, params: { id: admin.id } }.to change(User, :count).by(-1)
     end
 

@@ -5,8 +5,7 @@
         - if post.picture.url
           = link_to account_post_path(post), method: :get do
             = image_tag post.picture.url, class: 'img-responsive'
-          = link_to "Like #{post.likers_count}",
-            toggle_like_account_post_path(post),
-            class: ['button', 'button-small']
+          = link_to "Like #{post.likers_count}", toggle_like_account_post_path(post),
+                                                 remote: true, class: ['button', 'button-small']
   .text-center
     = paginate @posts

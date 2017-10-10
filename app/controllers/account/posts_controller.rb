@@ -4,7 +4,8 @@ class Account::PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+    byebug
+    @post = current_user.posts.create(post_params)
     flash[:danger] = "Post #{@post.errors.messages}" unless @post.save
     redirect_to account_user_path(current_user)
   end
@@ -15,8 +16,8 @@ class Account::PostsController < ApplicationController
   end
 
   def destroy
-    @user = resource
-    @user.destroy
+    @post = resource
+    @post.destroy
     redirect_to account_user_path(current_user)
   end
 
@@ -33,7 +34,7 @@ class Account::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :picture, :likees_count)
+    params.require(:post).permit(:content, :picture)
   end
 
   def collection

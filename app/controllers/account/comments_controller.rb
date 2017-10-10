@@ -28,7 +28,7 @@ class Account::CommentsController < ApplicationController
         format.js
       end
     else
-      flash[:alert] = 'Updating canseled'
+      flash[:alert] = 'Updating canceled'
     end
   end
 
