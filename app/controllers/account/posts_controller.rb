@@ -4,7 +4,6 @@ class Account::PostsController < ApplicationController
   end
 
   def create
-    byebug
     @post = current_user.posts.create(post_params)
     flash[:danger] = "Post #{@post.errors.messages}" unless @post.save
     redirect_to account_user_path(current_user)
