@@ -1,0 +1,9 @@
+.container#comments-list
+  .row
+    .col-md-3
+    .col-md-6
+      = render 'account/comments/form', comment: post.comments.build
+  .row
+    .col-md-3
+    .col-md-6
+      = render post.comments.ordered

@@ -14,6 +14,8 @@
 
 class Post < ApplicationRecord
   belongs_to :user
+  has_many :comments, dependent: :destroy
+  has_many :likes, as: :likeable
 
   scope :ordered, -> { order(created_at: :desc) }
 
@@ -23,4 +25,5 @@ class Post < ApplicationRecord
 
   validates :picture, presence: true
   validates :content, length: { minimum: 3, maximum: 100 }
+
 end

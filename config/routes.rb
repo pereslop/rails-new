@@ -9,17 +9,20 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'users#index'
 
-    resources :users, only: [:index, :edit, :show, :delete]
+    resources :users, only: [:index, :edit, :update, :show, :delete, :destroy]
   end
 
   namespace :account do
     root 'posts#index'
 
     resources :users, only: [:index, :show]
+
     resources :posts, only: [:index, :create, :destroy, :show, :likes] do
       member do
         get 'toggle_like', to: 'posts#toggle_like', as: :toggle_like
       end
+
+      resources :comments
     end
   end
 end

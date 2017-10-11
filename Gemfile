@@ -18,6 +18,7 @@ gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 gem 'bootstrap-sass', '3.3.7'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
+gem 'font-awesome-sass', '~> 4.7.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -46,6 +47,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.6'
   gem 'database_cleaner'
+  gem 'pry-rails'
 end
 
 group :development do

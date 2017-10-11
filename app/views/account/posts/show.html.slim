@@ -1,13 +1,25 @@
 .container.post data-post-id=@post.id
   .row
-    p.post-content
-      = @post.content
-    - if current_user.id == @post.user_id
-      button.btn.btn-danger.btn-sm
-        = link_to 'delete',
-                account_post_path(@post),
-                method: :delete,
-                data: { confirm: 'You sure' }
+    .col-sm-1
+      = link_to account_user_path(@post.user), method: :get do
+        - if @post.user.avatar.url
+          = image_tag @post.user.avatar.url, class: 'img-responsive'
+        - else
+          = image_tag ('britni.png'), class: 'img-responsive'
+    .col-sm-1
+      h3=@post.user.username
+    .col-sm-8
+      h5.post-content= @post.content
+    .col-sm-2
+      - if current_user.id == @post.user_id
+        button.btn.btn-danger.btn-sm
+          = link_to 'delete',
+                  account_post_path(@post),
+                  method: :delete,
+                  data: { confirm: 'You sure' }
+  .row
     = image_tag @post.picture.url, class: ['center-block', 'post-image']
     .text-center
       = render 'account/posts/like_btn', post: @post
+  .row#comments
+    = render 'account/comments/comments', post: @post

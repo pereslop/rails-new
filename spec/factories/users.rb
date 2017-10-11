@@ -24,7 +24,7 @@ FactoryGirl.define do
   factory :user do
     email { Faker::Internet.email }
     username { Faker::Name.first_name }
-    password { Faker::Internet.password}
+    password { Faker::Avatar.image("my-own-slug")}
   end
 
   trait :with_posts do

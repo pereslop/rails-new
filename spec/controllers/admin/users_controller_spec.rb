@@ -6,11 +6,6 @@ RSpec.describe Admin::UsersController, type: :controller do
       get :index
       expect(response.status).to eq(302)
     end
-
-    it 'GET #new' do
-      get :new
-      expect(response.status).to eq(302)
-    end
   end
 
   context 'user is logged as admin' do
@@ -33,19 +28,8 @@ RSpec.describe Admin::UsersController, type: :controller do
       expect(response.status).to eq(200)
     end
 
-    it 'GET #new' do
-      get :new
-      expect(response.status).to eq(200)
-    end
     it 'DELETE #destroy' do
-
       expect{ delete :destroy, params: { id: admin.id } }.to change(User, :count).by(-1)
-    end
-
-    it 'POST #create' do
-      expect do
-        post :create, params: { user: FactoryGirl.attributes_for(:user) }
-      end.to change(User, :count).by(1)
     end
 
     it  'Patch #update' do
