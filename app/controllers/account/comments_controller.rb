@@ -15,9 +15,9 @@ class Account::CommentsController < ApplicationController
 
   def edit
     @comment = resource
-   respond_to do |format|
-     format.js
-   end
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
