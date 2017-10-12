@@ -183,3 +183,45 @@ a.like_btn {
     }
   }
 }
+
+.gallery {
+  margin-top: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .gallery-content {
+    width: 80%;
+    height: 80%;
+    .content {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      height: 85%;
+      border: 5px crimson;
+      background-color: aqua;
+      .post-photo {
+        width: 65%;
+        background-color: #486090;
+      }
+      .post-comments {
+        width: 35%;
+        background-color: white;
+      }
+    }
+    .image-choice {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 20%;
+      border: 5px crimson;
+      background-color: #208a12;
+      .post-choice-photo {
+        image {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    }
+  }
+}
