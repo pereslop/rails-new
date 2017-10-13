@@ -3,6 +3,12 @@
     .gallery-content
       .content
         .post-photo
-          | dfgkdfgdfg
+          = image_tag post.picture.url, class: 'img-responsive'
         .post-comments
-          | fgjhfghfgh
+          .text-center
+            = link_to 'prew', account_post_path(post.prev), method: :get, remote: true unless post.prev == nil
+            = link_to 'next', account_post_path(post.next), method: :get, remote: true unless post.next == nil
+            - if post.comments
+              ul
+              - post.comments.each do |comment|
+                li= comment.content

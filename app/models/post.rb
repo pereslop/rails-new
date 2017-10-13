@@ -26,12 +26,5 @@ class Post < ApplicationRecord
   validates :picture, presence: true
   validates :content, length: { minimum: 3, maximum: 100 }
 
-  def next
-    Post.where("id > ?", id).limit(1).first
-  end
-
-  def prev
-    Post.where("id < ?", id).limit(1).first
-  end
 
 end

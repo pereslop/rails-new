@@ -3,14 +3,10 @@
     - @posts.each do |post|
       .col-md-3.col-sm-4.col-xs-6.text-center.post data-post-id=post.id
         - if post.picture.url
-          = image_tag post.picture.url, class: 'img-responsive post'
+          = link_to account_post_path(post), method: :get, remote: true do
+            = image_tag post.picture.url, class: 'img-responsive post'
           = render 'account/posts/like_btn', post: post
     .text-center
       = paginate @posts, window: 2
+= render 'account/posts/modal_gallery', post: @posts.first
 
-
-
-  javascript:
-    $('.img-responsive.post').click(function () {
-        $('#gallery-modal').modal('show');
-    });
