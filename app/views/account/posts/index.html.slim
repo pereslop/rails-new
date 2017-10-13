@@ -6,18 +6,7 @@
           = image_tag post.picture.url, class: 'img-responsive post'
           = render 'account/posts/like_btn', post: post
     .text-center
-      = paginate @posts
-.modal.fade.bd-example-modal-lg#gallery-modal aria-hidden="true" aria-labelledby="myLargeModalLabel" role="dialog" tabindex="-1"
-  .gallery
-    .gallery-content
-      .content
-        .post-photo
-          | dfgkdfgdfg
-        .post-comments dfgdfgdfgfdg
-      .image-choice
-        - @posts.each do |post|
-          .post-choice-photo
-            = image_tag post.picture.url
+      = paginate @posts, window: 2
 
 
 
