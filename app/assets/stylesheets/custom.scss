@@ -195,7 +195,7 @@ a.like_btn {
     .content {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: flex-start;
       height: 85%;
       border: 5px crimson;
       background-color: aqua;
@@ -206,6 +206,12 @@ a.like_btn {
       .post-comments {
         width: 35%;
         background-color: white;
+        .close:hover,
+        .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
       }
     }
     .image-choice {
@@ -223,5 +229,30 @@ a.like_btn {
         }
       }
     }
+  }
+}
+
+#post_actions {
+  z-index: 10;
+  display: none !important;
+  flex-direction: row !important;
+  align-items: center;
+  &:hover {
+    display: flex !important;
+  }
+  .previous-post {
+    display: flex;
+    background-color: #208a12;
+    width: 20%;
+  }
+  .like-area {
+    display: flex;
+    width: 60%;
+    background-color: yellow;
+  }
+  .next-post {
+    display: flex;
+    background-color: #730E15;
+    width: 20%;
   }
 }

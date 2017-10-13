@@ -1,0 +1,21 @@
+.gallery
+  .gallery-content
+    .content
+      .post-photo
+        #post-actions
+          .previous-post
+            = link_to 'prev', account_post_path(post.next), method: :get, remote: true unless post.next == nil
+          .like-area
+            = link_to 'next', account_post_path(post.prev), method: :get, remote: true unless post.prev == nil
+          .next-post
+          = image_tag post.picture.url, class: 'img-responsive'
+      .post-comments
+        span.close[type="button" data-dismiss="modal" aria-label="Close"]
+          i.fa.fa-trash
+        .text-center
+          - if post.comments
+            ul
+            - post.comments.each do |comment|
+              li= comment.content
+
+

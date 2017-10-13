@@ -8,5 +8,5 @@
           = render 'account/posts/like_btn', post: post
     .text-center
       = paginate @posts, window: 2
-= render 'account/posts/modal_gallery', post: @posts.first
+= render 'account/posts/modal', post: @posts.first
 

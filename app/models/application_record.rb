@@ -3,7 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
 
 
   def next
-    self.class.where("id > ?", id).first
+    self.class.where("id > ?", id).limit(1).first
   end
 
   def prev
