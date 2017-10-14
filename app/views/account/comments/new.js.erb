@@ -1,1 +1,1 @@
-$(''#new-comment-button').insertAfter("<%= escape_javascript render 'account/comments/form', comment: post.comments.build %>")
+$('#new-comment-button').insertAfter("<%= escape_javascript render 'account/comments/new', post: post %>")
