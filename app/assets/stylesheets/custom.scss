@@ -72,29 +72,21 @@ img {
 .simple_form input[type=submit] {
   background-color: #1155ff;
   color: white;
-  font-size: 15px;
+  font-size: smaller;
   padding: 5px;
   border-width: 0;
-  border-radius: 4px;
-  margin-top: 4px;
+  border-radius: 2px;
+  margin-top: 2px;
 }
 .simple_form.edit_comment input[type=submit] {
-  background-color: #208a12;
+  background-color: #95d684;
   color: white;
-  font-size: 10px;
+  font-size: smaller;
   margin: 2px;
   width: 20%;
   align-self: center;
 }
 
-.post-content {
-  display: inline-block;
-  margin-left: 11.5%;
-}
-.post-image {
-  margin-bottom: 20px;
-  width: 80%;
-}
 .row button {
   float: right;
   margin-right: 11.5%;
@@ -111,9 +103,76 @@ img {
 ul {
   list-style-type: none;
 }
+.close {
+  padding-right: 2px;
+}
+.post-content {
+  margin-right: 12px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 5px;
+  .user-avatar {
+    width: 20%;
+  }
+  .comment-user-avatar {
+    width: 14%;
+  }
+  .post-data {
+    width: 80%;
+    .post-username {
+      padding-left: 5%;
+      font-size: larger;
+    }
+    .comment-username {
+      font-size: medium;
+    }
+    p {
+      padding-left: 5%;
+    }
+    .post-time {
+      color: #999999;
+      display: inline-block;
+    }
+    .comment-text {
+      color: #666666;
+      font-size: smaller;
+    }
+  }
+  .like {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20%;
+    align-items: center;
+  }
+  .new-post {
+    display: flex;
+    align-items: center;
+  }
+}
+.post-content .like {
+  padding: 0;
+}
+.img-circle {
+  border-radius: 50%;
+}
+.underline {
+  padding-top: 7px;
+  border-bottom: 2px solid rgba(195,195,195,0.89);
+  margin: 0 5%;
+}
 
-.row[id^=this-comment-content-] {
-  padding-right: 25px;
+.simple_form.edit_comment {
+  margin: 0 7%;
+  textarea {
+    font-size: smaller;
+  }
+}
+
+#comments {
+  overflow-y: auto;
+  height: 370px;
 }
 
 //like button
@@ -181,78 +240,5 @@ a.like_btn {
       border-right: 8px solid transparent;
       border-top: 8px solid darken($accent-color, 10%);
     }
-  }
-}
-
-.gallery {
-  margin-top: 3%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .gallery-content {
-    width: 80%;
-    height: 80%;
-    .content {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      height: 85%;
-      border: 5px crimson;
-      background-color: aqua;
-      .post-photo {
-        width: 65%;
-        background-color: #486090;
-      }
-      .post-comments {
-        width: 35%;
-        background-color: white;
-        .close:hover,
-        .close:focus {
-          color: black;
-          text-decoration: none;
-          cursor: pointer;
-        }
-      }
-    }
-    .image-choice {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      height: 20%;
-      border: 5px crimson;
-      background-color: #208a12;
-      .post-choice-photo {
-        image {
-          width: 150px;
-          height: 150px;
-        }
-      }
-    }
-  }
-}
-
-#post_actions {
-  z-index: 10;
-  display: none !important;
-  flex-direction: row !important;
-  align-items: center;
-  &:hover {
-    display: flex !important;
-  }
-  .previous-post {
-    display: flex;
-    background-color: #208a12;
-    width: 20%;
-  }
-  .like-area {
-    display: flex;
-    width: 60%;
-    background-color: yellow;
-  }
-  .next-post {
-    display: flex;
-    background-color: #730E15;
-    width: 20%;
   }
 }

@@ -1,6 +1,6 @@
 class Account::CommentsController < ApplicationController
  before_action :find_post
- before_action :resource, only: [:destroy, :edit, :update]
+ before_action :resource, only: [:destroy, :edit, :update, :new]
 
   def create
     @comment = @post.comments.create(comment_params)
@@ -12,6 +12,13 @@ class Account::CommentsController < ApplicationController
     end
     flash[:danger] = "Comment #{@comment.errors.messages}" unless @comment.save
   end
+
+ def new
+   @comment = resource
+   respond_to do |format|
+     format.js { render 'account/comments/new'}
+   end
+ end
 
   def edit
     @comment = resource

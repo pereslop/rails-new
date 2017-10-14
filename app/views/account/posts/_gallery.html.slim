@@ -6,16 +6,32 @@
           .previous-post
             = link_to 'prev', account_post_path(post.next), method: :get, remote: true unless post.next == nil
           .like-area
+          #next-post
             = link_to 'next', account_post_path(post.prev), method: :get, remote: true unless post.prev == nil
-          .next-post
-          = image_tag post.picture.url, class: 'img-responsive'
+          = image_tag post.picture.url
       .post-comments
         span.close[type="button" data-dismiss="modal" aria-label="Close"]
-          i.fa.fa-trash
-        .text-center
-          - if post.comments
-            ul
-            - post.comments.each do |comment|
-              li= comment.content
+          i.fa.fa-window-close
+        .post-content
+          .user-avatar
+            = link_to account_user_path(post.user), method: :get do
+              - if post.user.avatar.url
+                = image_tag post.user.avatar.url, class: 'img-responsive img-circle'
+              - else
+                = image_tag 'britni.png', class: 'img-responsive img-circle'
+          .post-data
+            =link_to "#{post.user.username}", account_user_path(post.user), method: :get, class: 'post-username'
+            p.post-time= "#{time_ago_in_words(post.created_at)} ago"
+            p= post.content
+        .post-content
+          .like
+            = render 'account/posts/like_btn', post: post, id: 'post-like-btn'
+          .new-post
+            =link_to new_account_post_comment_path(post), method: :get, remote: true do
+              button.btn.btn-primary.btn-sm#new-comment-button New comment
+        .underline
+        #comments
+          = render 'account/comments/comments', post: post
+          //= render 'account/comments/form', comment: post.comments.build
 
 

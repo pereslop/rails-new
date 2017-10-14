@@ -1,3 +1,76 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.gallery {
+  margin-top: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .gallery-content {
+    width: 80%;
+    height: 80%;
+    .content {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      height: 85%;
+      border: 5px crimson;
+      background-color: aqua;
+      .post-photo {
+        width: 65%;
+        background-color: #486090;
+      }
+      .post-comments {
+        width: 35%;
+        background-color: white;
+        .close:hover,
+        .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+    }
+    .image-choice {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 20%;
+      border: 5px crimson;
+      background-color: #208a12;
+      .post-choice-photo {
+        image {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    }
+  }
+}
+#post_actions {
+  z-index: 10;
+  display: none !important;
+  flex-direction: row !important;
+  align-items: center;
+  &:hover {
+    display: flex !important;
+  }
+  .previous-post {
+    display: flex;
+    background-color: #208a12;
+    width: 20%;
+  }
+  .like-area {
+    display: flex;
+    width: 60%;
+    background-color: yellow;
+  }
+  .next-post {
+    display: flex;
+    background-color: #730E15;
+    width: 20%;
+  }
+}
