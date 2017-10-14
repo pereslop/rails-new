@@ -1,1 +1,1 @@
-$('#new-comment-button').insertAfter("<%= escape_javascript render 'account/comments/new', post: post %>")
+$('#comments').prepend("<%= escape_javascript render 'account/comments/new', post: @post%>");

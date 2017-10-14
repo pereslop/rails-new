@@ -1,6 +1,6 @@
 class Account::CommentsController < ApplicationController
  before_action :find_post
- before_action :resource, only: [:destroy, :edit, :update, :new]
+ before_action :resource, only: [:destroy, :edit]
 
   def create
     @comment = @post.comments.create(comment_params)
@@ -14,7 +14,7 @@ class Account::CommentsController < ApplicationController
   end
 
  def new
-   @comment = resource
+   @post = find_post
    respond_to do |format|
      format.js { render 'account/comments/new'}
    end
