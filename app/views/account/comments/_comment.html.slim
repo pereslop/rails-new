@@ -12,7 +12,7 @@ div id = "this-comment-content-#{comment.id}"
       p.comment-text= comment.content
     - if comment.user_id == current_user.id || current_user.admin? || comment.post.user_id == current_user.id
       .comment-actions
-        = link_to  account_post_comment_path(comment.post, comment), method: :delete, id: "#{comment.id}_delete", remote: true do
-          i.fa.fa-trash
         =link_to edit_account_post_comment_path(comment.post, comment), remote: true do
           i.fa.fa-pencil
+        = link_to  account_post_comment_path(comment.post, comment), method: :delete, id: "#{comment.id}_delete", remote: true do
+          i.fa.fa-trash

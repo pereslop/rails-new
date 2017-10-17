@@ -99,12 +99,41 @@ img {
 .comment {
   background-color: rgba(241, 240, 239, 0.89);
 }
-
-ul {
-  list-style-type: none;
+.modal-body {
+  height: 90%;
+  overflow-y: hidden;
 }
 .close {
   padding-right: 2px;
+}
+.post-photo {
+  .post-actions {
+    z-index: 1052;
+    flex-direction: row;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    .previous-post {
+      align-self: center;
+      width: 20%;
+      height: 100%;
+    }
+    .like-area {
+      align-self: center;
+      width: 60%;
+    }
+    .nex-post {
+      align-self: center;
+      width: 20%;
+    }
+    &:hover {
+    }
+  }
+  .post-image {
+    z-index: 1051;
+  }
 }
 .post-content {
   margin-right: 12px;
@@ -138,6 +167,9 @@ ul {
       color: #666666;
       font-size: smaller;
     }
+    .comment-actions a {
+      margin: 5px;
+    }
   }
   .like {
     width: 30%;
@@ -146,11 +178,8 @@ ul {
     margin-right: 20%;
     align-items: center;
   }
-  .new-post {
-    display: flex;
-    align-items: center;
-  }
 }
+
 .post-content .like {
   padding: 0;
 }
@@ -173,7 +202,7 @@ ul {
 
 #comments {
   overflow-y: auto;
-  height: 370px;
+  height: 90%;
 }
 
 //like button

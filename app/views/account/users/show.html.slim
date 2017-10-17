@@ -16,9 +16,11 @@
           - @posts.each do |post|
             .col-md-3.col-sm-4.col-xs-6.text-center.post data-post-id=post.id
               - if post.picture.url
-                = link_to account_post_path(post), method: :get do
+                = link_to account_post_path(post), method: :get, remote: true do
                   = image_tag post.picture.url, class: 'img-responsive'
                 = render 'account/posts/like_btn', post: post
           = paginate @posts
         -else
           h3 There no posts, your can be first!!!
+= render 'account/posts/modal', post: @posts.first
+

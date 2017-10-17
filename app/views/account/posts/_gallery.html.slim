@@ -2,13 +2,14 @@
   .gallery-content
     .content
       .post-photo
-        #post-actions
+        .post-actions
           .previous-post
             = link_to 'prev', account_post_path(post.next), method: :get, remote: true unless post.next == nil
           .like-area
-          #next-post
+          .next-post
             = link_to 'next', account_post_path(post.prev), method: :get, remote: true unless post.prev == nil
-          = image_tag post.picture.url
+        .post-image
+          = image_tag post.picture.url, class: 'img-responsive'
       .post-comments
         span.close[type="button" data-dismiss="modal" aria-label="Close"]
           i.fa.fa-window-close
@@ -32,6 +33,5 @@
         .underline
         #comments
           = render 'account/comments/comments', post: post
-          //= render 'account/comments/form', comment: post.comments.build
 
 
