@@ -1,18 +1,18 @@
-.gallery
-  .gallery-content
-    .content
+.gallery.container
+  span.close[type="button" data-dismiss="modal" aria-label="Close"]
+    i.fa.fa-window-close
+  .row
+    .col-lg-8
       .post-photo
         .post-actions
           .previous-post
-            = link_to 'prev', account_post_path(post.next), method: :get, remote: true unless post.next == nil
-          .like-area
+            = link_to '<<', account_post_path(post.next), method: :get, remote: true unless post.next == nil
           .next-post
-            = link_to 'next', account_post_path(post.prev), method: :get, remote: true unless post.prev == nil
+            = link_to '>>', account_post_path(post.prev), method: :get, remote: true unless post.prev == nil
         .post-image
-          = image_tag post.picture.url, class: 'img-responsive'
+          = image_tag post.picture.url
+    .col-lg-4
       .post-comments
-        span.close[type="button" data-dismiss="modal" aria-label="Close"]
-          i.fa.fa-window-close
         .post-content
           .user-avatar
             = link_to account_user_path(post.user), method: :get do
@@ -31,7 +31,6 @@
             =link_to new_account_post_comment_path(post), post: post, method: :get, remote: true do
               button.btn.btn-primary.btn-sm#new-comment-button New comment
         .underline
-        #comments
-          = render 'account/comments/comments', post: post
+        = render 'account/comments/comments', post: post
 
 
