@@ -1,3 +1,2 @@
-let oldGallery = $('.gallery');
-let newGallery = "<%= j render 'account/posts/gallery', post: @post_for_show, comments: @comments %>";
-oldGallery.replaceWith(newGallery);
+$('#posts').replaceWith("<%= j render 'account/posts/posts', posts: @posts %>");
+$('.gallery').replaceWith("<%= j render 'account/posts/gallery', post: @post_for_show, comments: @comments %>");

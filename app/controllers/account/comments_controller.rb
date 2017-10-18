@@ -3,7 +3,7 @@ class Account::CommentsController < ApplicationController
   before_action :resource, only: [:destroy, :edit]
 
   def create
-    @comment = @post.comments.create(comment_params)
+    @comment = @post.comments.build(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
       respond_to do |format|
@@ -14,16 +14,16 @@ class Account::CommentsController < ApplicationController
   end
 
   def new
-   @post = find_post
-   respond_to do |format|
+    @post = find_post
+    respond_to do |format|
      format.js { render 'account/comments/new'}
-   end
+    end
   end
 
   def edit
     @comment = resource
     respond_to do |format|
-      format.js
+      format.js { render 'account/comments/new'}
     end
   end
 

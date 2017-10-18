@@ -1,4 +1,6 @@
 class Account::PostsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
     @posts = collection.page(params[:page]).per(24)
   end
@@ -39,6 +41,7 @@ class Account::PostsController < ApplicationController
   def destroy
     @post = resource
     @post.next ? @post_for_show = @post.next : @post_for_show = @post.prev
+    @posts = collection.page(params[:page]).per(24)
     @post.destroy
     respond_to do |format|
       format.html do

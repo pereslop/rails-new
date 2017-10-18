@@ -1,0 +1,5 @@
+= simple_form_for [:account, @post], remote: local_assigns.fetch(:remote, true) do |f|
+  = f.input :content
+  - unless @post.persisted?
+    = f.file_field :picture,  required: true, error_html: { class: 'cant_be_blank'}
+  = f.submit
