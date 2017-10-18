@@ -31,7 +31,7 @@ RSpec.describe Account::PostsController, type: :controller do
 
       it 'Delete#destroy' do
         expect do
-          delete :destroy, params: { id: post_for_user .id }
+          delete :destroy, params: { id: post_for_user .id }, xhr: true
         end.to change(Post, :count).by(-1)
       end
 

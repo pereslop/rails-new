@@ -17,10 +17,17 @@ class Account::PostsController < ApplicationController
     end
   end
 
+
   def destroy
     @post = resource
+    @post.next ? @post_for_show = @post.next : @post_for_show = @post.prev
     @post.destroy
-    redirect_to account_user_path(current_user)
+    respond_to do |format|
+      format.html do
+        flash[:success] = 'Post deleted.'
+      end
+      format.js { render 'account/posts/destroy' }
+    end
   end
 
   def toggle_like

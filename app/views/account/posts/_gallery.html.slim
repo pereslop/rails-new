@@ -23,6 +23,10 @@
           .post-data
             =link_to "#{post.user.username}", account_user_path(post.user), method: :get, class: 'post-username'
             p.post-time= "#{time_ago_in_words(post.created_at)} ago"
+            - if post.user == current_user || current_user.admin?
+              = link_to account_post_path(post), data: {confirm: 'Are you sure?'}, method: :delete, remote: true, class: 'post-destroy' do
+                span
+                  i.fa.fa-trash
             p= post.content
         .post-content
           .like
