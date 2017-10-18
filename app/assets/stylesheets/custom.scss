@@ -111,6 +111,14 @@ img {
   margin: 0 5%;
 }
 
+.no-margin {
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0;
+}
+
 .simple_form.edit_comment, .new_comment {
   margin: 0 7%;
   textarea {
@@ -118,7 +126,10 @@ img {
     font-size: smaller;
   }
 }
-
+.simple_form.edit_post {
+  width: 70%;
+  margin-left: 10px;
+}
 //like button
 
 a.like_btn {

@@ -1,2 +1,1 @@
-let comments_list = $('#comments')
-comments_list.replaceWith('<%= escape_javascript render 'account/comments/comments', post: @post %>')
+$('#comments').replaceWith('<%= escape_javascript render 'account/comments/comments', post: @post, allow_picture: false %>')

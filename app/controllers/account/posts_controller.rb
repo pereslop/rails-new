@@ -13,7 +13,25 @@ class Account::PostsController < ApplicationController
     @post = resource
     @comments = @post.comments.ordered
     respond_to do |format|
-      format.js { render 'account/posts/update_gallery'}
+      format.js { render 'account/posts/update_gallery' }
+    end
+  end
+
+  def edit
+    @post = resource
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update
+    @post = resource
+    if @post.update(post_update_params)
+      respond_to do |format|
+        format.js { render 'account/posts/update_gallery' }
+      end
+    else
+      flash[:alert] = 'Updating canceled'
     end
   end
 
@@ -44,6 +62,10 @@ class Account::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content, :picture)
+  end
+
+  def post_update_params
+    params.require(:post).permit(:content)
   end
 
   def collection

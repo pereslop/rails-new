@@ -8,10 +8,6 @@
   max-height: 700px;
   &.container {
     background-color: white;
-    .row [class*="col-"] {
-      padding: 0;
-      margin: 0;
-    }
   }
   .post-photo {
     width: 700px;
@@ -88,6 +84,9 @@
         }
         p {
           padding-left: 5%;
+        }
+        a span {
+          padding-left: 5px;
         }
         .post-time {
           color: #999999;
