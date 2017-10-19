@@ -16,7 +16,7 @@
           = render 'account/posts/posts', posts: @posts
         -else
           h3 There no posts, your can be first!!!
-      .row.text-center
+      text-center
         = paginate @posts
 = render 'account/posts/modal', post: @posts.first
 
