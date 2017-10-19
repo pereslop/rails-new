@@ -14,6 +14,11 @@ RSpec.describe Account::CommentsController, type: :controller do
         get :edit, params: { id: comment.id, post_id: post_for_user.id }, xhr: true
         expect(response).to have_http_status(:success)
       end
+
+      it 'get#new' do
+        get :new, params: { post_id: post_for_user.id}, xhr: true
+        expect(response).to have_http_status(:success)
+      end
     end
 
     describe 'actions' do

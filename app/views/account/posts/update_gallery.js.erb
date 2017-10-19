@@ -1,0 +1,4 @@
+$('#gallery-modal').modal('show');
+let oldGallery = $('.gallery');
+let newGallery = "<%= j render 'account/posts/gallery', post: @post, comments: @comments %>";
+oldGallery.replaceWith(newGallery);

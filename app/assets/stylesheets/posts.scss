@@ -1,3 +1,113 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.gallery {
+  margin-top: 3%;
+  max-height: 700px;
+  &.container {
+    background-color: white;
+  }
+  .post-photo {
+    width: 700px;
+    .post-actions {
+      position: absolute;
+      background-color: transparent ;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      z-index: 1051;
+      a {
+        color: transparent;
+      }
+      &:hover {
+        .previous-post {
+        }
+        a {
+          color: #efefef;
+          padding: 340px 10px;
+          background:rgba(0,0,0,0.3);
+        }
+      }
+      .next-post {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 350px;
+        height: 700px;
+        a {
+          align-self: flex-end;
+        }
+      }
+      .previous-post {
+        display: flex;
+        align-items: center;
+        width: 350px;
+        height: 700px;
+      }
+    }
+    .post-image {
+      position: relative;
+      max-width: 700px;
+      img {
+        max-height: 700px;
+        max-width: 700px;
+      }
+    }
+  }
+  .post-comments {
+    background-color: white;
+    overflow-y: scroll;
+    max-height: 650px;
+    .post-content {
+      margin-right: 12px;
+      padding-top: 8px;
+      display: flex;
+      flex-direction: row;
+      padding-left: 5px;
+      .user-avatar {
+        width: 20%;
+      }
+      .comment-user-avatar {
+        width: 14%;
+      }
+      .post-data {
+        width: 80%;
+        .post-username {
+          padding-left: 5%;
+          font-size: larger;
+        }
+        .comment-username {
+          font-size: medium;
+        }
+        p {
+          padding-left: 5%;
+        }
+        a span {
+          padding-left: 5px;
+        }
+        .post-time {
+          color: #999999;
+          display: inline-block;
+          margin-right: 50px;
+        }
+        .comment-text {
+          color: #666666;
+          font-size: smaller;
+        }
+        .comment-actions a {
+          margin: 5px;
+        }
+      }
+      .like {
+        width: 30%;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 20%;
+        align-items: center;
+      }
+    }
+  }
+}
