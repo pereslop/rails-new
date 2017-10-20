@@ -3,5 +3,5 @@
     #posts
       = render @posts
   =paginate @posts, remote: true
-= render 'account/posts/modal', post: @posts.first
+= render 'account/posts/modal', post: @posts.first, comments: @comments
 

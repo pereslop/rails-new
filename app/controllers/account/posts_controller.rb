@@ -13,7 +13,6 @@ class Account::PostsController < ApplicationController
 
   def show
     @post = resource
-    @comments = @post.comments.ordered
     respond_to do |format|
       format.js { render 'account/posts/update_gallery' }
     end
