@@ -1,6 +1,9 @@
-$('#posts').append('<%= j render @posts%>');
-<% if @posts.next_page %>
-  $('.pagination').replaceWith('<%= j paginate @posts %>');
+$("<%=j render @posts %>").appendTo($("#posts"));
+
+// Update pagination link
+<% if @posts.last_page? %>
+  $('.pagination').html("That's all, folks!");
 <% else %>
-  $('.pagination').remove();
+  $('.pagination')
+    .html("<%=j paginate @posts, remote: true %>");
 <% end %>

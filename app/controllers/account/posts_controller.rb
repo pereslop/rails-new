@@ -2,7 +2,7 @@ class Account::PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @posts = collection.page(params[:page]).per(20)
+    @posts = collection.page(params[:page])
   end
 
   def create

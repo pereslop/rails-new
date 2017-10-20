@@ -13,10 +13,8 @@
     .col-md-9
       .row
         - if @user.posts
-          = render 'account/posts/posts', posts: @posts
+          = render 'account/posts/posts', posts: @user.posts
         -else
           h3 There no posts, your can be first!!!
-      text-center
-        = paginate @posts
+      =paginate @posts, params: {controller: 'posts', action: 'index'}
 = render 'account/posts/modal', post: @posts.first
-
