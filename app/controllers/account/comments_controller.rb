@@ -23,7 +23,7 @@ class Account::CommentsController < ApplicationController
   def edit
     @comment = resource
     respond_to do |format|
-      format.js { render 'account/comments/new'}
+      format.js { render 'account/comments/edit'}
     end
   end
 
