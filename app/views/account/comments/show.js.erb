@@ -1,8 +1,0 @@
-$("<%=j render @comments %>").appendTo($("#comments"));
-// Update pagination link
-<% if @comments.last_page? %>
-  $('.pagination').html("That's all, folks!");
-<% else %>
-  $('.pagination')
-    .html("<%=j link_to_next_page @comments, 'Next Page', params: {controller: 'comments', action: 'show'}, remote: true %>");
-<% end %>

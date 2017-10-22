@@ -5,9 +5,8 @@ class Account::UsersController < AccountController
 
   def show
     @user = resource
-    @posts = @user.posts.ordered.page(params[:page]).per(12)
+    @posts = @user.posts.ordered.page(params[:page]).per(24)
     @post = @user.posts.new
-    # @comments = @post.comments.ordered.page(params[:page])
   end
 
   private
