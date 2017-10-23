@@ -1,0 +1,14 @@
+let comments = "<%= j render 'account/posts/comments/comments', comments: @comments %>"
+
+if ($("#comments > .pagination").length > 1) {
+  $('#comments').append(comments)
+} else {
+  $("#comments > .pagination").remove()
+  $('#comments').append(comments)
+}
+
+<% if @comments.last_page? %>
+  $('#comments > .pagination').html("That's all, folks!");
+<% else %>
+  $('#comments > .pagination').html("<%=j link_to_next_page @comments, 'load more...', remote: true %>");
+<% end %>

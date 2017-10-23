@@ -1,51 +1,54 @@
-class Account::CommentsController < ApplicationController
+class Account::Posts::CommentsController < ApplicationController
   before_action :find_post
   before_action :resource, only: [:destroy, :edit]
+
+  def index
+    @posts = find_post
+    @comments = @post.comments.page(params[:page]).per(10)
+    respond_to do |format|
+      format.js
+    end
+  end
 
   def create
     @comment = @post.comments.build(comment_params)
     @comment.user_id = current_user.id
+    @comments = @post.comments.page(params[:page]).per(10)
     if @comment.save
       respond_to do |format|
         format.js
       end
     end
-    flash[:danger] = "Comment #{@comment.errors.messages}" unless @comment.save
   end
 
   def new
     @post = find_post
     respond_to do |format|
-     format.js { render 'account/comments/new'}
+     format.js
     end
   end
 
   def edit
     @comment = resource
     respond_to do |format|
-      format.js { render 'account/comments/new'}
+      format.js
     end
   end
 
   def update
-   @comment = resource
+    @comment = resource
+    @comments = @post.comments.page(params[:page]).per(10)
     if @comment.update(comment_params)
       respond_to do |format|
-        flash[:success] = 'Comment updated'
         format.js
       end
-    else
-      flash[:alert] = 'Updating canceled'
     end
   end
 
   def destroy
    @comment.destroy
+   @comments = @post.comments.page(params[:page]).per(10)
    respond_to do |format|
-     format.html do
-    flash[:success] = 'Comment deleted.'
-    redirect_to account_post_path(@post)
-     end
      format.js
    end
   end

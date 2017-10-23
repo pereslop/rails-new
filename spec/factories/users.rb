@@ -29,11 +29,11 @@ FactoryGirl.define do
 
   trait :with_posts do
     after(:create) do |user|
-      create_list(:post, 10, user: user)
+      create_list(:post, 50, user: user)
     end
 
     after(:build) do |user|
-      build_list(:post, 10, user: user)
+      build_list(:post, 50, user: user)
     end
   end
 

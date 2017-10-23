@@ -2,7 +2,6 @@
   .row
     #posts
       = render @posts
-  .text-center
-    = paginate @posts
-= render 'account/posts/modal', post: @posts.first
+  =paginate @posts, remote: true
+= render 'account/posts/modal', post: @posts.first, comments: @comments
 

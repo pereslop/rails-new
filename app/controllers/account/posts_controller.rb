@@ -2,7 +2,7 @@ class Account::PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @posts = collection.page(params[:page]).per(24)
+    @posts = collection.page(params[:page])
   end
 
   def create
@@ -13,7 +13,6 @@ class Account::PostsController < ApplicationController
 
   def show
     @post = resource
-    @comments = @post.comments.ordered
     respond_to do |format|
       format.js { render 'account/posts/update_gallery' }
     end
@@ -40,7 +39,7 @@ class Account::PostsController < ApplicationController
 
   def destroy
     @post = resource
-    @post.next ? @post_for_show = @post.next : @post_for_show = @post.prev
+    @post_for_show = @post.next ? @post.next : @post.prev
     @posts = collection.page(params[:page]).per(24)
     @post.destroy
     respond_to do |format|
