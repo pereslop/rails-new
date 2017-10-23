@@ -46,6 +46,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
   gem 'database_cleaner'
   gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rack-livereload'
+  gem 'guard-livereload', '~> 2.5', require: false
 end
 
 group :development do
