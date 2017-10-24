@@ -6,6 +6,7 @@
       .post-photo
         .post-actions
           .previous-post
+            = link_to '<<', account_post_path(post.next), method: :get, remote: true unless post.next.nil?
           .next-post
             = link_to '>>', account_post_path(post.prev), method: :get, remote: true unless post.prev.nil?
         .post-image
@@ -37,5 +38,8 @@
             =link_to new_account_post_comment_path(post), post: post, method: :get, remote: true do
               button.btn.btn-primary.btn-sm#new-comment-button New comment
         .underline
-        div#comments
-          =link_to 'more', account_post_comments_path(post), method: :get, remote:true, id: 'comments-link'
+          .text-center
+            =link_to post_comments_account_post_path(post), method: :get, remote: true
+          /= render 'account/comments/comments', comments: post.comments
+
+

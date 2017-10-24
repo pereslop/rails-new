@@ -14,7 +14,7 @@
 
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :comments, dependent: :destroy
+  has_many :comments, as: :commentable
   has_many :likes, as: :likeable
 
   scope :ordered, -> { order(created_at: :desc) }
