@@ -10,9 +10,9 @@ div id = "this-comment-content-#{comment.id}"
       = link_to "#{comment.user.username}", account_user_path(comment.user), class: 'post-username comment-username'
       p.post-time=  "#{time_ago_in_words(comment.created_at)} ago"
       p.comment-text= comment.content
-    - if comment.user_id == current_user.id || current_user.admin? || comment.post.user_id == current_user.id
+    - if comment.user_id == current_user.id || current_user.admin? || comment.commentable.user_id == current_user.id
       .comment-actions
-        =link_to edit_account_post_comment_path(comment.post, comment), remote: true do
+        =link_to edit_account_post_comment_path(comment.commentable, comment), remote: true do
           i.fa.fa-pencil
-        = link_to  account_post_comment_path(comment.post, comment), method: :delete, id: "#{comment.id}_delete", remote: true do
+        = link_to  account_post_comment_path(comment.commentable, comment), method: :delete, id: "#{comment.id}_delete", remote: true do
           i.fa.fa-trash

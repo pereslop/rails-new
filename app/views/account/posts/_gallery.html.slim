@@ -35,11 +35,10 @@
           .like
             = render 'account/posts/like_btn', post: post, id: 'post-like-btn'
           .new-post
-            =link_to new_account_post_comment_path(post), post: post, method: :get, remote: true do
+            =link_to new_account_post_comment_path(post),  method: :get, remote: true do
               button.btn.btn-primary.btn-sm#new-comment-button New comment
         .underline
-          .text-center
-            =link_to post_comments_account_post_path(post), method: :get, remote: true
-          /= render 'account/comments/comments', comments: post.comments
+        div#comments
+          = link_to 'more', account_post_comments_path(post), method: :get, remote: true, id: 'comments-link'
 
 

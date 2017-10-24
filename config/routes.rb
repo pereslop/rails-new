@@ -17,12 +17,11 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :show]
 
-    resources :posts, only: [:index, :create, :destroy, :show, :likes, :edit, :update] do
-      resources :comments, controller: 'posts/comments'
+    resources :posts do
+      resources :comments, module: :posts
       member do
         get 'toggle_like', to: 'posts#toggle_like', as: :toggle_like
       end
-
     end
   end
 end

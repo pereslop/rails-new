@@ -1,3 +1,3 @@
-= simple_form_for [:account, comment.post, comment], remote: true do |f|
+= simple_form_for [:account, comment.commentable, comment], remote: true do |f|
   = f.text_area :content
   = f.submit
