@@ -1,16 +1,23 @@
 class CommentsController < ApplicationController
 
   def index
-    @comments = @commentable.comments.page(params[:page]).per(10)
+    @comments = @commentable.comments.ordered.page(params[:page]).per(10)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def new
+    @comment = @commentable.comments.ordered.new
     respond_to do |format|
       format.js
     end
   end
 
   def create
-    @comment = @commentable.comments.build(comment_params)
+    @comment = @commentable.comments.ordered.build(comment_params)
     @comment.user_id = current_user.id
-    @comments = @commentable.comments.page(params[:page]).per(10)
+    @comments = @commentable.comments.ordered.page(params[:page]).per(10)
     if @comment.save
       respond_to do |format|
         format.js
@@ -27,7 +34,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment = resource
-    @comments = @commentable.comments.page(params[:page]).per(10)
+    @comments = @commentable.comments.ordered.page(params[:page]).per(10)
     if @comment.update(comment_params)
       respond_to do |format|
         format.js
@@ -38,9 +45,9 @@ class CommentsController < ApplicationController
   def destroy
    @comment = resource
    @comment.destroy
-   @comments = @commentable.comments.page(params[:page]).per(10)
+   @comments = @commentable.comments.ordered.page(params[:page]).per(10)
    respond_to do |format|
-     format.js
+     format.js { render 'account/posts/comments/destroy' }
    end
   end
 
@@ -51,6 +58,6 @@ class CommentsController < ApplicationController
   end
 
   def resource
-    @comment = @commentable.comments.find(params[:id])
+    @comment = @commentable.comments.ordered.find(params[:id])
   end
 end

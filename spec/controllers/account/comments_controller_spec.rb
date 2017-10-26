@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Account::CommentsController, type: :controller do
+RSpec.describe Account::Posts::CommentsController, type: :controller do
   context 'Comment' do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:post_for_user) { FactoryGirl.create(:post, user: user) }

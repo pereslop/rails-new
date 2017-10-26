@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   namespace :account do
     root 'posts#index'
 
+    resources :comments do
+      resources :comments, module: :comments
+    end
+
     resources :users, only: [:index, :show]
 
     resources :posts do
