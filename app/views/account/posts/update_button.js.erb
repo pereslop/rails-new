@@ -1,6 +1,6 @@
 let post = $(".post[data-post-id='<%= j  @post.id.to_s  %>']");
 let old_btn = post.find('.like-btn')
 let updatedBtn = "<%= j render 'account/posts/like_btn', post: @post  %>";
-let oldPostButton = $('.like-btn');
+let oldPostButton = $(".like-btn-<%= j  @post.id.to_s  %>");
 oldPostButton.replaceWith(updatedBtn);
 old_btn.replaceWith(updatedBtn);

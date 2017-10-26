@@ -3,9 +3,9 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 return unless Rails.env.development?
 
-FactoryGirl.create_list(:user, 2, :with_posts)
+FactoryGirl.create_list(:user, 10, :with_posts)
 Post.all.each do |post|
-  FactoryGirl.create_list(:comment, rand(2..5),
+  FactoryGirl.create_list(:comment, rand(5..10),
                           user_id: User.pluck(:id).sample,
                           commentable_type: 'Post',
                           commentable_id: post.id,
@@ -13,7 +13,7 @@ Post.all.each do |post|
 end
 
 Comment.all.each do |comment|
-  FactoryGirl.create_list(:comment, rand(5..7),
+  FactoryGirl.create_list(:comment, rand(5..20),
                           user_id: User.pluck(:id).sample,
                           commentable_type: 'Comment',
                           commentable_id: comment.id)

@@ -16,13 +16,4 @@ FactoryGirl.define do
     content  { Faker::Lorem.sentence(5) }
     association :user
   end
-
-  trait :with_comments do
-    after(:create) do |comment|
-      create_list(:comment, 6, commentable: comment)
-    end
-
-    after(:build) do |comment|
-      build_list(:comment, 6, commentable: comment)
-    end  end
 end
