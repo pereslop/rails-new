@@ -1,0 +1,3 @@
+let oldComment = $("div[data-comment-id='<%= j  @comment.id.to_s  %>']");
+
+oldComment.replaceWith("<%= escape_javascript render 'account/comments/edit', commentable: @comment.commentable, comment: @comment %>")

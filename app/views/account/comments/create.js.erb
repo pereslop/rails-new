@@ -1,0 +1,6 @@
+let comment = $("[data-comment-id='<%= j  @commentable.id.to_s %>'] > .comment-comments");
+let commentButton = $("#new-comment-for-<%= j  @commentable.id.to_s %>");
+let newComment = '<%= escape_javascript render 'account/comments/comment', comment: @comment, parent: true %>';
+comment.append(newComment);
+$('.simple_form.new_comment').empty();
+commentButton.show();
