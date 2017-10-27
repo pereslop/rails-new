@@ -14,9 +14,10 @@
       .row
         - if @user.posts
           #posts
-            = render @user.posts.ordered
+            = render @posts
+          =paginate @posts, params: {controller: 'users', action: 'show'}
         -else
           h3 There no posts, your can be first!!!
-      =paginate @posts, params: {controller: 'users', action: 'show'}
-= render 'account/posts/modal', post: @posts.first
+- if @posts
+  = render 'account/posts/modal', post: @posts.first
 
