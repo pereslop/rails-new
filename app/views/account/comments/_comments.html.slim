@@ -1,0 +1,6 @@
+- if local_assigns[:parent]
+  = render partial: 'account/comments/comment', collection: comments, as: :comment, locals: { parent: parent }
+- else
+  = render partial: 'account/comments/comment', collection: comments, as: :comment, locals: { parent: false }
+  .pagination
+    = link_to_next_page @comments, 'load more...', remote: true

@@ -15,14 +15,17 @@ Rails.application.routes.draw do
   namespace :account do
     root 'posts#index'
 
+    resources :comments do
+      resources :comments, module: :comments
+    end
+
     resources :users, only: [:index, :show]
 
-    resources :posts, only: [:index, :create, :destroy, :show, :likes, :edit, :update] do
-      resources :comments, controller: 'posts/comments'
+    resources :posts do
+      resources :comments, module: :posts
       member do
         get 'toggle_like', to: 'posts#toggle_like', as: :toggle_like
       end
-
     end
   end
 end

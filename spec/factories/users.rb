@@ -15,25 +15,27 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  username               :string
 #  role                   :integer          default("user")
+#  username               :string
+#  avatar                 :string
 #
 
 FactoryGirl.define do
 
   factory :user do
     email { Faker::Internet.email }
-    username { Faker::Name.first_name }
-    password { Faker::Avatar.image("my-own-slug")}
+    username { Faker::Pokemon.name }
+    password { Faker::Internet.password(8) }
+    avatar { Faker::Avatar.image("my-own-slug")}
   end
 
   trait :with_posts do
     after(:create) do |user|
-      create_list(:post, 50, user: user)
+      create_list(:post, 5, user: user)
     end
 
     after(:build) do |user|
-      build_list(:post, 50, user: user)
+      build_list(:post, 5, user: user)
     end
   end
 

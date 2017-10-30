@@ -1,3 +1,5 @@
-$('#comments').empty()
-$("#comments").append('<%= escape_javascript render 'account/posts/comments/comments', comments: @comments %>')
+$('.simple_form.new_comment').remove();
+$('.pagination').remove()
+$("#comments").empty();
+$("#comments").prepend('<%= j render 'account/comments/comments', comments: @comments %>')
 $('#new-comment-button').show()

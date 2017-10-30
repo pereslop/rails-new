@@ -1,0 +1,5 @@
+let post = $('.post-comments')
+let comment = $("div[data-comment-id='<%= j  @commentable.id.to_s  %>']");
+comment.prepend("<%= escape_javascript render 'account/comments/new', comment: @comment %>");
+let newCommentButton = $("#new-comment-for-<%= j  @commentable.id.to_s  %>");
+newCommentButton.hide();

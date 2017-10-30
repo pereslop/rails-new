@@ -1,5 +1,5 @@
 = link_to toggle_like_account_post_path(post),
-        class: 'like-btn',
+        class: "like-btn-#{post.id}",
         data: { remote: true }
   i.fa.fa-thumbs-up
     span.span-like=post.likers_count

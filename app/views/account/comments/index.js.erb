@@ -1,4 +1,4 @@
-let comments = "<%= j render 'account/posts/comments/comments', comments: @comments %>"
+let comments = "<%= j render 'account/comments/comments', comments: @comments, parent: false %>"
 
 if ($("#comments > .pagination").length > 1) {
   $('#comments').append(comments)
