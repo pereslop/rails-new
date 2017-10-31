@@ -38,5 +38,11 @@ RSpec.describe Admin::UsersController, type: :controller do
       expect(admin.reload.username).to eq(new_name)
       expect(response.status).to eq(302)
     end
+
+    it 'patch#update failed' do
+      new_name = 'q'
+      patch :update, params: { id: admin.id, user: { username: new_name } }
+      expect(response.status).to eq(200)
+    end
   end
 end

@@ -13,6 +13,7 @@ class Account::PostsController < ApplicationController
 
   def show
     @post = resource
+    @posts = collection
     respond_to do |format|
       format.js { render 'account/posts/update_gallery' }
     end
@@ -43,9 +44,6 @@ class Account::PostsController < ApplicationController
     @posts = collection.page(params[:page]).per(24)
     @post.destroy
     respond_to do |format|
-      format.html do
-        flash[:success] = 'Post deleted.'
-      end
       format.js { render 'account/posts/destroy' }
     end
   end

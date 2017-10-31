@@ -14,10 +14,10 @@
       .row
         - if @user.posts
           #posts
-            = render @posts
-          =paginate @posts, params: {controller: 'users', action: 'show'}
+            = render partial: 'account/posts/post', collection: @user.posts, as: :post, locals: { user_post: true }
+            =paginate @posts, params: {controller: 'users', action: 'show'}
         -else
           h3 There no posts, your can be first!!!
 - if @posts
-  = render 'account/posts/modal', post: @posts.first
+  = render 'account/posts/modal', post: @posts.last, posts: @posts.ordered,  user_post: true
 

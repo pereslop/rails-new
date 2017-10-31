@@ -4,13 +4,10 @@
   .row
     .col-lg-8.no-padding
       .post-photo
-        .post-actions
-          .previous-post
-            = link_to '<<', account_post_path(post.next), method: :get, remote: true unless post.next.nil?
-          .next-post
-            = link_to '>>', account_post_path(post.prev), method: :get, remote: true unless post.prev.nil?
-        .post-image
-          = image_tag post.picture.url
+        - if local_assigns[:user_post]
+          = render 'account/users/posts/users_post_actions', post: post, posts: posts
+        - else
+          = render 'account/posts/post_actions', post: post, posts: @posts
     .col-lg-4.no-padding
       .post-comments
         .post-content
