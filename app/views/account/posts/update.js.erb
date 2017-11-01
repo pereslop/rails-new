@@ -1,0 +1,7 @@
+let content = $('#post-content-<%= j @post.id.to_s %>');
+content.replaceWith("<%= j render 'account/posts/content', post: @post %>")
+if ($('#comments-link').length > 0) {
+  commentsLink = $('#comments-link').attr('href')
+  $.getScript(commentsLink)
+  $('#comments-link').remove()
+}

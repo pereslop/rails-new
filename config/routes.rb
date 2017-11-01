@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     root 'posts#index'
 
     resources :users do
-      resources :posts, module: :users, only: [:index, :show, :destroy, :edit]
+      resources :posts, module: :users, only: [:show, :destroy]
     end
 
     resources :comments do

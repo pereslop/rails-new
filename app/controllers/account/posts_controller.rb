@@ -22,7 +22,7 @@ class Account::PostsController < ApplicationController
   def edit
     @post = resource
     respond_to do |format|
-      format.js
+      format.js { render 'account/posts/edit'}
     end
   end
 
@@ -30,7 +30,7 @@ class Account::PostsController < ApplicationController
     @post = resource
     if @post.update(post_update_params)
       respond_to do |format|
-        format.js { render 'account/posts/update_gallery' }
+        format.js { render 'account/posts/update' }
       end
     else
       flash[:alert] = 'Updating canceled'
