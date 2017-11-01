@@ -1,6 +1,6 @@
 $('#gallery-modal').modal('show');
 let oldGallery = $('.gallery');
-let newGallery = "<%= j render 'account/posts/gallery', post: @post, comments: @comments, user_post: true, posts: @posts  %>";
+let newGallery = "<%= j render 'account/posts/gallery', post: @post_for_show, comments: @post_for_show.comments, user_post: true, posts: @posts  %>";
 oldGallery.replaceWith(newGallery);
 if ($('#comments-link').length > 0) {
   commentsLink = $('#comments-link').attr('href')

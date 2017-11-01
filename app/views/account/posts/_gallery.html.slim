@@ -21,12 +21,10 @@
             =link_to "#{post.user.username}", account_user_path(post.user), method: :get, class: 'post-username'
             p.post-time= "#{time_ago_in_words(post.created_at)} ago"
             - if post.user == current_user || current_user.admin?
-              = link_to edit_account_post_path(post), method: :get, remote: true do
-                span
-                  i.fa.fa-pencil
-              = link_to account_post_path(post), data: {confirm: 'Are you sure?'}, method: :delete, remote: true do
-                span
-                  i.fa.fa-trash
+              - if local_assigns[:user_post]
+                = render 'account/users/posts/user_post_edit_and_destroy_actions', post: post
+              -else
+                = render 'account/posts/post_edit_and_destroy_actions', post: post
             p= post.content
         .post-content
           .like
