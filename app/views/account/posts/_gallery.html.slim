@@ -4,41 +4,9 @@
   .row
     .col-lg-8.no-padding
       .post-photo
-        .post-actions
-          .previous-post
-            = link_to '<<', account_post_path(post.next), method: :get, remote: true unless post.next.nil?
-          .next-post
-            = link_to '>>', account_post_path(post.prev), method: :get, remote: true unless post.prev.nil?
-        .post-image
-          = image_tag post.picture.url
+        - if local_assigns[:user_post]
+          = render 'account/users/posts/users_post_actions', post: post, posts: posts
+        - else
+          = render 'account/posts/post_actions', post: post, posts: @posts
     .col-lg-4.no-padding
-      .post-comments
-        .post-content
-          .user-avatar
-            = link_to account_user_path(post.user), method: :get do
-              - if post.user.avatar.url
-                = image_tag post.user.avatar.url, class: 'img-responsive img-circle'
-              - else
-                = image_tag 'britni.png', class: 'img-responsive img-circle'
-          .post-data#post-content
-            =link_to "#{post.user.username}", account_user_path(post.user), method: :get, class: 'post-username'
-            p.post-time= "#{time_ago_in_words(post.created_at)} ago"
-            - if post.user == current_user || current_user.admin?
-              = link_to edit_account_post_path(post), method: :get, remote: true do
-                span
-                  i.fa.fa-pencil
-              = link_to account_post_path(post), data: {confirm: 'Are you sure?'}, method: :delete, remote: true do
-                span
-                  i.fa.fa-trash
-            p= post.content
-        .post-content
-          .like
-            = render 'account/posts/like_btn', post: post
-          .new-post
-            = link_to new_account_post_comment_path(post), method: :get, remote: true do
-              button.btn.btn-primary.btn-sm#new-comment-button New comment
-        .underline
-        div#comments
-          = link_to 'more', account_post_comments_path(post), method: :get, remote: true, id: 'comments-link'
-
-
+      = render 'account/posts/content', post: post

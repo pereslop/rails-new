@@ -12,11 +12,11 @@
         - if current_user.posts.any?
     .col-md-9
       .row
-        - if @user.posts
+        - if @posts.any?
           #posts
-            = render @user.posts.ordered
+            = render partial: 'account/posts/post', collection: @user.posts.ordered, as: :post, locals: { user_post: true }
+            =paginate @posts, params: {controller: 'users', action: 'show'}
         -else
           h3 There no posts, your can be first!!!
-      =paginate @posts, params: {controller: 'users', action: 'show'}
-= render 'account/posts/modal', post: @posts.first
+= render 'account/posts/modal', post: @posts.last, posts: @posts.ordered,  user_post: true if @posts.any?
 

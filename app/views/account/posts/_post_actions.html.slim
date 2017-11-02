@@ -1,0 +1,7 @@
+.post-actions
+  .previous-post
+    = link_to '<<', account_post_path(posts.prev_for(post)), method: :get, remote: true unless posts.prev_for(post).nil?
+  .next-post
+    = link_to '>>', account_post_path(posts.next_for(post)), method: :get, remote: true unless posts.next_for(post).nil?
+.post-image
+  = image_tag post.picture.url

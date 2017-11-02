@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Account::UsersController, type: :controller do
 
-  context "acoount user routes" do
+  context "account user routes" do
     let(:user) { FactoryGirl.create(:user) }
     before(:each) do
       sign_in user

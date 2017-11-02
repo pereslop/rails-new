@@ -9,7 +9,6 @@
     .post-data
       = link_to "#{comment.user.username}", account_user_path(comment.user), class: 'post-username comment-username'
       p.post-time=  "#{time_ago_in_words(comment.created_at)} ago"
-      p=comment.id
       p.comment-text= comment.content
       .comment-actions
         - if local_assigns[:parent]

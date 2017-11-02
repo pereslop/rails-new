@@ -1,3 +1,6 @@
 .modal.fade.bd-example-modal-lg#gallery-modal aria-hidden="true" aria-labelledby="myLargeModalLabel" role="dialog" tabindex="-1"
   .modal-body
-    = render 'account/posts/gallery', post: post
+    - if local_assigns[:user_post]
+      = render 'account/posts/gallery',  post: post, user_post: user_post, posts: posts
+    - else
+      = render 'account/posts/gallery',  post: post

@@ -1,0 +1,6 @@
+= link_to edit_account_post_path(post), method: :get, remote: true do
+  span
+    i.fa.fa-pencil
+= link_to account_post_path(post), data: {confirm: 'Are you sure?'}, method: :delete, remote: true do
+  span
+    i.fa.fa-trash
