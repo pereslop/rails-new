@@ -52,5 +52,4 @@ RSpec.describe Account::PostsController, type: :controller do
 
     end
   end
-
 end
