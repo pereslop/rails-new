@@ -13,4 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require underscore
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/rails_new
+//= require_self
 //= require_tree .
+window,App = {
+    Models: {},
+    Collections: {},
+    Views: {}
+}

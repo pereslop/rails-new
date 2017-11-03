@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   def index
     @comments = @commentable.comments.ordered.page(params[:page]).per(3)
     respond_to do |format|
+      format.json { render json: @comments}
       format.js { render 'account/comments/index' }
     end
   end
