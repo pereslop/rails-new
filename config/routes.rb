@@ -26,7 +26,9 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
 
     resources :posts do
-      resources :comments, module: :posts
+      resources :comments, module: :posts do
+        get 'page/:page', action: :index, on: :collection
+      end
       member do
         get 'toggle_like', to: 'posts#toggle_like', as: :toggle_like
       end

@@ -1,4 +1,4 @@
-.post-comments id= "post-content-#{post.id}"
+.post-comments id= "post-content-#{post.id}" data-post-id=post.id
   .post-content
     .user-avatar
       = link_to account_user_path(post.user), method: :get do
@@ -9,7 +9,7 @@
     .post-data#post-content
       = link_to "#{post.user.username}", account_user_path(post.user), method: :get, class: 'post-username'
       p.post-time= "#{time_ago_in_words(post.created_at)} ago"
-      - if post.user == current_user || current_user.admin?
+      - if post.user == current_user
         - if local_assigns[:user_post]
           = render 'account/users/posts/user_post_edit_and_destroy_actions', post: post, user: currne
         - else
@@ -22,5 +22,20 @@
       = link_to new_account_post_comment_path(post), method: :get, remote: true do
         button.btn.btn-primary.btn-sm#new-comment-button New comment
   .underline
-  div#comments
-    = link_to 'more', account_post_comments_path(post), method: :get, remote: true, id: 'comments-link'
+    a
+      | show comments
+  #comments
+
+
+coffee:
+  class RailsNew.Collections.Comments extends Backbone.Collection
+    model: RailsNew.Models.Comment
+    url: ->
+      postId = $('[id^=post-content-]').attr("data-post-id")
+      "/account/posts/#{postId}/comments/page/1"
+    'click': ->
+      alert 'you cliked me'
+  $ ->
+    RailsNew.comments = new RailsNew.Collections.Comments
+    RailsNew.commentsListView = new RailsNew.Views.CommmentsListView(collection: RailsNew.comments)
+    RailsNew.comments.fetch()

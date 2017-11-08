@@ -10,3 +10,11 @@ window.RailsNew =
   Routers: {}
   Views: {}
 
+RailsNew.Views.CommmentsListView = Backbone.View.extend
+  el: '#comments'
+  initialize: ->
+    @listenTo @collection, 'sync', @render
+  render: ->
+    for model in @collection.models
+      itemView = new RailsNew.Views.CommentItemView(model: model)
+      @$el.append itemView.render().el

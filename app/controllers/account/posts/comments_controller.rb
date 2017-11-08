@@ -1,4 +1,4 @@
-class Account::Posts::CommentsController < ::CommentsController
+       class Account::Posts::CommentsController < ::CommentsController
   before_action :set_commentable
 
   def new

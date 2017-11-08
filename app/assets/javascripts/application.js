@@ -20,8 +20,3 @@
 //= require backbone/rails_new
 //= require_self
 //= require_tree .
-window,App = {
-    Models: {},
-    Collections: {},
-    Views: {}
-}
