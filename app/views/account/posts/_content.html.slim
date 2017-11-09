@@ -25,14 +25,14 @@
     a
       | show comments
   #comments
-
-
+  script#comment-template[type="text/template"]
+    p try
 coffee:
+  RailsNew.postId = $('[id^=post-content-]').attr("data-post-id")
   class RailsNew.Collections.Comments extends Backbone.Collection
     model: RailsNew.Models.Comment
     url: ->
-      postId = $('[id^=post-content-]').attr("data-post-id")
-      "/account/posts/#{postId}/comments/page/1"
+      "/account/posts/#{RailsNew.postId}/comments/page/1"
     'click': ->
       alert 'you cliked me'
   $ ->

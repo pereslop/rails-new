@@ -1,10 +1,11 @@
 RailsNew.Views.CommentItemView = Backbone.View.extend
-  tagName: 'li'
-  template: _.template "<%= content %>"
+  el: '#comments'
+#  template: _.template "<a href='#' data-remote='true' data-method='get'>dfgdfg</a><p>fghf<p>"
   setPlaceholder: ->
-    if $('#comments').children('li').length is 0 then $('#comments').append('</p>no comments</p>')
+    if $('#comments').children('dvi').length is 0 then $('#comments').append('</p>no comments</p>')
   render: ->
-    @$el.html @template @model.attributes
+    template =  _.template($('#comment-template').html(), { comments: @model.atributes })
+    @$el.append template
     @
   events:
     'click': 'showMessage'
