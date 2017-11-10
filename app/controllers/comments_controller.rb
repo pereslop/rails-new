@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
 
   def index
     @comments = @commentable.comments.includes(:user).ordered.page(params[:page]).per(5)
-    @current_user = current_user
   end
 
   def new
