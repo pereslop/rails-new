@@ -18,5 +18,6 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/rails_new
+//= require skim
 //= require_self
 //= require_tree .

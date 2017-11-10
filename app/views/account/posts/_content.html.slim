@@ -9,7 +9,7 @@
     .post-data#post-content
       = link_to "#{post.user.username}", account_user_path(post.user), method: :get, class: 'post-username'
       p.post-time= "#{time_ago_in_words(post.created_at)} ago"
-      - if post.user == current_user
+      - if post.user == current_user || current_user.admin?
         - if local_assigns[:user_post]
           = render 'account/users/posts/user_post_edit_and_destroy_actions', post: post, user: currne
         - else
@@ -22,11 +22,7 @@
       = link_to new_account_post_comment_path(post), method: :get, remote: true do
         button.btn.btn-primary.btn-sm#new-comment-button New comment
   .underline
-    a
-      | show comments
   #comments
-  script#comment-template[type="text/template"]
-    p try
 coffee:
   RailsNew.postId = $('[id^=post-content-]').attr("data-post-id")
   class RailsNew.Collections.Comments extends Backbone.Collection

@@ -1,31 +1,29 @@
-.comments data-comment-id=<%= content %>
-  p <%= content %>
-/.comments id= "this-comment-content-<%= content %>>" data-comment-id=comment.id
-/  .post-content
-/    .comment-user-avatar
-/      = link_to account_user_path(comment.user), method: :get do
-/        - if comment.user.avatar.url
-/          = image_tag comment.user.avatar.url, class: 'img-responsive img-circle'
-/        - else
-/          = image_tag ('britni.png'), class: 'img-responsive img-circle'
-/    .post-data
-/      = link_to "#{comment.user.username}", account_user_path(comment.user), class: 'post-username comment-username'
-/      p.post-time=  "#{time_ago_in_words(comment.created_at)} ago"
-/      p.comment-text= comment.content
-/      .comment-actions
-/        - if local_assigns[:parent]
-/          - if comment.user_id == current_user.id
-/            = link_to edit_account_comment_comment_path(comment.commentable, comment), remote: true do
-/              i.fa.fa-pencil
-/            = link_to account_comment_comment_path(comment.commentable, comment), method: :delete, remote: true do
-/              i.fa.fa-trash
-/        -else
-/          - if comment.user_id == current_user.id
-/            =link_to edit_account_post_comment_path(comment.commentable, comment), remote: true do
-/              i.fa.fa-pencil
-/            = link_to  account_post_comment_path(comment.commentable, comment), method: :delete, remote: true do
-/              i.fa.fa-trash
-/          = render 'account/comments/new_comment_button', commentable: comment
-/  .comment-comments
-/    - if comment.comments.any?
-/      =render 'account/comments/comments', comments: comment.comments, parent: true
+.comments id= "this-comment-content-#{comment.id}" data-comment-id=comment.id
+  .post-content
+    .comment-user-avatar
+      = link_to account_user_path(comment.user), method: :get do
+        - if comment.user.avatar.url
+          = image_tag comment.user.avatar.url, class: 'img-responsive img-circle'
+        - else
+          = image_tag ('britni.png'), class: 'img-responsive img-circle'
+    .post-data
+      = link_to "#{comment.user.username}", account_user_path(comment.user), class: 'post-username comment-username'
+      p.post-time=  "#{time_ago_in_words(comment.created_at)} ago"
+      p.comment-text= comment.content
+      .comment-actions
+        - if local_assigns[:parent]
+          - if comment.user_id == current_user.id
+            = link_to edit_account_comment_comment_path(comment.commentable, comment), remote: true do
+              i.fa.fa-pencil
+            = link_to account_comment_comment_path(comment.commentable, comment), method: :delete, remote: true do
+              i.fa.fa-trash
+        -else
+          - if comment.user_id == current_user.id
+            =link_to edit_account_post_comment_path(comment.commentable, comment), remote: true do
+              i.fa.fa-pencil
+            = link_to  account_post_comment_path(comment.commentable, comment), method: :delete, remote: true do
+              i.fa.fa-trash
+          = render 'account/comments/new_comment_button', commentable: comment
+  .comment-comments
+    - if comment.comments.any?
+      =render 'account/comments/comments', comments: comment.comments, parent: true
