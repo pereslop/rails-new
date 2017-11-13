@@ -111,3 +111,11 @@
     }
   }
 }
+
+div[id^="this-comment-content-"]:hover .post-content .post-data .comment-actions {
+  visibility: visible;
+  transition: 1000ms;
+}
+.comment-actions {
+  visibility: hidden;
+}
