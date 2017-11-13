@@ -14,9 +14,10 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
+    @comments = @commentable.comments
     if @comment.save
       respond_to do |format|
-        format.js { render 'account/comments/create' }
+        format.json { render 'account/posts/comments/index'}
       end
     end
   end

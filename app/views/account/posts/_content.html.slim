@@ -28,21 +28,12 @@
 coffee:
   RailsNew.commentsPage = 0
   RailsNew.postId = $('[id^=post-content-]').attr("data-post-id")
-  class RailsNew.Collections.Comments extends Backbone.Collection
-    model: RailsNew.Models.Comment
-    url: ->
-      "/account/posts/#{RailsNew.postId}/comments?page=#{RailsNew.commentsPage + 1}"
   $ ->
     RailsNew.comments = new RailsNew.Collections.Comments
     RailsNew.commentsListView = new RailsNew.Views.CommmentsListView(collection: RailsNew.comments)
     RailsNew.comments.fetch()
   $('#load-comments').click ->
     RailsNew.commentsPage += 1
-    class RailsNew.Collections.Comments extends Backbone.Collection
-      model: RailsNew.Models.Comment
-      url: ->
-        "/account/posts/#{RailsNew.postId}/comments?page=#{RailsNew.commentsPage + 1}"
-    $ ->
-      RailsNew.comments = new RailsNew.Collections.Comments
-      RailsNew.commentsListView = new RailsNew.Views.CommmentsListView(collection: RailsNew.comments)
-      RailsNew.comments.fetch()
+    RailsNew.comments = new RailsNew.Collections.Comments
+    RailsNew.commentsListView = new RailsNew.Views.CommmentsListView(collection: RailsNew.comments)
+    RailsNew.comments.fetch()

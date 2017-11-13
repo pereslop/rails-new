@@ -16,7 +16,7 @@ class Account::Posts::CommentsController < ::CommentsController
 
     if @comment.save
       respond_to do |format|
-        format.js { render 'account/posts/comments/create' }
+        format.json { render 'account/posts/comments/index'}
       end
     end
   end
