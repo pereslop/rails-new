@@ -1,13 +1,6 @@
 json.array! @comments do |comment|
-  json.partial! 'account/posts/comments/default_comment', locals: { comment: comment}
-  json.edit_url edit_account_post_comment_path(comment.commentable, comment)
-  json.destroy_url account_post_comment_path(comment.commentable, comment)
-  json.new_comment_url new_account_comment_comment_path(comment)
-  json.nested false
+  json.partial! 'account/posts/comments/parent_comment', locals: { comment: comment}
   json.comments comment.comments  do |comment|
-    json.partial! 'account/posts/comments/default_comment', locals: { comment: comment}
-    json.edit_url edit_account_comment_comment_path(comment.commentable, comment)
-    json.destroy_url account_comment_comment_path(comment.commentable, comment)
-    json.nested true
+    json.partial! 'account/comments/nested_comment', locals: { comment: comment}
   end
 end

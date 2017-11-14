@@ -1,5 +1,7 @@
-$('.simple_form.new_comment').remove();
-$('.pagination').remove()
 $("#comments").empty();
-$("#comments").prepend('<%= j render 'account/comments/comments', comments: @comments %>')
+RailsNew.commentsPage = 0
+RailsNew.comments = new RailsNew.Collections.Comments
+RailsNew.commentsListView = new RailsNew.Views.CommmentsListView({collection: RailsNew.comments})
+RailsNew.comments.fetch()
+RailsNew.postId = $('[id^=post-content-]').attr("data-post-id")
 $('#new-comment-button').show()
