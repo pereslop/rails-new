@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     if @comment.save
       respond_to do |format|
-        format.js { render 'account/comments/create'}
+        format.js { render 'account/comments/create' }
       end
     end
   end

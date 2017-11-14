@@ -16,7 +16,7 @@ class Account::Posts::CommentsController < ::CommentsController
 
     if @comment.save
       respond_to do |format|
-        format.js { render 'account/posts/comments/create'}
+        format.js { render 'account/posts/comments/create' }
       end
     end
   end
