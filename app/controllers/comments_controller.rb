@@ -31,6 +31,7 @@ class CommentsController < ApplicationController
   def update
     @comment = resource
     if @comment.update(comment_params)
+      @comment.reload
       respond_to do |format|
         format.js { render 'account/comments/update' }
       end

@@ -1,7 +1,7 @@
 json.id comment.id
 json.content comment.content
 json.username comment.user.username
-json.avatar comment.user.avatar.url
+json.user_avatar_url comment.user.avatar.url
 json.user_id comment.user.id
 json.current_user_id current_user.id
 json.user_url account_user_path(comment.user)

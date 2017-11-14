@@ -1,11 +1,5 @@
-let oldComment = $("div[data-comment-id='<%= j  @comment.id.to_s  %>']");
-let editForm = $("#edit_comment_<%= j  @comment.id.to_s  %>")
-let parent = $('#comments');
-let editedParentComment = "<%= escape_javascript render 'account/comments/comment', comment: @comment %>"
-let editedChildComment = "<%= escape_javascript render 'account/comments/comment', comment: @comment, parent: true %>"
-
-if  (oldComment.parent(parent).length) {
-  editForm.replaceWith(editedParentComment);
-} else {
-  editForm.replaceWith(editedChildComment);
-}
+$("#comments").empty()
+RailsNew.commentsPage = 0
+RailsNew.comments = new RailsNew.Collections.Comments
+RailsNew.commentsListView = new RailsNew.Views.CommmentsListView({collection: RailsNew.comments})
+RailsNew.comments.fetch()

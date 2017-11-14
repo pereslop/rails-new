@@ -1,8 +1,8 @@
+$("#comments").empty();
 let comment = $("[data-comment-id='<%= j  @commentable.id.to_s %>'] > .comment-comments");
 let commentButton = $("#new-comment-for-<%= j  @commentable.id.to_s %>");
 RailsNew.commentsPage = 0
 RailsNew.comments = new RailsNew.Collections.Comments
 RailsNew.commentsListView = new RailsNew.Views.CommmentsListView({collection: RailsNew.comments})
 RailsNew.comments.fetch()
-$('.simple_form.new_comment').empty();
 commentButton.show();
