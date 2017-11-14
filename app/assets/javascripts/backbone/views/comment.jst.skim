@@ -1,6 +1,11 @@
 .comments id= "this-comment-content-#{@comment.id}" data-comment-id=@comment.id
   .post-content
-    .comment-user.avatar
+    .comment-user-avatar
+      a href="#{@comment.user_url}" class="post-username comment-username"
+        - if @comment.avatar
+          img src="#{@comment.avatar}" alt='user_avatar' class='img-responsive img-circle'
+        - else
+          img src="/assets/britni.png" alt='user_avatar' class='img-responsive img-circle'
     .post-data
       a href="#{@comment.user_url}" class="post-username comment-username"
         | #{@comment.username}
