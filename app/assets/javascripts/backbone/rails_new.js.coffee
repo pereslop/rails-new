@@ -16,6 +16,9 @@ RailsNew.Views.CommmentsListView = Backbone.View.extend
   initialize: ->
     @listenTo @collection, 'sync', @render
   render: ->
+    if @collection.models.length is 0
+      $('#load-comments').empty()
+      $('#comments').prepend('<p>no moe</p>')
     for model in @collection.models
       itemView = new RailsNew.Views.CommentItemView(model: model)
       @$el.append itemView.render().el
