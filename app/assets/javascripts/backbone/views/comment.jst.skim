@@ -7,20 +7,22 @@
         - else
           img src="/assets/britni.png" alt='user_avatar' class='img-responsive img-circle'
     .post-data
-      a href="#{@comment.user_url}" class="post-username comment-username"
-        | #{@comment.username}
-      p.post-time
-        | created #{@comment.time_ago} ago
+      .post-info
+        .comment-username
+          a href="#{@comment.user_url}" class="post-username comment-username"
+            | #{@comment.username}
+        p.post-time
+          | created #{@comment.time_ago} ago
+        .comment-actions
+          - if @parent
+            a href=@comment.new_comment_url data-remote='true' id="new-comment-for-#{@comment.id}"
+              i.fa.fa-comment-o
+          - if @comment.user_id is @comment.current_user_id
+            a href=@comment.edit_url data-remote='true'
+              i.fa.fa-pencil
+            a href=@comment.destroy_url data-remote='true' data-method='delete'
+              i.fa.fa-trash
       p.comment-text #{@comment.content}
-      .comment-actions
-        - if @parent
-          a href=@comment.new_comment_url data-remote='true' id="new-comment-for-#{@comment.id}"
-            i.fa.fa-comment-o
-        - if @comment.user_id is @comment.current_user_id
-          a href=@comment.edit_url data-remote='true'
-            i.fa.fa-pencil
-          a href=@comment.destroy_url data-remote='true' data-method='delete'
-            i.fa.fa-trash
   .comment-comments
 - if !@comment.nested
   coffee:
