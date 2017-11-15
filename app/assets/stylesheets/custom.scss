@@ -63,6 +63,13 @@ img {
 .simple_form {
   display: flex;
   flex-direction: column;
+  margin: 0;
+  width: 100%;
+  #comment_content {
+    width: 320px;
+    border-radius: 5px;
+    border: 2px solid #337ab7;
+  }
 }
 
 .simple_form input[type=submit] {
