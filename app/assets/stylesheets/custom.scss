@@ -67,6 +67,7 @@ img {
   width: 100%;
   #comment_content {
     width: 320px;
+    height: 26px;
     border-radius: 5px;
     border: 2px solid #337ab7;
   }
@@ -118,6 +119,25 @@ img {
   border-bottom: 2px solid rgba(195,195,195,0.89);
   margin: 0 5%;
 }
+.comment-comment {
+  color: #666666;
+  font-size: 13px;
+  &:hover {
+    text-decoration: none;
+    color: #3e3e46;
+  }
+}
+#load-comments {
+  display: block;
+  margin-right: 20px;
+  text-align: right;
+  font-size: 16px;
+  color: #597aa6;
+  &:hover {
+    color: #283957;
+  }
+}
+
 
 .no-margin {
   margin: 0;

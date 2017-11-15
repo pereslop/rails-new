@@ -7,7 +7,7 @@
         - else
           = image_tag 'britni.png', class: 'img-responsive img-circle'
     .post-data
-      .post-info
+      .post-info#post-content
         .comment-username
           = link_to "#{post.user.username}", account_user_path(post.user), method: :get, class: 'post-username'
         p.post-time= "#{time_ago_in_words(post.created_at)} ago"
@@ -25,7 +25,7 @@
       = render 'account/comments/new', comment: post.comments.new
   .underline
   #comments
-  a href="#" id="load-comments"
+  a href="#" id="load-comments" class='comment-comment'
     | load more comments...
 coffee:
   RailsNew.commentsPage = 0
