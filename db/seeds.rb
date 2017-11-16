@@ -3,7 +3,13 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 return unless Rails.env.development?
 
-FactoryGirl.create_list(:user, 10, :with_posts)
+@users = []
+10.times do
+  @users << User.create(FactoryGirl.attributes_for(:user, :with_posts))
+end
+@users.each do |user|
+  FactoryGirl.create_list(:post, 5, user: user)
+end
 Post.all.each do |post|
   FactoryGirl.create_list(:comment, rand(5..10),
                           user_id: User.pluck(:id).sample,

@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  devise_for :users,
-    controllers: {
-      sessions: 'account/users/sessions'
-    }
+  devise_for :users
 
   namespace :admin do
     root 'users#index'

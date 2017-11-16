@@ -1,4 +1,5 @@
 $("#comments").empty();
+$('#new_comment').replaceWith("<%= j  render 'account/comments/new', comment: @commentable.comments.new %>")
 RailsNew.commentsPage = 0
 RailsNew.comments = new RailsNew.Collections.Comments
 RailsNew.commentsListView = new RailsNew.Views.CommmentsListView({collection: RailsNew.comments})

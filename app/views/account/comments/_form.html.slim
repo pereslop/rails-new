@@ -1,3 +1,8 @@
 = simple_form_for [:account, comment.commentable, comment], remote: true do |f|
-  = f.text_area :content
-  = f.submit
+  = f.text_area :content, placeholder: 'type comment here and press enter'
+coffee:
+  $('textarea').keypress (event) ->
+    if event.which == 13
+      event.preventDefault()
+      $(this).closest('form').submit();
+    return

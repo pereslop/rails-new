@@ -35,8 +35,6 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 350px;
-        height: 700px;
         a {
           align-self: flex-end;
         }
@@ -75,30 +73,42 @@
       }
       .post-data {
         width: 80%;
-        .post-username {
-          padding-left: 5%;
-          font-size: larger;
-        }
-        .comment-username {
-          font-size: medium;
-        }
-        p {
-          padding-left: 5%;
-        }
-        a span {
-          padding-left: 5px;
-        }
-        .post-time {
-          color: #999999;
-          display: inline-block;
-          margin-right: 50px;
+        display: flex;
+        flex-direction: column;
+        .post-info {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .post-username {
+            padding-left: 5%;
+            font-size: larger;
+          }
+          .post-time {
+            color: #999999;
+            width: 50%;
+            margin-top: 1.8%;
+          }
+          .comment-username {
+            font-size: medium;
+          }
+          p {
+            padding-left: 5%;
+          }
+          a span {
+            padding-left: 5px;
+          }
+          .comment-actions {
+            display: flex;
+            flex-direction: row-reverse;
+             a {
+              margin: 5px;
+            }
+          }
         }
         .comment-text {
           color: #666666;
           font-size: smaller;
-        }
-        .comment-actions a {
-          margin: 5px;
+          margin-left: 10px;
         }
       }
       .like {
