@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  devise_for :users,
-    controllers: {
-      sessions: 'account/users/sessions'
-    }
+  devise_for :users
 
   namespace :admin do
     root 'users#index'
@@ -26,7 +23,8 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
 
     resources :posts do
-      resources :comments, module: :posts
+      resources :comments, module: :posts do
+      end
       member do
         get 'toggle_like', to: 'posts#toggle_like', as: :toggle_like
       end

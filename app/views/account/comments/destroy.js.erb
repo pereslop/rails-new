@@ -1,3 +1,5 @@
-let childComment = $("div[data-comment-id='<%= j  @comment.id.to_s  %>']");
+let childComment = $("div[data-comment-id='<%= j @comment.id.to_s  %>']");
+let childCommentNewUrl = $("#new-comment-for-<%= j @comment.id.to_s  %>");
+childCommentNewUrl.remove();
 childComment.remove();
 

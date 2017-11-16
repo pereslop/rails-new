@@ -1,7 +1,5 @@
 class Account::Users::PostsController < Account::PostsController
 
-
-
   def show
     @post_for_show = resource
     @posts = @post_for_show.user.posts.ordered

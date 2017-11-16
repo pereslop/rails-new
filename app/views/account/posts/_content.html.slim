@@ -1,4 +1,4 @@
-.post-comments id= "post-content-#{post.id}"
+.post-comments id= "post-content-#{post.id}" data-post-id=post.id
   .post-content
     .user-avatar
       = link_to account_user_path(post.user), method: :get do
@@ -6,21 +6,36 @@
           = image_tag post.user.avatar.url, class: 'img-responsive img-circle'
         - else
           = image_tag 'britni.png', class: 'img-responsive img-circle'
-    .post-data#post-content
-      = link_to "#{post.user.username}", account_user_path(post.user), method: :get, class: 'post-username'
-      p.post-time= "#{time_ago_in_words(post.created_at)} ago"
-      - if post.user == current_user || current_user.admin?
-        - if local_assigns[:user_post]
-          = render 'account/users/posts/user_post_edit_and_destroy_actions', post: post, user: currne
-        - else
-          = render 'account/posts/post_edit_and_destroy_actions', post: post
-      p= post.content
+    .post-data
+      .post-info#post-content
+        .comment-username
+          = link_to "#{post.user.username}", account_user_path(post.user), method: :get, class: 'post-username'
+        p.post-time= "#{time_ago_in_words(post.created_at)} ago"
+        .like
+          = render 'account/posts/like_btn', post: post
+        .post-actions
+          - if post.user == current_user || current_user.admin?
+            - if local_assigns[:user_post]
+              = render 'account/users/posts/user_post_edit_and_destroy_actions', post: post, user: currne
+            - else
+              = render 'account/posts/post_edit_and_destroy_actions', post: post
+      p.comment-text= post.content
   .post-content
-    .like
-      = render 'account/posts/like_btn', post: post
     .new-post
-      = link_to new_account_post_comment_path(post), method: :get, remote: true do
-        button.btn.btn-primary.btn-sm#new-comment-button New comment
+      = render 'account/comments/new', comment: post.comments.new
   .underline
-  div#comments
-    = link_to 'more', account_post_comments_path(post), method: :get, remote: true, id: 'comments-link'
+  #comments
+  a href="#" id="load-comments" class='comment-comment'
+    | load more comments...
+coffee:
+  RailsNew.commentsPage = 0
+  RailsNew.postId = $('[id^=post-content-]').attr("data-post-id")
+  $ ->
+    RailsNew.comments = new RailsNew.Collections.Comments
+    RailsNew.commentsListView = new RailsNew.Views.CommmentsListView(collection: RailsNew.comments)
+    RailsNew.comments.fetch()
+  $('#load-comments').click ->
+    RailsNew.commentsPage += 1
+    RailsNew.comments = new RailsNew.Collections.Comments
+    RailsNew.commentsListView = new RailsNew.Views.CommmentsListView(collection: RailsNew.comments)
+    RailsNew.comments.fetch()
