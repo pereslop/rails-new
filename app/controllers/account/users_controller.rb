@@ -9,6 +9,11 @@ class Account::UsersController < AccountController
     @post = @user.posts.new
   end
 
+  def follow
+    @user = resource
+    current_user.follow!(@user)
+  end
+
   private
 
   def user_params

@@ -7,18 +7,22 @@ return unless Rails.env.development?
 10.times do
   @users << User.create(FactoryGirl.attributes_for(:user, :with_posts))
 end
+
+@posts = []
 @users.each do |user|
-  FactoryGirl.create_list(:post, 5, user: user)
-end
-Post.all.each do |post|
-  FactoryGirl.create_list(:comment, rand(5..10),
-                          user_id: User.pluck(:id).sample,
-                          commentable_type: 'Post',
-                          commentable_id: post.id,
-                          created_at: Time.now - rand(11).days)
+  @posts <<FactoryGirl.create_list(:post, 5, user: user)
 end
 
-Comment.all.each do |comment|
+@comments = []
+@comments.each do |post|
+  @comments << FactoryGirl.create_list(:comment, rand(5..10),
+                                      user_id: User.pluck(:id).sample,
+                                      commentable_type: 'Post',
+                                      commentable_id: post.id,
+                                      created_at: Time.now - rand(11).days)
+end
+
+@comments.each do |comment|
   FactoryGirl.create_list(:comment, rand(5..20),
                           user_id: User.pluck(:id).sample,
                           commentable_type: 'Comment',

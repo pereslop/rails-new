@@ -2,10 +2,15 @@
   .row
     .col-md-3.text-center
       h1=  @user.username
+      =link_to 'follow', follow_account_user_path(@user), method: :get, remote: true
       - if @user.avatar.url
         = image_tag @user.avatar.url, class: 'img-responsive'
       - else
         = image_tag ('britni.png'), class: 'img-responsive'
+      p followers
+      p=@user.followers_count
+      p followees
+      p=@user.followees_count
       - if @user.id == current_user.id
         = link_to "Edit profile", edit_user_registration_path, method: :get
         = render 'account/posts/form'
