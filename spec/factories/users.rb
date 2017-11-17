@@ -29,13 +29,22 @@ FactoryGirl.define do
     avatar { Faker::Avatar.image("my-own-slug")}
   end
 
-  trait :with_posts do
+  trait :with_content do
     after(:create) do |user|
-      create_list(:post, 5, user: user)
-    end
-
-    after(:build) do |user|
-      build_list(:post, 5, user: user)
+      posts = create_list(:post, 5, user: user)
+      posts.each do |post|
+        comments = FactoryGirl.create_list(:comment, rand(5..10),
+                                      user_id: User.pluck(:id).sample,
+                                      commentable_type: 'Post',
+                                      commentable_id: post.id,
+                                      created_at: Time.now - rand(11).days)
+        comments.each do |comment|
+            FactoryGirl.create_list(:comment, rand(5..20),
+                                    user_id: User.pluck(:id).sample,
+                                    commentable_type: 'Comment',
+                                    commentable_id: comment.id)
+        end
+      end
     end
   end
 
