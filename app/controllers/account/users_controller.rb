@@ -7,13 +7,17 @@ class Account::UsersController < AccountController
     @user = resource
     @posts = @user.posts.ordered.page(params[:page]).per(24)
     @post = @user.posts.new
+    @followees = followees
+    @followers = followers
   end
 
   def follow
-    @user = resource
-    current_user.follow!(@user)
+    current_user.follow!(resource)
   end
 
+  def unfollow
+    current_user.unfollow!(resource)
+  end
   private
 
   def user_params
@@ -26,6 +30,14 @@ class Account::UsersController < AccountController
 
   def resource
     collection.find(params[:id])
+  end
+
+  def followers
+    resource.followers(User)
+  end
+
+  def followees
+    resource.followables(User)
   end
 
 end

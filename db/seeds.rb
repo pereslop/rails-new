@@ -10,3 +10,7 @@ User.create_with(FactoryGirl.attributes_for(:user, :with_content, :admin, email:
 if User.count < 10
   FactoryGirl.create_list(:user, 5, :with_content)
 end
+
+User.all.each do |user|
+  User.count.times { user.follow!(User.find(User.pluck(:id).sample))}
+end

@@ -23,29 +23,32 @@
 class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
-  acts_as_followable
-  acts_as_follower
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-
-  validates_integrity_of  :avatar
-  validates_processing_of :avatar
-
-  ROLES = [:user, :admin]
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  enum role: ROLES
+  # has_many :follows, as: :followable
+  # has_many :follows, as: :follower
 
+
+  acts_as_liker
+  acts_as_followable
+  acts_as_follower
+
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+  :recoverable, :rememberable, :trackable, :validatable
+
+  validates_integrity_of  :avatar
+  validates_processing_of :avatar
   validates :username,
     presence: true,
     uniqueness: { case_sensitive: false },
     length: { minimum: 3 }
 
+  ROLES = [:user, :admin]
+  enum role: ROLES
+
   scope :ordered, -> { order(username: :asc) }
 
-  acts_as_liker
 end
