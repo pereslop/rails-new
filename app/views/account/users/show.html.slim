@@ -2,7 +2,8 @@
   .row
     .col-md-3.text-center
       h1=  @user.username
-      =link_to 'follow', follow_account_user_path(@user), method: :get, remote: true
+      -unless @user == current_user
+        =link_to 'follow', follow_account_user_path(@user), method: :get, remote: true
       - if @user.avatar.url
         = image_tag @user.avatar.url, class: 'img-responsive'
       - else

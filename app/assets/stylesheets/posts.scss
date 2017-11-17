@@ -67,6 +67,9 @@
       padding-left: 5px;
       .user-avatar {
         width: 20%;
+        .form-avatar {
+
+        }
       }
       .comment-user-avatar {
         width: 14%;
@@ -121,6 +124,23 @@
     }
   }
 }
+.form-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  .user-avatar {
+    .form-avatar {
+      width: 26px;
+      height: 26px;
+      margin-top: 2px;
+    }
+  }
+  .form {
+
+  }
+
+}
+
 
 div[id^="this-comment-content-"]:hover .post-content .post-data .comment-actions {
   visibility: visible;
