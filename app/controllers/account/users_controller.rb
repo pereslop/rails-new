@@ -11,13 +11,26 @@ class Account::UsersController < AccountController
     @followers = followers
   end
 
+
+
   def follow
-    current_user.follow!(resource)
+    @user = resource
+    current_user.follow!(@user)
+
+    respond_to do |format|
+      format.js { render 'account/users/follow' }
+    end
   end
 
   def unfollow
-    current_user.unfollow!(resource)
+    @user = resource
+    current_user.unfollow!(@user)
+
+    respond_to do |format|
+      format.js { render 'account/users/follow' }
+    end
   end
+
   private
 
   def user_params

@@ -1,4 +1,16 @@
-.followers {
+.user-username {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  h1, a {
+    display: inherit;
+  }
+  a {
+    align-self: center;
+  }
+}
+.followers, .followees {
   margin-top: 5px;
   p {
     text-align: right;

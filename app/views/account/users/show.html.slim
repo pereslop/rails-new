@@ -1,9 +1,10 @@
 .container
   .row
-    .col-md-3.text-center
-      h1=  @user.username
-      -unless @user == current_user
-        =render 'account/users/follow_btn', user: @user
+    .col-md-3
+      .user-username
+        h1.no-margin=  @user.username
+        -unless @user == current_user
+          =render 'account/users/follow_btn', user: @user
       - if @user.avatar.url
         = image_tag @user.avatar.url, class: 'img-responsive'
       - else
@@ -11,11 +12,11 @@
       .followers
         p= "followers #{@user.followers_count}"
         .row
-          = render partial: 'account/users/follower', collection: @followers, as: :follower
-      .followers
+          = render partial: 'account/users/follower', collection: @followers.first(6), as: :follower
+      .followees
         p= "followees #{@user.followees_count}"
         .row
-          = render partial: 'account/users/follower', collection: @followees, as: :follower
+          = render partial: 'account/users/follower', collection: @followees.first(6), as: :follower
       - if @user.id == current_user.id
         = link_to "Edit profile", edit_user_registration_path, method: :get
         = render 'account/posts/form'

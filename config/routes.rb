@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     root 'posts#index'
 
     resources :users do
-      resources :posts, module: :users, only: [:show, :destroy]
+      resources :posts, module: :users, only: [:show, :destroy, :follewers, :followees]
       member do
         get 'follow', to: 'users#follow', as: :follow
         get 'unfollow', to: 'users#unfollow', as: :unfollow
