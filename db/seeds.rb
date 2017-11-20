@@ -7,7 +7,7 @@ unless User.find_by(role: 'admin')
   User.create(FactoryGirl.attributes_for(:user, :with_content, :admin, email: 'pereslop@gmail.com', password: 'qqqqqq'))
 end
 User.create_with(FactoryGirl.attributes_for(:user, :with_content, :admin, email: 'pereslop@gmail.com', password: 'qqqqqq')).find_or_create_by(email: 'pereslop@gmail.com')
-if User.count < 10
+if User.count < 20
   FactoryGirl.create_list(:user, 5, :with_content)
 end
 
