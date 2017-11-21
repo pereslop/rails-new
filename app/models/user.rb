@@ -21,6 +21,8 @@
 #
 
 class User < ApplicationRecord
+  ROLES = %i(user, admin)
+
   mount_uploader :avatar, AvatarUploader
 
   has_many :posts, dependent: :destroy
@@ -42,7 +44,6 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false },
     length: { minimum: 3 }
 
-  ROLES = [:user, :admin]
   enum role: ROLES
 
   scope :ordered, -> { order(username: :asc) }

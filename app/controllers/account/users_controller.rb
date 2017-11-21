@@ -6,7 +6,7 @@ class Account::UsersController < AccountController
   def show
     @user = resource
     @posts = @user.posts.ordered.page(params[:page]).per(24)
-    @post = @user.posts.new
+    @post = @posts.new
     @followees = get_followees
     @followers = get_followers
   end
@@ -14,35 +14,27 @@ class Account::UsersController < AccountController
   def followers
     @users = get_followers
 
-    respond_to do |format|
-      format.js { render 'account/users/update_follow_modal' }
-    end
+    render 'account/users/update_follow_modal'
   end
 
   def followees
     @users = get_followees
 
-    respond_to do |format|
-      format.js { render 'account/users/update_follow_modal' }
-    end
+     render 'account/users/update_follow_modal'
   end
 
   def follow
     @user = resource
     current_user.follow!(@user)
 
-    respond_to do |format|
-      format.js { render 'account/users/follow' }
-    end
+    render 'account/users/follow'
   end
 
   def unfollow
     @user = resource
     current_user.unfollow!(@user)
 
-    respond_to do |format|
-      format.js { render 'account/users/follow' }
-    end
+    render 'account/users/follow'
   end
 
   private
