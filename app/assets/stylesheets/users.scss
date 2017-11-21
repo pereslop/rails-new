@@ -1,0 +1,36 @@
+.user-username {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 2px;
+  h1, a {
+    display: inline-block;
+  }
+  a {
+    align-self: center;
+    width: 30%;
+  }
+}
+.followers, .followees {
+  margin:5px 0;
+  background-color: #444345;
+  a {
+    text-align: right;
+    display: block;
+    span {
+    color: white;
+    padding-right: 5px;
+    }
+  }
+}
+
+
+#follows-list {
+  background-color: #e6e6e6;
+  padding-top: 10px;
+  a {
+    display: block;
+    text-align: center;
+  }
+}

@@ -6,44 +6,37 @@ class CommentsController < ApplicationController
 
   def new
     @comment = @commentable.comments.new
-    respond_to do |format|
-      format.js { render 'account/comments/new' }
-    end
+
+    render 'account/comments/new'
   end
 
   def create
     @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      respond_to do |format|
-        format.js { render 'account/comments/create' }
-      end
+      render 'account/comments/create'
     end
   end
 
   def edit
     @comment = resource
-    respond_to do |format|
-      format.js { render 'account/comments/edit' }
-    end
+
+    render 'account/comments/edit'
   end
 
   def update
     @comment = resource
     if @comment.update(comment_params)
       @comment.reload
-      respond_to do |format|
-        format.js { render 'account/comments/update' }
-      end
+        render 'account/comments/update'
     end
   end
 
   def destroy
    @comment = resource
    @comment.destroy
-   respond_to do |format|
-     format.js { render 'account/comments/destroy' }
-   end
+
+   render 'account/comments/destroy'
   end
 
   private

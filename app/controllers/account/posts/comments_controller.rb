@@ -4,9 +4,7 @@ class Account::Posts::CommentsController < ::CommentsController
   def new
     @comment = @commentable.comments.new
 
-    respond_to do |format|
-      format.js { render 'account/posts/comments/new' }
-    end
+    render 'account/posts/comments/new'
   end
 
   def create
@@ -15,9 +13,7 @@ class Account::Posts::CommentsController < ::CommentsController
     @comment.user_id = current_user.id
 
     if @comment.save
-      respond_to do |format|
-        format.js { render 'account/posts/comments/create' }
-      end
+      render 'account/posts/comments/create'
     end
   end
 

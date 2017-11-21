@@ -35,6 +35,8 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        height: 700px;
+        width: 350px;
         a {
           align-self: flex-end;
         }
@@ -42,8 +44,11 @@
       .previous-post {
         display: flex;
         align-items: center;
-        width: 350px;
         height: 700px;
+        width: 350px;
+        a {
+          align-self: flex-start;
+        }
       }
     }
     .post-image {
@@ -121,6 +126,19 @@
     }
   }
 }
+.form-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  .user-avatar {
+    .form-avatar {
+      width: 26px;
+      height: 26px;
+      margin-top: 2px;
+    }
+  }
+}
+
 
 div[id^="this-comment-content-"]:hover .post-content .post-data .comment-actions {
   visibility: visible;

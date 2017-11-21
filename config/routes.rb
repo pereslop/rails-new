@@ -14,6 +14,12 @@ Rails.application.routes.draw do
 
     resources :users do
       resources :posts, module: :users, only: [:show, :destroy]
+      member do
+        get 'follow', to: 'users#follow', as: :follow
+        get 'unfollow', to: 'users#unfollow', as: :unfollow
+        get 'followers', to: 'users#followers', as: :followers
+        get 'followees', to: 'users#followees', as: :followees
+      end
     end
 
     resources :comments do

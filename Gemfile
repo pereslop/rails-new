@@ -18,7 +18,6 @@ gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 gem 'bootstrap-sass', '3.3.7'
 gem 'jquery-rails'
 gem 'rails-backbone'
-gem 'backbone-forms-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'font-awesome-sass', '~> 4.7.0'
 # Use Uglifier as compressor for JavaScript assets

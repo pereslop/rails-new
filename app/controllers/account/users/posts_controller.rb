@@ -3,9 +3,8 @@ class Account::Users::PostsController < Account::PostsController
   def show
     @post_for_show = resource
     @posts = @post_for_show.user.posts.ordered
-    respond_to do |format|
-      format.js { render 'account/users/posts/update_gallery' }
-    end
+
+    render 'account/users/posts/update_gallery'
   end
 
   def destroy
@@ -13,9 +12,8 @@ class Account::Users::PostsController < Account::PostsController
     @posts = collection.ordered
     @post_for_show = @posts.prev_for(@post) ? @posts.prev_for(@post) : @posts.next_for(@post)
     @post.destroy
-    respond_to do |format|
-      format.js { render 'account/users/posts/update_gallery' }
-    end
+
+    render 'account/users/posts/update_gallery'
   end
 
   private

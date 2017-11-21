@@ -3,24 +3,13 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 return unless Rails.env.development?
 
-@users = []
-10.times do
-  @users << User.create(FactoryGirl.attributes_for(:user, :with_posts))
-end
-@users.each do |user|
-  FactoryGirl.create_list(:post, 5, user: user)
-end
-Post.all.each do |post|
-  FactoryGirl.create_list(:comment, rand(5..10),
-                          user_id: User.pluck(:id).sample,
-                          commentable_type: 'Post',
-                          commentable_id: post.id,
-                          created_at: Time.now - rand(11).days)
+
+User.create_with(FactoryGirl.attributes_for(:user, :with_content, :admin, email: 'pereslop@gmail.com', password: 'qqqqqq')).find_or_create_by(role: 'admin')
+
+if User.count < 16
+  FactoryGirl.create_list(:user, 15, :with_content)
 end
 
-Comment.all.each do |comment|
-  FactoryGirl.create_list(:comment, rand(5..20),
-                          user_id: User.pluck(:id).sample,
-                          commentable_type: 'Comment',
-                          commentable_id: comment.id)
+User.all.each do |user|
+  User.count.times { user.follow!(User.find(User.pluck(:id).sample))}
 end
