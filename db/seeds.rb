@@ -4,9 +4,10 @@
 return unless Rails.env.development?
 
 
-User.create_with(FactoryGirl.attributes_for(:user, :with_content, :admin, email: 'pereslop@gmail.com', password: 'qqqqqq')).find_or_create_by(email: 'pereslop@gmail.com')
-if User.count < 20
-  FactoryGirl.create_list(:user, 5, :with_content)
+User.create_with(FactoryGirl.attributes_for(:user, :with_content, :admin, email: 'pereslop@gmail.com', password: 'qqqqqq')).find_or_create_by(role: 'admin')
+
+if User.count < 16
+  FactoryGirl.create_list(:user, 15, :with_content)
 end
 
 User.all.each do |user|

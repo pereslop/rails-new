@@ -26,7 +26,7 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     username { Faker::Pokemon.name }
     password { Faker::Internet.password(8) }
-    avatar { Faker::Avatar.image("my-own-slug")}
+    avatar { Rack::Test::UploadedFile.new(Dir[Rails.root.join('spec', 'support', 'images', 'users_avatars', '*.*')].sample) }
   end
 
   trait :with_content do
