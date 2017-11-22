@@ -1,0 +1,10 @@
+.col-md-3.col-sm-4.col-xs-6.text-center
+  = link_to account_user_path(user), method: :get do
+    - if user.avatar.url
+      = image_tag user.avatar.url, class: 'img-responsive'
+    - else
+      = image_tag ('britni.png'), class: 'img-responsive'
+    .user-actions
+      = link_to "#{user.username}",  account_user_path(user), method: :get
+      -if user.follows?(current_user)
+        button.btn.btn-xs.btn-danger.no-padding followed

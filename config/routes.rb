@@ -19,7 +19,10 @@ Rails.application.routes.draw do
         get 'unfollow', to: 'users#unfollow', as: :unfollow
         get 'followers', to: 'users#followers', as: :followers
         get 'followees', to: 'users#followees', as: :followees
+
       end
+      collection { post :index, to: 'users#index' }
+
     end
 
     resources :comments do

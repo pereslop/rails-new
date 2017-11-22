@@ -1,6 +1,6 @@
 class Account::UsersController < AccountController
   def index
-    @users = collection
+    @users = @search.result.page(params[:page]).per(24)
   end
 
   def show
