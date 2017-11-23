@@ -1,5 +1,9 @@
-h1 for users account(in future will be changed)
-
-ul
-  - @users.each do |user|
-    li= link_to user.username, account_user_path(user)
+.container
+  .row
+    - if @users.any?
+      = render partial: 'account/users/user', collection: @users, as: :user
+    - else
+      .text-center
+        h5 no users found, please try again
+  .row.text-center
+    = paginate @users

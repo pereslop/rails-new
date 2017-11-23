@@ -1,6 +1,6 @@
 class Account::UsersController < AccountController
   def index
-    @users = collection
+    @users = @search.result.page(params[:page]).per(24)
   end
 
   def show
@@ -14,27 +14,25 @@ class Account::UsersController < AccountController
   def followers
     @users = get_followers
 
-    render 'account/users/update_follow_modal'
+    render :update_follow_modal
   end
 
   def followees
     @users = get_followees
 
-     render 'account/users/update_follow_modal'
+     render :update_follow_modal
   end
 
   def follow
     @user = resource
     current_user.follow!(@user)
-
-    render 'account/users/follow'
   end
 
   def unfollow
     @user = resource
     current_user.unfollow!(@user)
 
-    render 'account/users/follow'
+    render :follow
   end
 
   private

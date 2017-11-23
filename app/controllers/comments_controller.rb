@@ -28,7 +28,9 @@ class CommentsController < ApplicationController
     @comment = resource
     if @comment.update(comment_params)
       @comment.reload
-        render 'account/comments/update'
+      render 'account/comments/update'
+    else
+      render 'account/comments/edit'
     end
   end
 

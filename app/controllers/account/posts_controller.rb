@@ -20,7 +20,6 @@ class Account::PostsController < ApplicationController
 
   def edit
     @post = resource
-    render 'account/posts/edit'
   end
 
   def update
@@ -39,8 +38,6 @@ class Account::PostsController < ApplicationController
     @post_for_show = @post.next ? @post.next : @post.prev
     @posts = collection.page(params[:page]).per(24)
     @post.destroy
-
-    render 'account/posts/destroy'
   end
 
   def toggle_like
@@ -48,7 +45,7 @@ class Account::PostsController < ApplicationController
     current_user.toggle_like!(@post)
     @post.reload
 
-    render 'account/posts/update_button'
+    render :update_button
   end
 
   private
