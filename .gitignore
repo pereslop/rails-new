@@ -20,6 +20,6 @@
 .idea
 
 /public/uploads/*
-/tryRuby.rb
+/try_ruby.rb
 /coverage/*
 /vendor/bundle/*
