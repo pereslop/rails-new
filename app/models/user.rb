@@ -15,18 +15,25 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  role                   :integer          default("user")
+#  role                   :integer          default("user,")
 #  username               :string
 #  avatar                 :string
+#  followees_count        :integer          default(0)
+#  followers_count        :integer          default(0)
 #
 
 class User < ApplicationRecord
   ROLES = %i(user, admin)
+  SOCIALS = {
+      facebook: 'Facebook',
+      google_oauth2: 'Google'
+  }
 
   mount_uploader :avatar, AvatarUploader
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :authorizations
 
   acts_as_liker
   acts_as_followable
@@ -36,7 +43,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
+         :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
   validates_integrity_of  :avatar
   validates_processing_of :avatar
@@ -49,22 +56,26 @@ class User < ApplicationRecord
 
   scope :ordered, -> { order(username: :asc) }
 
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
+  def self.from_omniauth(auth, current_user)
+    authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first_or_create
+    if authorization.user.blank?
+      user = current_user.nil? ? User.where('email = ?', auth['info']['email']).first : current_user
+      if user.blank?
+        user = User.new
+        user.password = Devise.friendly_token[0, 20]
+        user.fetch_details(auth)
+        user.save
       end
+      authorization.user = user
+      authorization.save
     end
+    authorization.user
   end
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.username = auth.info.name
-      user.remote_avatar_url = auth.info.image
-      puts ''
-    end
+  def fetch_details(auth)
+    self.username = auth.info.name
+    self.email = auth.info.email
+    self.remote_avatar_url = auth.info.image
   end
 
 end

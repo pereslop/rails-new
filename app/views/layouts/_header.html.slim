@@ -26,3 +26,4 @@ body
                 li= link_to "sign in", new_user_session_path, method: :get
                 li.social= link_to "sign up", new_user_registration_path, method: :get
                 li= link_to "facebook", user_facebook_omniauth_authorize_path, id: 'facebook-auth'
+                li= link_to "google", user_google_oauth2_omniauth_authorize_path, id: 'google-auth'
