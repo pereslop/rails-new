@@ -230,3 +230,13 @@ a.like_btn {
   margin-left: 10%;
   border-left: 2px solid gainsboro;
 }
+.social {
+  height: 30px;
+}
+#facebook-auth {
+  background-color: #486090 !important;
+  color: white !important;
+  &:hover {
+    background-color: #3a4775 !important;
+  }
+}
