@@ -1,6 +1,6 @@
 class Admin::UsersController < AdminController
   def index
-    @users = collection.page(params[:page]).per(24)
+    @users = collection.page(params[:page]).per(LIST_OF_ENTITIES)
   end
 
   def show

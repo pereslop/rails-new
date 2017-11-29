@@ -36,7 +36,7 @@ class Account::PostsController < ApplicationController
   def destroy
     @post = resource
     @post_for_show = @post.next ? @post.next : @post.prev
-    @posts = collection.page(params[:page]).per(24)
+    @posts = collection.page(params[:page]).per(LIST_OF_ENTITIES)
     @post.destroy
   end
 
