@@ -15,9 +15,11 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  role                   :integer          default("user")
+#  role                   :integer          default("user,")
 #  username               :string
 #  avatar                 :string
+#  followees_count        :integer          default(0)
+#  followers_count        :integer          default(0)
 #
 
 require 'test_helper'

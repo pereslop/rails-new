@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  LIST_OF_ENTITIES = 24
 
   protect_from_forgery with: :exception
 
