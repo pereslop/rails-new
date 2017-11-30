@@ -33,7 +33,7 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :authorizations
+  has_many :authorizations, dependent: :destroy
 
   acts_as_liker
   acts_as_followable
@@ -43,7 +43,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+         :omniauthable, omniauth_providers: SOCIALS.keys
 
   validates_integrity_of  :avatar
   validates_processing_of :avatar
@@ -59,7 +59,7 @@ class User < ApplicationRecord
   def self.from_omniauth(auth, current_user)
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first_or_create
     if authorization.user.blank?
-      user = current_user.nil? ? User.where('email = ?', auth['info']['email']).first : current_user
+      user = current_user || User.find_by(email: auth.info.email)
       if user.blank?
         user = User.new
         user.password = Devise.friendly_token[0, 20]

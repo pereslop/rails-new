@@ -8,6 +8,15 @@ $body-color:   #486090;
 $light-color:  #FFFFFF;
 $dark-color:   #000000;
 $accent-color: #B7E9FF;
+$button-blue-color: #1155ff;
+$button-green-color: #208a12;
+$comment-blue-form-color: $button-blue-color;
+$button-edit-green-color: #95d684;
+$comment-background-color: rgba(241, 240, 239, 0.89);
+$like-btn-background-color: rgba(209,208,207,0.89);
+$facebook-color: $body-color;
+$grey-color: #666666;
+$dark-grey-color: #4a4a4a;
 
 h1 {
   text-align: center;
@@ -42,17 +51,17 @@ img {
 
 .button {
   font-size: 15px;
-  background-color: #1155ff;
+  background-color: $button-blue-color;
   color: white;
   padding: 10px;
   border-radius: 4px;
   margin: 2px 0;
 }
 .button-green {
-  background-color: #208a12;
+  background-color: $button-blue-color;
 }
 .button-blue {
-  background-color: #1155ff;
+  background-color: $button-blue-color;
 }
 .button-small {
   font-size: 10px;
@@ -69,12 +78,12 @@ img {
     width: 320px;
     height: 26px;
     border-radius: 5px;
-    border: 2px solid #337ab7;
+    border: 2px solid $comment-blue-form-color;
   }
 }
 
 .simple_form input[type=submit] {
-  background-color: #1155ff;
+  background-color: $button-blue-color;
   color: white;
   font-size: smaller;
   padding: 5px;
@@ -83,7 +92,7 @@ img {
   margin-top: 2px;
 }
 .simple_form.edit_comment input[type=submit] {
-  background-color: #95d684;
+  background-color: $button-edit-green-color;
   color: white;
   font-size: smaller;
   margin: 2px;
@@ -101,7 +110,7 @@ img {
   color: rgba(67,61,72,0.56);
 }
 .comment {
-  background-color: rgba(241, 240, 239, 0.89);
+  background-color: $comment-background-color;
 }
 
 .close {
@@ -117,15 +126,15 @@ img {
 }
 .underline {
   padding-top: 7px;
-  border-bottom: 2px solid rgba(195,195,195,0.89);
+  border-bottom: 2px solid $dark-grey-color;
   margin: 0 5%;
 }
 .comment-comment {
-  color: #666666;
+  color: $dark-grey-color;
   font-size: 13px;
   &:hover {
     text-decoration: none;
-    color: #3e3e46;
+    color: $grey-color;
   }
 }
 #load-comments {
@@ -133,10 +142,7 @@ img {
   margin-right: 20px;
   text-align: right;
   font-size: 16px;
-  color: #597aa6;
-  &:hover {
-    color: #283957;
-  }
+  color: $body-color;
 }
 
 
@@ -170,7 +176,7 @@ a.like_btn {
   margin: auto;
   width: 90px;
   height: 40px;
-  background: rgba(209,208,207,0.89);
+  background: $like-btn-background-color;
   border: 0;
   font-size: .9rem;
   font-family: Futura;
@@ -234,14 +240,11 @@ a.like_btn {
   height: 30px;
 }
 #facebook-auth {
-  background-color: #486090;
+  background-color: $facebook-color;
   color: white ;
-  &:hover {
-    background-color: #3a4775 ;
-  }
 }
 
 #google-auth {
-  background-color: #c8c8c8;
+  background-color: $like-btn-background-color;
   color: white;
 }
