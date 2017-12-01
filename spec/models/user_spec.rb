@@ -2,17 +2,28 @@ require 'rails_helper'
 
 describe User, type: :model do
 
-  context 'User authorization' do
-    it 'should create new authorization and user' do
+  describe 'User authorization' do
+    it 'create new authorization and user' do
       expect do
-        User.from_omniauth(Faker::Omniauth.google, nil)
-      end.to change(Authorization, :count).by(1)
+        described_class.from_omniauth(Faker::Omniauth.facebook)
+      end.to change(Authorization, :count).by(1).and change(described_class, :count).by(1)
     end
 
-    it 'should login user registered user' do
-      authorization = FactoryGirl.create(:authorization, :facebook)
+    it 'login registered user with authorization' do
+      authorization = FactoryGirl.create(:authorization)
       user = authorization.user
-      expect(User.from_omniauth(authorization, nil)).to eq(user)
+      expect do
+        described_class.from_omniauth(authorization)
+      end.to change(described_class, :count).by(0)
+    end
+
+    it 'login user without authorization' do
+      user = FactoryGirl.create(:user)
+      authorization = Faker::Omniauth.facebook
+      authorization[:info][:email] = user.email
+      expect do
+        described_class.from_omniauth(authorization)
+      end.to  change(described_class, :count).by(0).and change(Authorization, :count).by(1)
     end
   end
 

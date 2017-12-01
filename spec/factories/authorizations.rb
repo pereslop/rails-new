@@ -13,15 +13,8 @@
 FactoryGirl.define do
   factory :authorization do
     association :user
-  end
-
-  trait :facebook do
     provider { Faker::Omniauth.facebook[:provider] }
     uid { Faker::Omniauth.facebook[:uid] }
   end
 
-  trait :google do
-    provider { Faker::Omniauth.google[:provider] }
-    uid { Faker::Omniauth.google[:uid] }
-  end
 end
