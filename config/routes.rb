@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks#all" }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks#all' }
 
   namespace :admin do
     root 'users#index'
@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   namespace :account do
     root 'posts#index'
 
+
+    resources :messages
+
     resources :users do
       resources :posts, module: :users, only: [:show, :destroy]
       member do
@@ -19,10 +22,8 @@ Rails.application.routes.draw do
         get 'unfollow', to: 'users#unfollow', as: :unfollow
         get 'followers', to: 'users#followers', as: :followers
         get 'followees', to: 'users#followees', as: :followees
-
       end
       collection { post :index, to: 'users#index' }
-
     end
 
     resources :comments do

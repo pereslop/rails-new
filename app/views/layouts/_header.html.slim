@@ -5,6 +5,7 @@ body
       nav
         ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
+            li= link_to "messages", account_messages_path, method: :get
             li= render 'account/users/serch_form'
             -if current_user.admin?
               li= link_to "admin panel", admin_users_path, method: :get

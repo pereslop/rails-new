@@ -12,9 +12,7 @@ class Account::Posts::CommentsController < ::CommentsController
     @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
 
-    if @comment.save
-      render 'account/posts/comments/create'
-    end
+    render 'account/posts/comments/create' if @comment.save
   end
 
   private
@@ -22,5 +20,4 @@ class Account::Posts::CommentsController < ::CommentsController
   def set_commentable
     @commentable = Post.find(params[:post_id])
   end
-
 end

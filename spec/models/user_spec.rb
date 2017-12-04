@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :inet
+#  last_sign_in_ip        :inet
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  role                   :integer          default("user,")
+#  username               :string
+#  avatar                 :string
+#  followees_count        :integer          default(0)
+#  followers_count        :integer          default(0)
+#
+
 require 'rails_helper'
 
 describe User, type: :model do
@@ -13,7 +37,6 @@ describe User, type: :model do
     end
 
     it 'login registered user with authorization' do
-
       expect do
         described_class.from_omniauth(authorization)
       end.to change(described_class, :count).by(0)
@@ -26,5 +49,4 @@ describe User, type: :model do
       end.to  change(described_class, :count).by(0).and change(Authorization, :count).by(1)
     end
   end
-
 end

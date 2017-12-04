@@ -13,3 +13,8 @@ end
 User.all.each do |user|
   User.count.times { user.follow!(User.find(User.pluck(:id).sample))}
 end
+
+
+User.all.each do |user|
+  user.messages.create(body: Faker::Lorem.words(5), user_id: User.pluck(:id).sample, conversation_id: Conversation.pluck(:id).sample)
+end
