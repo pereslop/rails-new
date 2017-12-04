@@ -59,12 +59,9 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     authorization = Authorization.where(provider: auth[:provider], uid: auth[:uid].to_s).first_or_create
     return authorization.user if authorization.user
-    user = User.find_by(email: auth[:info][:email])
-    if user.blank?
-      user = User.new
-      user.password = Devise.friendly_token[0, 20]
-      user.fetch_details(auth)
-      user.save
+    user = User.find_or_create_by(email: auth[:info][:email]) do |u|
+      u.password = Devise.friendly_token[0, 20]
+      u.fetch_details(auth)
     end
     user.authorizations << authorization
     user

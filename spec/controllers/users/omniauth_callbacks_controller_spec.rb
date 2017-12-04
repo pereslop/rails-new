@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Users::OmniauthCallbacksController, type: :controller do
-  let(:default_email) { 'pereslop@rere.com' }
-  let(:user) { User.find_by(email: default_email)}
+  let!(:default_email) { 'pereslop@rere.com' }
+  let!(:user) { User.find_by(email: default_email)}
 
 
   describe 'GET#ALL' do
@@ -29,23 +29,5 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       end.to change(User, :count).by(0)
     end
 
-  end
-
-  def setup_env_for_omniauth(email = true)
-    request.env['devise.mapping'] = Devise.mappings[:user]
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = env_data_for_facebook(email)
-
-    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
-  end
-
-  def env_data_for_facebook(email)
-    @facebook_hash = Faker::Omniauth.facebook
-    if email
-      @facebook_hash[:info][:email] = default_email
-    else
-      @facebook_hash[:info][:email] = ''
-    end
-    @facebook_hash
   end
 end

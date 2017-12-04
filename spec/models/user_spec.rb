@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe User, type: :model do
-  let (:auth) { Faker::Omniauth.facebook }
-  let (:user) { FactoryGirl.create(:user)}
+  let! (:auth) { Faker::Omniauth.facebook }
+  let! (:user) { FactoryGirl.create(:user)}
   let! (:authorization) { FactoryGirl.create(:authorization) }
 
   describe 'User authorization' do
@@ -13,6 +13,7 @@ describe User, type: :model do
     end
 
     it 'login registered user with authorization' do
+
       expect do
         described_class.from_omniauth(authorization)
       end.to change(described_class, :count).by(0)
