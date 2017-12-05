@@ -12,8 +12,9 @@
 
 FactoryGirl.define do
   factory :authorization do
-    user_id 1
-    provider "MyString"
-    uid "MyString"
+    association :user
+    provider { Faker::Omniauth.facebook[:provider] }
+    uid { Faker::Omniauth.facebook[:uid] }
   end
+
 end

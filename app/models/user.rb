@@ -56,26 +56,21 @@ class User < ApplicationRecord
 
   scope :ordered, -> { order(username: :asc) }
 
-  def self.from_omniauth(auth, current_user)
-    authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first_or_create
-    if authorization.user.blank?
-      user = current_user || User.find_by(email: auth.info.email)
-      if user.blank?
-        user = User.new
-        user.password = Devise.friendly_token[0, 20]
-        user.fetch_details(auth)
-        user.save
-      end
-      authorization.user = user
-      authorization.save
+  def self.from_omniauth(auth)
+    authorization = Authorization.where(provider: auth[:provider], uid: auth[:uid].to_s).first_or_create
+    return authorization.user if authorization.user
+    user = User.find_or_create_by(email: auth[:info][:email]) do |u|
+      u.password = Devise.friendly_token[0, 20]
+      u.fetch_details(auth)
     end
-    authorization.user
+    user.authorizations << authorization
+    user
   end
 
   def fetch_details(auth)
-    self.username = auth.info.name
-    self.email = auth.info.email
-    self.remote_avatar_url = auth.info.image
+    self.username = auth[:info][:name]
+    self.email = auth[:info][:email]
+    self.remote_avatar_url = auth[:info][:image]
   end
 
 end

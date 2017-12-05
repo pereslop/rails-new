@@ -1,5 +1,25 @@
+module OmniAuthTestHelper
+  def setup_env_for_omniauth(email = true)
+    request.env['devise.mapping'] = Devise.mappings[:user]
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.mock_auth[:facebook] = env_data_for_facebook(email)
+
+    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+  end
+
+  def env_data_for_facebook(email)
+    @facebook_hash = Faker::Omniauth.facebook
+    if email
+      @facebook_hash[:info][:email] = 'pereslop@rere.com'
+    else
+      @facebook_hash[:info][:email] = ''
+    end
+    @facebook_hash
+  end
+end
 
 RSpec.configure do |config|
+  config.include OmniAuthTestHelper
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -80,3 +100,5 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+
