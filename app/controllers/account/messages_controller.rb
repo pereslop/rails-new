@@ -1,26 +1,21 @@
 class Account::MessagesController < ApplicationController
 
   def index
+    @companions = companion
     @messages = collection
   end
 
-  def sent
-    @messages = collection.sent
-  end
-
-  def received
-    @messages = collection.received
-  end
-
-  def new
-  end
-
   def create
+    puts ''
   end
 
   private
 
+    def companions
+      User.find(params[:id])
+    end
+
     def collection
-      Message.all_for_user(current_user)
+      Message.between(current_user, recipient)
     end
 end

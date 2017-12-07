@@ -80,4 +80,8 @@ class User < ApplicationRecord
   def messages
     Message.all_for_user(self)
   end
+
+  def companions(messages)
+    messages.pluck(:sender_id, :recipient_id).flatten.uniq
+  end
 end

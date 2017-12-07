@@ -1,0 +1,4 @@
+= simple_form_for [:account, recipient,  message], remote: true do |f|
+  = f.input :body
+  = f.input :recipient_id,  as: :hidden
+  = f.submit
