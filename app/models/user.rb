@@ -37,7 +37,7 @@ class User < ApplicationRecord
   has_many :authorizations, dependent: :destroy
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
-  # has_many :messages, ->(user) { where('sender_id = ? or recipient_id = ?', user.id, user.id) }
+
   acts_as_liker
   acts_as_followable
   acts_as_follower
@@ -78,6 +78,6 @@ class User < ApplicationRecord
   end
 
   def messages
-    Message.for_user(self)
+    Message.all_for_user(self)
   end
 end

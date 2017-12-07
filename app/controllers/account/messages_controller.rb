@@ -21,6 +21,6 @@ class Account::MessagesController < ApplicationController
   private
 
     def collection
-      Message.for_user(current_user)
+      Message.all_for_user(current_user)
     end
 end

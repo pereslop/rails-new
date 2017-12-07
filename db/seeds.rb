@@ -3,18 +3,15 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 return unless Rails.env.development?
 
+User.create_with(FactoryGirl.attributes_for(:user,
+                                            :with_content,
+                                            :admin,
+                                            email: 'pereslop@gmail.com',
+                                            password: 'qqqqqq')).find_or_create_by(role: 'admin')
+FactoryGirl.create_list(:user, 15, :with_content) if User.count < 16
 
-User.create_with(FactoryGirl.attributes_for(:user, :with_content, :admin, email: 'pereslop@gmail.com', password: 'qqqqqq')).find_or_create_by(role: 'admin')
-
-if User.count < 16
-  FactoryGirl.create_list(:user, 15, :with_content)
-end
-
+users_ids = User.all.pluck(:id)
 User.all.each do |user|
-  User.count.times { user.follow!(User.find(User.pluck(:id).sample))}
-end
-
-
-User.all.each do |user|
-  user.messages.create(body: Faker::Lorem.words(5), user_id: User.pluck(:id).sample, conversation_id: Conversation.pluck(:id).sample)
+  User.count.times { user.follow!(User.find(users_ids.sample))}
+  20.times { FactoryGirl.create(:message, sender_id: user.id, recipient_id: users_ids.sample) }
 end

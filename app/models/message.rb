@@ -16,7 +16,7 @@ class Message < ApplicationRecord
 
   validates :body, presence: true
 
-  scope :for_user, ->(user) do
+  scope :all_for_user, ->(user) do
     where(sender_id: user.id).or(Message.where(recipient_id: user.id))
   end
   scope :sent, ->(user) { where(sender_id: user.id)}
