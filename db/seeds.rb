@@ -6,7 +6,6 @@ return unless Rails.env.development?
 User.create_with(FactoryGirl.attributes_for(:user,
                                             :with_content,
                                             :admin,
-                                            email: 'pereslop@gmail.com',
                                             password: 'qqqqqq')).find_or_create_by(role: 'admin')
 FactoryGirl.create_list(:user, 15, :with_content) if User.count < 16
 

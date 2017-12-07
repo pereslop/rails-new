@@ -10,7 +10,6 @@ class Account::Users::MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.sender_id = current_user.id
     @message.save
-    byebug
     render 'account/users/messages/create' if @message.save
   end
 
@@ -27,7 +26,7 @@ class Account::Users::MessagesController < ApplicationController
     def resource
       collection.find(params[:id])
     end
-  
+
     def recipient
       User.find(params[:user_id])
     end

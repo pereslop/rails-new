@@ -1,0 +1,7 @@
+.messenger-user
+  .user-avatar
+    = link_to account_messages_path(companion.id) do
+      = image_tag companion.avatar.url, class: 'img-responsive, img-circle, img-companion'
+  .username
+    = link_to account_messages_path(companion.id) do
+      span= companion.username

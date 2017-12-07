@@ -1,21 +1,17 @@
 class Account::MessagesController < ApplicationController
 
   def index
-    @companions = companion
-    @messages = collection
-  end
-
-  def create
-    puts ''
+    @companions = companions
+    @messages = @companions.first.messages
   end
 
   private
 
     def companions
-      User.find(params[:id])
+      User.find(current_user.companions(current_user.messages))
     end
 
     def collection
-      Message.between(current_user, recipient)
+      Message.between(current_user, companions.first)
     end
 end

@@ -1,0 +1,36 @@
+.messenger-user {
+  background-color: grey;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: row;
+  &:first-child {
+    background-color: red;
+  }
+  .user-avatar {
+    .img-companion {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+    }
+  }
+  .username {
+    display: flex;
+    margin-left: 5px;
+    padding-right: 5px
+  }
+}
+.message {
+  background-color: blue;
+  margin: 1px 0;
+  .time {
+    text-align: right;
+    color: grey;
+    padding-right: 5px;
+    font-size: 12px;
+    margin-bottom: 0;
+  }
+  .body {
+    color: white;
+    padding-left: 5px;
+  }
+}
