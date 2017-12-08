@@ -9,7 +9,7 @@
         = image_tag @user.avatar.url, class: 'img-responsive'
       - else
         = image_tag ('britni.png'), class: 'img-responsive'
-      = link_to 'write a massage', new_account_user_message_path(@user), method: :get, remote: true
+      = link_to 'write a massage', chat_account_message_path, method: :get
       .followers
         = link_to followers_account_user_path(@user), method: :get, remote: true do
           span= "followers #{@user.followers_count}"

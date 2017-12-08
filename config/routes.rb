@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   namespace :account do
     root 'posts#index'
 
-    resources :messages
+    resources :messages do
+      member do
+        get 'chat', to: 'messages#chat', as: :chat
+      end
+    end
 
     resources :users do
       resources :messages, module: :users

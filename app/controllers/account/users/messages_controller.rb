@@ -16,7 +16,7 @@ class Account::Users::MessagesController < ApplicationController
   private
 
     def collection
-      Message.between(current_user, recipient)
+      Message.between_users(current_user, recipient)
     end
 
     def message_params

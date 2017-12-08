@@ -12,6 +12,6 @@
 
 FactoryGirl.define do
   factory :message do
-    body Faker::Matz.quote
+    body { Faker::Matz.quote }
   end
 end

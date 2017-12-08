@@ -35,8 +35,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :authorizations, dependent: :destroy
-  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
-  has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
+  has_many :sent_messages, class_name: :Message, foreign_key: :sender_id
+  has_many :received_messages, class_name: :Message, foreign_key: :recipient_id
 
   acts_as_liker
   acts_as_followable
@@ -84,4 +84,5 @@ class User < ApplicationRecord
   def companions(messages)
     messages.pluck(:sender_id, :recipient_id).flatten.uniq
   end
+
 end

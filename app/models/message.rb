@@ -11,8 +11,8 @@
 #
 
 class Message < ApplicationRecord
-  belongs_to :sender, class_name: 'User', foreign_key: :sender_id
-  belongs_to :recipient, class_name: 'User', foreign_key: :recipient_id
+  belongs_to :sender, class_name: User
+  belongs_to :recipient, class_name: User
 
   validates :body, presence: true
 
@@ -22,8 +22,7 @@ class Message < ApplicationRecord
   scope :sent, ->(user) { where(sender_id: user.id)}
   scope :received, ->(user) { where(recipient_id: user.id) }
   scope :ordered, ->{ order(created_at: :desc) }
-  scope :between, ->(sender, recipient) do
+  scope :between_users, ->(sender, recipient) do
     where('(sender_id = ? AND recipient_id = ?) OR (recipient_id = ? AND sender_id = ?)', sender.id, recipient.id, sender.id, recipient.id)
   end
-
 end
