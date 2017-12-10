@@ -10,7 +10,7 @@ class Account::Users::PostsController < Account::PostsController
     @post = resource
     @posts = collection.ordered
     @post_for_show = @posts.prev_for(@post) ? @posts.prev_for(@post) : @posts.next_for(@post)
-sh    @post.destroy
+    @post.destroy
 
     render 'account/users/posts/update_gallery'
   end

@@ -12,14 +12,13 @@ Rails.application.routes.draw do
   namespace :account do
     root 'posts#index'
 
-    resources :messages do
+    resources :messages , only: [:index, :chat, :create] do
       member do
         get 'chat', to: 'messages#chat', as: :chat
       end
     end
 
     resources :users do
-      resources :messages, module: :users
       resources :posts, module: :users, only: [:show, :destroy]
       member do
         get 'follow', to: 'users#follow', as: :follow

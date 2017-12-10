@@ -1,3 +1,5 @@
 .message
-  p.time= "#{time_ago_in_words(message.created_at)} ago"
+  .message-info
+    p.companion-usermane= message.sender.username
+    p.time= "#{time_ago_in_words(message.created_at)} ago"
   p.body= message.body

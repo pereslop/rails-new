@@ -1,2 +1,2 @@
-$('#message-modal').modal('hide');
-$('#message-modal').remove()
+$('#messages-list').html(' <%= j render 'account/messages/messages', messages: @messages, companion: @companion, message: @message %>');
+$("#message_body").val('');

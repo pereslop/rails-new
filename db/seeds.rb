@@ -7,12 +7,12 @@ if User.count < 16
   User.create_with(FactoryGirl.attributes_for(:user,
                                               :with_content,
                                               :admin)).find_or_create_by(role: 'admin')
-  FactoryGirl.create_list(:user, 15, :with_content)
 end
+FactoryGirl.create_list(:user, 15, :with_content)
 
 users_ids = User.all.pluck(:id)
 
+200.times { FactoryGirl.create(:message, sender_id: user.id, recipient_id: users_ids.sample) }
 User.all.each do |user|
   User.count.times { user.follow!(User.find(users_ids.sample))}
-  200.times { FactoryGirl.create(:message, sender_id: user.id, recipient_id: users_ids.sample) }
 end

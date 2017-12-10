@@ -15,6 +15,13 @@ class Message < ApplicationRecord
   belongs_to :recipient, class_name: User
 
   validates :body, presence: true
+  validate :sender_can_not_be_recipient
+
+  def sender_can_not_be_recipient
+    if sender_id == recipient_id
+      errors.add(:base, 'you can not send message to yourself')
+    end
+  end
 
   scope :all_for_user, ->(user) do
     where(sender_id: user.id).or(Message.where(recipient_id: user.id))

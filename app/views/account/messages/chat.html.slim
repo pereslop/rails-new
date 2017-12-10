@@ -3,7 +3,7 @@
     .col-md-3.companions-list
       = render  partial: 'account/messages/companion',  collection: @companions
     .col-md-9
-      = render 'account/messages/form', recipient: @companion, message: @message
-      = render 'account/messages/messages',  messages: @messages
-      .text-center
-        = paginate @messages
+      #messages-content
+        = render 'account/messages/messages_content', message: @message, companion: @companion, messages: @messages
+        .text-center
+          = paginate @messages
