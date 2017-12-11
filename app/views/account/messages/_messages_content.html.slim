@@ -1,5 +1,9 @@
 =link_to account_user_path(@companion), method: :get, class: 'username-link' do
+  span data-companion-id=@companion.id
   span.text-center= @companion.username
 = render 'account/messages/form', companion: companion, message: message
 #messages-list
   = render 'account/messages/messages',  messages: messages
+coffee:
+    active_user_id = $('span[data-companion-id]').attr('data-companion-id')
+    $("div[data-companion-id='#{active_user_id}' ]").addClass('active-message-companion active');

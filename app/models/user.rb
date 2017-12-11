@@ -79,11 +79,10 @@ class User < ApplicationRecord
   end
 
   def messages
-    Message.all_for_user(self)
+    Message.all_for_user(self).ordered
   end
 
   def companions(messages)
-    messages.pluck(:sender_id, :recipient_id).flatten.uniq
+    messages.ordered.pluck(:sender_id, :recipient_id).flatten.uniq
   end
-
 end

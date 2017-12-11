@@ -14,4 +14,8 @@ FactoryGirl.define do
   factory :message do
     body { Faker::Lorem.sentence }
   end
+  trait :with_associations do
+    association :sender, factory: :user
+    association :recipient, factory: :user
+  end
 end

@@ -2,7 +2,7 @@ $messages-background-color: #f6f6f6;
 $sent-messages-background-color: #b9dbfa;
 $active-companion-color: #333333;
 
-#active-message-companion {
+.active-message-companion.active {
   background-color: $active-companion-color;
   a {
     color: white;

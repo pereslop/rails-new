@@ -49,4 +49,8 @@ describe User, type: :model do
       end.to  change(described_class, :count).by(0).and change(Authorization, :count).by(1)
     end
   end
+
+  describe 'user scopes' do
+
+  end
 end
