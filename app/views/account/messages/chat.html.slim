@@ -5,5 +5,5 @@
     .col-md-9
       #messages-content
         = render 'account/messages/messages_content', message: @message, companion: @companion, messages: @messages
-        .text-center
-          = paginate @messages
+      .text-center
+        = paginate @messages

@@ -1,3 +1,4 @@
+
 require 'rails_helper'
 
 RSpec.describe Account::MessagesController, type: :controller do
@@ -8,13 +9,16 @@ RSpec.describe Account::MessagesController, type: :controller do
   end
 
   describe 'actions' do
-    let!(:create_action) do
+    let(:create_action) do
       post :create, params: {
-        message: FactoryGirl.attributes_for(:message, recipient_id: recipient.id)
-      }
+        message: FactoryGirl.attributes_for(:message, sender_id: sender.id, recipient_id: recipient.id)
+      }, xhr: true
     end
     it 'POST#create' do
-      expect { create_action }.to change(Message, :count).by(1)
+      expect do
+        create_action
+        sender.sent_messages.reload
+      end.to change(Message, :count).by(1)
     end
   end
 end

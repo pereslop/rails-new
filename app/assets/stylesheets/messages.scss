@@ -1,4 +1,5 @@
-$messages-background-color: #e7e7e7;
+$messages-background-color: #f6f6f6;
+$sent-messages-background-color: #b9dbfa;
 $active-companion-color: #333333;
 
 #active-message-companion {
@@ -7,6 +8,7 @@ $active-companion-color: #333333;
     color: white;
   }
 }
+
 .messenger-user {
   background-color: $messages-background-color;
   margin: 5px 0;
@@ -88,4 +90,7 @@ $active-companion-color: #333333;
     margin-top: -14px;
     margin-left: 5px;
   }
+}
+.sender-message.sender-message-background {
+  background-color: $sent-messages-background-color;
 }

@@ -58,6 +58,7 @@ class User < ApplicationRecord
   enum role: ROLES
 
   scope :ordered, -> { order(username: :asc) }
+  scope :without, ->(user) { where.not(id: user.id) }
 
   def self.from_omniauth(auth)
     authorization = Authorization.where(provider: auth[:provider],

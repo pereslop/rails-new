@@ -1,4 +1,5 @@
 class Account::MessagesController < ApplicationController
+
   def index
     @companion = companions.first
     redirect_to chat_account_message_path(@companion)
@@ -22,7 +23,6 @@ class Account::MessagesController < ApplicationController
     @message.save
     if @message.save
       @messages = Message.between_users(current_user, User.find(@message.recipient.id)).ordered.page(params[:page]).per(20)
-      render 'account/messages/create'
     else
       flash[:danger] = @message.errors.messages
     end
@@ -39,6 +39,7 @@ class Account::MessagesController < ApplicationController
     end
 
     def companions
-      User.find(current_user.companions(current_user.messages))
+      companions_ids = current_user.companions(current_user.messages)
+      User.find(companions_ids).without(current_user)
     end
 end

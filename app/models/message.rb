@@ -14,7 +14,7 @@ class Message < ApplicationRecord
   belongs_to :sender, class_name: User
   belongs_to :recipient, class_name: User
 
-  validates :body, presence: true
+  validates :body, presence: true, length: { maximum: 250 }
   validate :sender_can_not_be_recipient
 
   def sender_can_not_be_recipient
