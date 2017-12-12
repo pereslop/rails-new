@@ -29,6 +29,10 @@ describe User, type: :model do
   let! (:user) { FactoryGirl.create(:user)}
   let! (:authorization) { FactoryGirl.create(:authorization) }
 
+  context 'validations' do
+    it { FactoryGirl.build(:user).should be_valid }
+  end
+
   describe 'User authorization' do
     it 'create new authorization and user' do
       expect do

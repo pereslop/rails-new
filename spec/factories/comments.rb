@@ -15,5 +15,6 @@ FactoryGirl.define do
   factory :comment do
     content  { Faker::Lorem.sentence(5) }
     association :user
+    association :commentable, factory: :post
   end
 end

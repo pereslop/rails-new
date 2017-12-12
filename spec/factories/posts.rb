@@ -16,5 +16,6 @@ FactoryGirl.define do
   factory :post do
     content { Faker::Lorem.sentence(5) }
     picture { Rack::Test::UploadedFile.new(Dir[Rails.root.join('spec', 'support', 'images', 'posts_pictures', '*.*')].sample) }
+    association :user
   end
 end
