@@ -1,11 +1,14 @@
 $messages-background-color: #f6f6f6;
 $sent-messages-background-color: #b9dbfa;
 $active-companion-color: #333333;
-
+$white-color: #ffffff;
+$grey-color: #808080;
+$light-grey-color: #D3D3D3;
+$blue-color: #486090;
 .active-message-companion.active {
   background-color: $active-companion-color;
   a {
-    color: white;
+    color: $white-color;
   }
 }
 
@@ -15,7 +18,7 @@ $active-companion-color: #333333;
   display: flex;
   flex-direction: row;
   &:hover {
-    background-color: grey;
+    background-color: $grey-color;
   }
   .user-avatar {
     .img-companion {
@@ -59,7 +62,7 @@ $active-companion-color: #333333;
     .time {
       display: block;
       text-align: right;
-      color: grey;
+      color: $grey-color;
       padding-right: 5px;
       font-size: 12px;
       margin-bottom: 0;
@@ -71,7 +74,7 @@ $active-companion-color: #333333;
   }
 }
 .companions-list {
-  border-right: 2px solid lightgrey;
+  border-right: 2px solid $light-grey-color;
 }
 #new_message {
   display: flex;
@@ -85,7 +88,7 @@ $active-companion-color: #333333;
   .send-message {
     display: flex;
     align-self: center;
-    background-color: #486090;
+    background-color: $blue-color;
     height: 53px;
     margin-top: -14px;
     margin-left: 5px;

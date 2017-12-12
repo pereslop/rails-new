@@ -58,7 +58,11 @@ class User < ApplicationRecord
   enum role: ROLES
 
   scope :ordered, -> { order(username: :asc) }
-  scope :without, ->(user) { where.not(id: user.id) }
+  scope :without_user, ->(user) { where.not(id: user) }
+  # scope :companions, ->(user) do
+  #   companions_ids = self.messages.ordered.pluck(:sender_id, :recipient_id).flatten.uniq
+  #   User.where(id: companions_ids).without(self)
+  # end
 
   def self.from_omniauth(auth)
     authorization = Authorization.where(provider: auth[:provider],
@@ -82,7 +86,8 @@ class User < ApplicationRecord
     Message.all_for_user(self).ordered
   end
 
-  def companions(messages)
-    messages.ordered.pluck(:sender_id, :recipient_id).flatten.uniq
+  def companions
+    companions_ids = self.messages.ordered.pluck(:sender_id, :recipient_id).flatten.uniq
+    User.where(id: companions_ids).without_user(self)
   end
 end

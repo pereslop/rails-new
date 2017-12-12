@@ -13,7 +13,11 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
 
-    render 'account/comments/create' if @comment.save
+    if @comment.save
+      render 'account/comments/create'
+    else
+      flash.now[:danger] = @comment.errors.messages
+    end
   end
 
   def edit
