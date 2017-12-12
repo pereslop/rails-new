@@ -17,6 +17,11 @@ RSpec.describe Message, type: :model do
   let!(:recipient) { FactoryGirl.create(:user) }
   let!(:new_companion) { FactoryGirl.create(:user) }
 
+  context 'validations' do
+    it { FactoryGirl.build(:message).should be_valid }
+  end
+
+
   describe 'User validation' do
     it 'sender can not sent message himself' do
       expect(FactoryGirl.build(:message,
