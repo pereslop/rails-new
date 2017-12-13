@@ -18,7 +18,6 @@ class Message < ApplicationRecord
   validate :sender_can_not_be_recipient
 
   scope :all_for_user, ->(user) do
-    # where(sender_id: user.id).or(where(recipient_id: user.id))
     where('(sender_id = ? OR recipient_id = ?)', user.id, user.id)
   end
   scope :sent, ->(user) { where(sender_id: user.id)}

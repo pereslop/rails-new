@@ -15,7 +15,7 @@ class Account::Posts::CommentsController < ::CommentsController
     if @comment.save
       render 'account/posts/comments/create'
     else
-      flash.now[:danger] = @comment.errors.messages
+      render body: nil
     end
   end
 
