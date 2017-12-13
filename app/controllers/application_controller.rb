@@ -16,5 +16,4 @@ class ApplicationController < ActionController::Base
   def set_global_search_variable
     @search = User.ransack(params[:q])
   end
-
 end

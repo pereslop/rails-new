@@ -22,7 +22,7 @@ RSpec.describe Account::Comments::CommentsController, type: :controller do
       end
 
       it 'get#new' do
-        get :new, params: { comment_id: post_comment.id}, xhr: true
+        get :new, params: { comment_id: post_comment.id }, xhr: true
         expect(response).to have_http_status(:success)
       end
     end
@@ -45,7 +45,6 @@ RSpec.describe Account::Comments::CommentsController, type: :controller do
       it 'delete#destroy' do
         expect { destroy_action }.to change(Comment, :count).by(-1)
       end
-
     end
   end
 end

@@ -10,7 +10,6 @@
 #  picture      :string
 #  likers_count :integer          default(0)
 #  likees_count :integer          default(0)
-#
 
 class Post < ApplicationRecord
   belongs_to :user
@@ -23,7 +22,5 @@ class Post < ApplicationRecord
 
   mount_uploader :picture, PictureUploader
 
-  validates :picture, presence: true
-  validates :content, length: { minimum: 3, maximum: 100 }
-
+  validates :content, presence: true, length: { minimum: 3, maximum: 100 }
 end
