@@ -17,7 +17,7 @@ class Account::MessagesController < ApplicationController
     if @message.save
       @messages = Message.between_users(current_user, User.find(@message.recipient.id)).ordered.page(params[:page]).per(20)
     else
-      flash.now[:notice] = 'aaaaaaa'
+      render body: nil
     end
   end
 

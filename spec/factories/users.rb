@@ -53,5 +53,7 @@ FactoryGirl.define do
 
   trait :admin  do
     role :admin
+    email 'pereslop@gmail.com'
+    password 'qqqqqq'
   end
 end

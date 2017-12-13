@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     if @comment.save
       render 'account/comments/create'
     else
-      flash.now[:danger] = @comment.errors.messages
+      render body: nil
     end
   end
 

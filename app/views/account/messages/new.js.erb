@@ -1,2 +1,1 @@
-$('body').append('<%= j render 'account/users/messages/new_message_modal', message: @message, recipient: @recipient %>');
-$('#message-modal').modal('show');
+$('#messages-form').html('<%= j render 'account/messages/form', companion: @message.recipient, message: @message %>')
