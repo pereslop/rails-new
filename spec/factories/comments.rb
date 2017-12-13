@@ -17,4 +17,7 @@ FactoryGirl.define do
     association :user
     association :commentable, factory: :post
   end
+  trait :invalid_comment do
+    content ''
+  end
 end

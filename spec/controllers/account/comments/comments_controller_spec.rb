@@ -29,10 +29,16 @@ RSpec.describe Account::Comments::CommentsController, type: :controller do
 
     describe 'actions' do
       let(:create_action) { post :create, params: { comment: FactoryGirl.attributes_for(:comment), comment_id: post_comment.id }, xhr: true  }
+      let(:invalid_create_action) { post :create, params: { comment: FactoryGirl.attributes_for(:comment, :invalid_comment), comment_id: post_comment.id }, xhr: true  }
       let(:destroy_action) { delete :destroy, params: { comment_id: post_comment.id, id: nested_comment.id }, xhr: true }
 
       it 'post#create' do
         expect { create_action }.to change(Comment, :count).by(1)
+      end
+
+
+      it 'post#create-invalid' do
+        expect { invalid_create_action }.to change(Comment, :count).by(0)
       end
 
       it 'patch#update' do

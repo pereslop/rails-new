@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   namespace :account do
     root 'posts#index'
 
-    resources :messages , only: [:index, :create] do
+    resources :messages do
       member do
         get 'chat', to: 'messages#chat', as: :chat
       end

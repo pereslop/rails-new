@@ -1,4 +1,6 @@
 class Admin::UsersController < AdminController
+  before_action :require_admin!
+
   def index
     @users = collection.page(params[:page]).per(LIST_OF_ENTITIES)
   end

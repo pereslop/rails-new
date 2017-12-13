@@ -26,5 +26,5 @@ User.all.each do |user|
                          recipient_id: user.id,
                          created_at: Time.now - rand(100).days)
   end
-  User.count.times { user.follow!(User.find(users_ids.sample)) }
 end
+  User.count.times { user.follow!(User.find(users_ids.sample)) }
