@@ -18,3 +18,4 @@ RSpec.describe Post, type: :model do
   context 'validations' do
     it { FactoryGirl.build(:post).should be_valid }
   end
+end

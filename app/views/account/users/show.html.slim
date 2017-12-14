@@ -9,6 +9,10 @@
         = image_tag @user.avatar.url, class: 'img-responsive'
       - else
         = image_tag ('britni.png'), class: 'img-responsive'
+      - if @user.id == current_user.id
+        = link_to "Edit profile", edit_user_registration_path, method: :get
+        #post-form
+          = render 'account/posts/form', remote: false
       - unless current_user == @user
         = link_to 'send a massage', chat_account_message_path, method: :get
       .followers
@@ -21,9 +25,6 @@
           span= "followees #{@user.followees_count}"
       .row
         = render partial: 'account/users/follower', collection: @followees.first(6), as: :follower
-      - if @user.id == current_user.id
-        = link_to "Edit profile", edit_user_registration_path, method: :get
-        = render 'account/posts/form'
         - if current_user.posts.any?
     .col-md-9
       .row

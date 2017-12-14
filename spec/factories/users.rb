@@ -24,6 +24,7 @@
 
 FactoryGirl.define do
 
+
   factory :user do
     email { Faker::Internet.email }
     username { Faker::Name.name }
@@ -52,5 +53,6 @@ FactoryGirl.define do
 
   trait :admin  do
     role :admin
+    email 'pereslop@gmail.com'
   end
 end

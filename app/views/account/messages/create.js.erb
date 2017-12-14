@@ -1,2 +1,2 @@
-$('#messages-list').html(' <%= j render 'account/messages/messages', messages: @messages, companion: @companion, message: @message %>');
-$("#message_body").val('');
+$('#messages-list').html(' <%= j render 'account/messages/messages', messages: @messages, companion: @message.recipient, message: @message %>');
+$('#messages-form').html('<%= j render 'account/messages/form', companion: @message.recipient, message: @message %>')

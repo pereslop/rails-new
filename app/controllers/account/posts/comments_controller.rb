@@ -12,7 +12,11 @@ class Account::Posts::CommentsController < ::CommentsController
     @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
 
-    render 'account/posts/comments/create' if @comment.save
+    if @comment.save
+      render 'account/posts/comments/create'
+    else
+      render body: nil
+    end
   end
 
   private
