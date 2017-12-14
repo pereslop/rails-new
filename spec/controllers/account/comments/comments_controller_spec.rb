@@ -31,6 +31,8 @@ RSpec.describe Account::Comments::CommentsController, type: :controller do
       let(:create_action) { post :create, params: { comment: FactoryGirl.attributes_for(:comment), comment_id: post_comment.id }, xhr: true  }
       let(:invalid_create_action) { post :create, params: { comment: FactoryGirl.attributes_for(:comment, :invalid_comment), comment_id: post_comment.id }, xhr: true  }
       let(:destroy_action) { delete :destroy, params: { comment_id: post_comment.id, id: nested_comment.id }, xhr: true }
+      let!(:invalid_content ) { '' }
+      let!(:new_content) {  Faker::Lorem.sentence(5) }
 
       it 'post#create' do
         expect { create_action }.to change(Comment, :count).by(1)
@@ -42,10 +44,15 @@ RSpec.describe Account::Comments::CommentsController, type: :controller do
       end
 
       it 'patch#update' do
-        new_content = 'aaaaaaaaaaaaaaaaaaaaaaa'
         patch :update, params: { comment: { content: new_content }, comment_id: post_comment.id, id: nested_comment.id,  xhr: true, format: :js }
         nested_comment.reload
         expect(nested_comment.content).to eq(new_content)
+      end
+
+      it 'patch#update - invalid' do
+        patch :update, params: { comment: { content: invalid_content }, comment_id: post_comment.id, id: nested_comment.id,  xhr: true, format: :js }
+        nested_comment.reload
+        expect(nested_comment.content).to eq(nested_comment.content)
       end
 
       it 'delete#destroy' do

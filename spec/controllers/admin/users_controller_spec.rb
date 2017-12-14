@@ -8,6 +8,16 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
   end
 
+  context 'user logged as user' do
+    let!(:user) { FactoryGirl.create(:user) }
+    it 'redirect to the root path' do
+      sign_in user
+      get :index
+      expect(response.status).to eq(302)
+    end
+  end
+
+
   context 'user is logged as admin' do
     let(:admin) { FactoryGirl.create(:user, :admin) }
     before(:each) do
