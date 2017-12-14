@@ -28,22 +28,38 @@ RSpec.describe Account::Comments::CommentsController, type: :controller do
     end
 
     describe 'actions' do
-      let(:create_action) { post :create, params: { comment: FactoryGirl.attributes_for(:comment), comment_id: post_comment.id }, xhr: true  }
-      let(:destroy_action) { delete :destroy, params: { comment_id: post_comment.id, id: nested_comment.id }, xhr: true }
+      let!(:new_comment) { FactoryGirl.attributes_for(:comment) }
+      let!(:invalid_content ) { '' }
+      let!(:new_content) {  Faker::Lorem.sentence(5) }
 
       it 'post#create' do
-        expect { create_action }.to change(Comment, :count).by(1)
+        expect do
+          post :create, params: { comment: new_comment, comment_id: post_comment.id }, xhr: true
+        end.to change(Comment, :count).by(1)
+      end
+
+      it 'post#create-invalid' do
+        expect do
+          post :create, params: {  comment: { content: invalid_content }, comment_id: post_comment.id, xhr: true }
+        end.to change(Comment, :count).by(0)
       end
 
       it 'patch#update' do
-        new_content = 'aaaaaaaaaaaaaaaaaaaaaaa'
         patch :update, params: { comment: { content: new_content }, comment_id: post_comment.id, id: nested_comment.id,  xhr: true, format: :js }
         nested_comment.reload
         expect(nested_comment.content).to eq(new_content)
       end
 
+      it 'patch#update - invalid' do
+        patch :update, params: { comment: { content: invalid_content }, comment_id: post_comment.id, id: nested_comment.id,  xhr: true, format: :js }
+        nested_comment.reload
+        expect(nested_comment.content).to eq(nested_comment.content)
+      end
+
       it 'delete#destroy' do
-        expect { destroy_action }.to change(Comment, :count).by(-1)
+        expect do
+          delete :destroy, params: { comment_id: post_comment.id, id: nested_comment.id }, xhr: true
+        end.to change(Comment, :count).by(-1)
       end
     end
   end
