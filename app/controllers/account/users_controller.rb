@@ -7,18 +7,18 @@ class Account::UsersController < AccountController
     @user = resource
     @posts = @user.posts.ordered.page(params[:page]).per(24)
     @post = @posts.new
-    @followees = get_followees
-    @followers = get_followers
+    @followees = user_followees
+    @followers = user_followers
   end
 
   def followers
-    @users = get_followers
+    @users = user_followers
 
     render :update_follow_modal
   end
 
   def followees
-    @users = get_followees
+    @users = user_followees
 
      render :update_follow_modal
   end
@@ -49,12 +49,11 @@ class Account::UsersController < AccountController
     collection.find(params[:id])
   end
 
-  def get_followers
+  def user_followers
     resource.followers(User)
   end
 
-  def get_followees
+  def user_followees
     resource.followables(User)
   end
-
 end

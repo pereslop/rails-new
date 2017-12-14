@@ -14,6 +14,8 @@ class Account::Posts::CommentsController < ::CommentsController
 
     if @comment.save
       render 'account/posts/comments/create'
+    else
+      render body: nil
     end
   end
 
@@ -22,5 +24,4 @@ class Account::Posts::CommentsController < ::CommentsController
   def set_commentable
     @commentable = Post.find(params[:post_id])
   end
-
 end

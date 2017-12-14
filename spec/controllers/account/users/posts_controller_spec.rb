@@ -11,7 +11,6 @@ RSpec.describe Account::Users::PostsController, type: :controller do
 
     it 'Get#show' do
       get :show, params: {  user_id: user.id, id: post_for_user.id }, xhr: true
-
       expect(response.status).to eq(200)
     end
 

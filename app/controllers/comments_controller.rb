@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   def index
     @comments = @commentable.comments.includes(:user).ordered.page(params[:page]).per(5)
   end
@@ -13,8 +12,11 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
+
     if @comment.save
       render 'account/comments/create'
+    else
+      render body: nil
     end
   end
 

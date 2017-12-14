@@ -24,9 +24,10 @@
 
 FactoryGirl.define do
 
+
   factory :user do
     email { Faker::Internet.email }
-    username { Faker::Pokemon.name }
+    username { Faker::Name.name }
     password { Faker::Internet.password(8) }
     avatar { Rack::Test::UploadedFile.new(Dir[Rails.root.join('spec', 'support', 'images', 'users_avatars', '*.*')].sample) }
   end
@@ -52,5 +53,7 @@ FactoryGirl.define do
 
   trait :admin  do
     role :admin
+    email 'pereslop@gmail.com'
+    password 'qqqqqq'
   end
 end
