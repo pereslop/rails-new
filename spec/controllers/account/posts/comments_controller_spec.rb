@@ -26,39 +26,41 @@ RSpec.describe Account::Posts::CommentsController, type: :controller do
       end
     end
 
-    describe 'actions' do
-      let!(:new_comment) { FactoryGirl.attributes_for(:comment) }
+    context 'comment actions' do
       let!(:invalid_content ) { '' }
-      let!(:new_content) {  Faker::Lorem.sentence(5) }
-
-      it 'post#create' do
-        expect do
-          post :create, params: { comment: new_comment, post_id: post_for_user.id }, xhr: true
-        end.to change(Comment, :count).by(1)
+      let!(:valid_content) {  Faker::Lorem.sentence(5) }
+      describe '#create' do
+        it 'create new comment' do
+          expect do
+            post :create, params: { comment: { content: valid_content }, post_id: post_for_user.id }, xhr: true
+          end.to change(Comment, :count).by(1)
+        end
+        it 'does not create comment' do
+          expect do
+            post :create, params: {  comment: { content: invalid_content }, post_id: post_for_user.id, xhr: true }
+          end.to change(Comment, :count).by(0)
+        end
       end
 
-      it 'post#create - invalid' do
-        expect do
-          post :create, params: {  comment: { content: invalid_content }, post_id: post_for_user.id, xhr: true }
-        end.to change(Comment, :count).by(0)
-      end
+      describe '#update' do
+        it 'change comment content' do
+          patch :update, params: { comment: { content: valid_content }, post_id: post_for_user.id, id: post_comment.id,  xhr: true, format: :js }
+          post_comment.reload
+          expect(post_comment.content).to eq(valid_content)
+        end
 
-      it 'patch#update' do
-        patch :update, params: { comment: { content: new_content }, post_id: post_for_user.id, id: post_comment.id,  xhr: true, format: :js }
-        post_comment.reload
-        expect(post_comment.content).to eq(new_content)
+        it 'does not change comment content' do
+          patch :update, params: { comment: { content: invalid_content }, post_id: post_for_user.id, id: post_comment.id,  xhr: true, format: :js }
+          post_comment.reload
+          expect(post_comment.content).to eq(post_comment.content)
+        end
       end
-
-      it 'patch#update-invalid' do
-        patch :update, params: { comment: { content: invalid_content }, post_id: post_for_user.id, id: post_comment.id,  xhr: true, format: :js }
-        post_comment.reload
-        expect(post_comment.content).to eq(post_comment.content)
-      end
-
-      it 'delete#destroy' do
-        expect do
-          delete :destroy, params: { post_id: post_for_user.id, id: post_comment.id }, xhr: true
-        end.to change(Comment, :count).by(-1)
+      describe '#destroy' do
+        it 'delete comment from database' do
+          expect do
+            delete :destroy, params: { post_id: post_for_user.id, id: post_comment.id }, xhr: true
+          end.to change(Comment, :count).by(-1)
+        end
       end
     end
   end

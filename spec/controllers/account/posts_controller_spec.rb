@@ -28,12 +28,12 @@ RSpec.describe Account::PostsController, type: :controller do
     end
 
     describe 'actions' do
-      let(:toggle_like_action) { get :toggle_like, params: { id: post_for_user.id }, xhr: true }
-      let(:create_action) {  }
       let(:invalid_content) { '' }
 
       it 'Get#toggle like' do
-        expect { toggle_like_action }.to change { post_for_user.likes.count }.by(1)
+        expect do
+          get :toggle_like, params: { id: post_for_user.id }, xhr: true
+        end.to change { post_for_user.likes.count }.by(1)
       end
 
       it 'Post#update' do
