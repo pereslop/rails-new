@@ -23,7 +23,7 @@
 #
 
 class User < ApplicationRecord
-  ROLES = %i(user, admin)
+  ROLES = %i(user, admin).freeze
 
   SOCIALS = {
       facebook: 'Facebook',
@@ -35,9 +35,9 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :authorizations, dependent: :destroy
-  has_many :sent_messages, class_name: :Message, foreign_key: :sender_id
-  has_many :received_messages, class_name: :Message, foreign_key: :recipient_id
-
+  has_many :user_conversations, dependent: :destroy
+  has_many :conversations, through: :user_conversations
+  has_many :messages, dependent: :destroy
   acts_as_liker
   acts_as_followable
   acts_as_follower
@@ -76,14 +76,5 @@ class User < ApplicationRecord
     self.username = auth[:info][:name]
     self.email = auth[:info][:email]
     self.remote_avatar_url = auth[:info][:image]
-  end
-
-  def messages
-    Message.all_for_user(self).ordered
-  end
-
-  def companions
-    companions_ids = self.messages.ordered.pluck(:sender_id, :recipient_id).flatten.uniq
-    User.where(id: companions_ids).without_user(self)
   end
 end

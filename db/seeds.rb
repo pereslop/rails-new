@@ -13,18 +13,5 @@ end
 users_ids = User.all.pluck(:id)
 
 User.all.each do |user|
-  recipient_id = users_ids.sample
-  recipient_id = users_ids.sample while user.id == recipient_id
-
-  30.times do
-      FactoryGirl.create(:message,
-                         sender_id: user.id,
-                         recipient_id: recipient_id,
-                         created_at: Time.now - rand(100).days)
-      FactoryGirl.create(:message,
-                         sender_id: recipient_id,
-                         recipient_id: user.id,
-                         created_at: Time.now - rand(100).days)
-  end
   User.count.times { user.follow!(User.find(users_ids.sample)) }
 end
