@@ -13,11 +13,10 @@ Rails.application.routes.draw do
     root 'posts#index'
 
     resources :conversations do
-      resources :messages do
-        member do
-          get 'chat', to: 'messages#chat', as: :chat
-        end
+      member do
+        get 'chat', to: 'conversations#chat', as: :chat
       end
+      resources :messages
     end
 
     resources :users do

@@ -1,0 +1,5 @@
+.message class=(['sender-message', 'sender-message-background'] if current_user == message.user)
+  .message-info
+    p.companion-usermane= message.user.username
+    p.time= "#{time_ago_in_words(message.created_at)} ago"
+  p.body= message.body

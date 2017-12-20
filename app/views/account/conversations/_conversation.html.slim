@@ -1,0 +1,10 @@
+.messenger-user data-companion-id=conversation.id
+  p = conversation.messages.pluck(:user_id).without(current_user.id).to_s
+
+
+  / .user-avatar
+  /   = link_to account_user_path(companion), method: :get do
+  /     = image_tag companion.avatar.url, class: 'img-responsive, img-circle, img-companion'
+  / .username
+  /   = link_to chat_account_message_path(companion.id), method: :get, remote:true do
+  /     span= companion.username
