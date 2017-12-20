@@ -1,5 +1,7 @@
 .messenger-user data-companion-id=conversation.id
-  p = conversation.messages.pluck(:user_id).without(current_user.id).to_s
+  .username
+    = link_to chat_account_conversation_path(conversation.id), remote: true do
+      span= conversations_users(conversation).first.username
 
 
   / .user-avatar

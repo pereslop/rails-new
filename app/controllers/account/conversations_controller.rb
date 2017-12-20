@@ -4,10 +4,11 @@ class Account::ConversationsController < ApplicationController
   end
 
   def chat
-    # @conversation = resource
-    @conversations = collection
-    byebug
-    @messages = resource.messages
+  @conversations = collection
+  @conversation = resource
+  @messages = @conversation.messages
+  @message = @conversation.messages.new()
+  puts ''
     # @message = resource.messages.new()
   end
 
@@ -22,8 +23,10 @@ class Account::ConversationsController < ApplicationController
   end
 
   def resource
+    byebug
     collection.find(params[:id])
   end
+
   def companions
     collection.for_users([current_user.id, ])
   end

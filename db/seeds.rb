@@ -15,7 +15,7 @@ User.all.each do |user|
   User.count.times { user.follow!(User.find(users_ids.sample)) }
   20.times { user.conversations.create() }
   user.conversations.each do |conversation|
-    conversation.messages.create(body: Faker::Lorem.sentence, user_id: user.id )
-    conversation.messages.create(body: Faker::Lorem.sentence, user_id: users_ids.sample )
+      conversation.messages.create(body: Faker::Lorem.sentence, user_id: user.id )
+      conversation.messages.create(body: Faker::Lorem.sentence, user_id: users_ids.sample )
   end
 end
