@@ -1,15 +1,15 @@
 class Account::ConversationsController < ApplicationController
   def index
-    redirect_to chat_account_conversation_path(collection.first)
+    @conversation = collection.first
+
+    common
+
+    render :chat
   end
 
   def chat
-  @conversations = collection
-  @conversation = resource
-  @messages = @conversation.messages
-  @message = @conversation.messages.new()
-  puts ''
-    # @message = resource.messages.new()
+    @conversation = resource
+    common
   end
 
   def create
@@ -17,6 +17,12 @@ class Account::ConversationsController < ApplicationController
   end
 
   private
+
+  def common
+    @conversations = collection
+    @messages = @conversation.messages
+    @message = @conversation.messages.new()
+  end
 
   def collection
     current_user.conversations
