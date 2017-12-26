@@ -10,7 +10,6 @@
 
 class Conversation < ApplicationRecord
   has_many :messages, dependent: :destroy
-  has_many :user_conversations, dependent: :destroy
   has_and_belongs_to_many :users
 
   scope :for_users, -> (user_ids) do

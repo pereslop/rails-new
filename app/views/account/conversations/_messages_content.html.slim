@@ -2,7 +2,7 @@
   span data-companion-id=conversation.id
   span.text-center= conversations_users(conversation).first.username
 #messages-form
-  = render 'account/messages/form', companion: current_user, message: message
+  / = render 'account/messages/form', companion: current_user, message: message
 #messages-list
   = render 'account/conversations/messages',  messages: messages
 javascript:

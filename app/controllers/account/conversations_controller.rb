@@ -5,7 +5,7 @@ class Account::ConversationsController < ApplicationController
     common
 
     render :chat
-  end
+    end
 
   def chat
     @conversation = resource
@@ -29,7 +29,6 @@ class Account::ConversationsController < ApplicationController
   end
 
   def resource
-    byebug
     collection.find(params[:id])
   end
 

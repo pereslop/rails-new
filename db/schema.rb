@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20171221103916) do
   create_table "conversations_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "conversation_id", null: false
-    t.index ["conversation_id", "user_id"], name: "index_conversations_users_on_conversation_id_and_user_id"
     t.index ["user_id", "conversation_id"], name: "index_conversations_users_on_user_id_and_conversation_id"
   end
 

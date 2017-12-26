@@ -35,14 +35,13 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :authorizations, dependent: :destroy
-  has_many :user_conversations, dependent: :destroy
   has_and_belongs_to_many :conversations
   has_many :messages, dependent: :destroy
   acts_as_liker
   acts_as_followable
   acts_as_follower
 
-  # Include default devise modules. Others available are:
+  # Include default devise modules. Others available are
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
