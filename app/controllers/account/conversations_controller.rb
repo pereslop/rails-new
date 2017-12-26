@@ -29,7 +29,12 @@ class Account::ConversationsController < ApplicationController
   end
 
   def resource
-    collection.find(params[:id])
+    if params[:user_id]
+      conversation = current_user.conversations.create()
+      conversation.users << User.find(params[:user_id])
+      return conversation
+    end
+    return collection.find(params[:id])
   end
 
   def companions

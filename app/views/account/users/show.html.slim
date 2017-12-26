@@ -14,7 +14,7 @@
         #post-form
           = render 'account/posts/form', remote: false
       - unless current_user == @user
-        = link_to 'send a massage', chat_account_conversation_path(@user), method: :get
+        = link_to 'send a massage', chat_account_conversation_path(user_id: @user.id), method: :get
       .followers
         = link_to followers_account_user_path(@user), method: :get, remote: true do
           span= "followers #{@user.followers_count}"

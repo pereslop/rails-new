@@ -7,7 +7,7 @@ if User.count < 16
   User.create_with(FactoryGirl.attributes_for(:user,
                                               :with_content,
                                               :admin)).find_or_create_by(role: 'admin')
-  FactoryGirl.create_list(:user, 15)
+  FactoryGirl.create_list(:user, 15, :with_content)
 end
 
 users_ids = User.all.pluck(:id)

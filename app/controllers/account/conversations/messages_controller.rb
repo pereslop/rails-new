@@ -12,6 +12,6 @@ class Account::Conversations::MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:body, :recipient_id)
+    params.require(:message).permit(:body, :conversation_id)
   end
 end
