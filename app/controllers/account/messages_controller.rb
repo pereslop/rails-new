@@ -28,6 +28,6 @@ class Account::MessagesController < ApplicationController
   end
 
   def companion
-    current_user.companions.find(params[:id])
+   User.find(params[:id])
   end
 end

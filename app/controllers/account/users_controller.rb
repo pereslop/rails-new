@@ -37,10 +37,6 @@ class Account::UsersController < AccountController
 
   private
 
-  def user_params
-    params.require(:user).permit(:username, :password)
-  end
-
   def collection
     User.ordered
   end

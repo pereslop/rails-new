@@ -17,10 +17,6 @@ class Account::Users::PostsController < Account::PostsController
 
   private
 
-  def post_update_params
-    params.require(:post).permit(:content)
-  end
-
   def collection
     @user = User.find(params[:user_id])
     @posts = @user.posts.ordered

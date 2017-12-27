@@ -8,16 +8,17 @@ RSpec.describe Account::Users::PostsController, type: :controller do
     before(:each) do
       sign_in user
     end
+    describe 'posts actions' do
+      it 'Get#show' do
+        get :show, params: {  user_id: user.id, id: post_for_user.id }, xhr: true
+        expect(response.status).to eq(200)
+      end
 
-    it 'Get#show' do
-      get :show, params: {  user_id: user.id, id: post_for_user.id }, xhr: true
-      expect(response.status).to eq(200)
-    end
-
-    it 'Delete#destroy' do
-      expect do
-        delete :destroy, params: { user_id: user.id, id: post_for_user.id }, xhr: true
-      end.to change(Post, :count).by(-1)
+      it 'Delete#destroy' do
+        expect do
+          delete :destroy, params: { user_id: user.id, id: post_for_user.id }, xhr: true
+        end.to change(Post, :count).by(-1)
+      end
     end
   end
 end

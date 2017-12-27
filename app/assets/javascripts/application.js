@@ -19,5 +19,6 @@
 //= require backbone_datalink
 //= require backbone/rails_new
 //= require skim
+//= require_tree ./channels
 //= require_self
 //= require_tree .
