@@ -16,10 +16,12 @@ User.all.each do |user|
   users_collection = User.all.without(user)
   User.count.times { user.follow!(users_collection.sample) }
   users_collection.each do |recipient|
-    conversation = user.conversations.create()
-    conversation.messages.create(body: Faker::Lorem.sentence, user_id: user.id)
+    unless User.companions(user).include?(recipient)
+      conversation = user.conversations.create()
+      conversation.messages.create(body: Faker::Lorem.sentence, user_id: user.id)
 
-    conversation.users << recipient
-    conversation.messages.create(body: Faker::Lorem.sentence, user_id: recipient.id )
+      conversation.users << recipient
+      conversation.messages.create(body: Faker::Lorem.sentence, user_id: recipient.id )
+    end
   end
 end

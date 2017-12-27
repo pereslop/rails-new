@@ -5,5 +5,3 @@
     .col-md-9
       #messages-content
         = render 'account/conversations/messages_content', messages: @messages, conversation: @conversation, message: @message
-      / .text-center
-      /   = paginate @messages

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       member do
         get 'chat', to: 'conversations#chat', as: :chat
       end
-      resources :messages
+      resources :messages, module: :conversations, only: [:create]
     end
 
     resources :users do

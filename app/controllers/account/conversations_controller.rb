@@ -5,15 +5,11 @@ class Account::ConversationsController < ApplicationController
     common
 
     render :chat
-    end
+  end
 
   def chat
     @conversation = resource
     common
-  end
-
-  def create
-
   end
 
   private
