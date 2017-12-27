@@ -25,10 +25,12 @@ class Account::ConversationsController < ApplicationController
   end
 
   def resource
-    if params[:user_id]
-      conversation = current_user.conversations.create()
-      conversation.users << User.find(params[:user_id])
-      return conversation
+    unless params[:user_id].nil?
+      if Conversation.between_users([current_user.id, params[:user_id]]).empty?
+        conversation = current_user.conversations.create()
+        conversation.users << User.find(params[:user_id])
+        return conversation
+      end
     end
     return collection.find(params[:id])
   end
