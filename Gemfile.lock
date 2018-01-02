@@ -37,6 +37,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (5.1.4)
       activesupport (= 5.1.4)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (5.1.4)
       activemodel (= 5.1.4)
       activesupport (= 5.1.4)
@@ -77,6 +81,11 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    cassandra-driver (3.2.0)
+      ione (~> 1.2)
+    cequel (3.0.1)
+      activemodel (>= 4.0)
+      cassandra-driver (~> 3.0)
     childprocess (0.8.0)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.2)
@@ -138,6 +147,7 @@ GEM
     hashie (3.5.6)
     http_parser.rb (0.6.0)
     i18n (0.8.6)
+    ione (1.2.4)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -356,6 +366,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemodel-serializers-xml
   any_login
   better_errors
   binding_of_caller
@@ -363,6 +374,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   carrierwave (~> 1.0)
+  cequel
   coffee-rails (~> 4.2)
   database_cleaner
   devise

@@ -10,9 +10,16 @@
 #  updated_at      :datetime         not null
 #
 
-class Message < ApplicationRecord
-  belongs_to :user
-  belongs_to :conversation
+class Message
+  include Cequel::Record
+  key :id, :timeuuid, auto: true
+  column :user_id, :text, index: true
+  column :conversation_id, :text, index: true
+  column :body, :text
 
-  validates :body, presence: true, length: { maximum: 250 }
+  timestamps
+
+  validates :user_id, presence: true
+  validates :conversation_id, presence: true
+  validates :body, presence: true
 end

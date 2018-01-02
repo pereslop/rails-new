@@ -13,6 +13,5 @@
 FactoryGirl.define do
     factory :message do
     body { Faker::Lorem.sentence }
-    association :user, factory: :user
     end
 end
