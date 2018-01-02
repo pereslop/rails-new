@@ -1,4 +1,4 @@
-= simple_form_for [:account, message.conversation, message], remote: true do |f|
+= simple_form_for [:account, conversation, message], remote: true do |f|
   = f.input :body, label: false
-  = f.hidden_field :conversation_id, value: message.conversation.id
+  = f.hidden_field :conversation_id, value: conversation.id
   = f.button :submit, 'SEND', class: 'send-message no-padding'

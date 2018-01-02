@@ -20,7 +20,7 @@ User.all.each do |user|
       conversation = user.conversations.create()
       Message.create(body: Faker::Lorem.sentence, user_id: user.id, conversation_id: conversation.id)
       conversation.users << recipient
-      Message.create(body: Faker::Lorem.sentence, user_id: user.id, conversation_id: recipient.id)
+      Message.create(body: Faker::Lorem.sentence, user_id: recipient.id, conversation_id: conversation.id)
     end
   end
 end

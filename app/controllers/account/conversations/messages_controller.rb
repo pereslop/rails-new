@@ -1,9 +1,10 @@
 class Account::Conversations::MessagesController < ApplicationController
 
   def create
-    @message = current_user.messages.build(message_params)
+    @message = Message.new(message_params)
+    @message.user_id = current_user.id
     if @message.save
-      redirect_to chat_account_conversation_path(@message.conversation), remote:true
+      redirect_to chat_account_conversation_path(Conversation.find(@message.conversation_id)), remote:true
     else
       render body: nil
     end

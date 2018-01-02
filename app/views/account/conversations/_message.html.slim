@@ -1,6 +1,5 @@
-.message class=(['sender-message', 'sender-message-background'] if current_user == message.user)
+.message class=(['sender-message', 'sender-message-background'] if current_user.id == message.user_id)
   .message-info
-    - if message.user
-      p.companion-usermane= message.user.username
-      p.time= "#{time_ago_in_words(message.created_at)} ago"
+    p.companion-usermane= User.find(message.user_id).username
+    p.time= "#{time_ago_in_words(message.updated_at)} ago"
   p.body= message.body
