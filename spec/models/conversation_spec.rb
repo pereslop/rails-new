@@ -11,5 +11,14 @@
 require 'rails_helper'
 
 RSpec.describe Conversation, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+ let!(:sender) { FactoryGirl.create(:user) }
+ let!(:recipient) { FactoryGirl.create(:user) }
+ let!(:conversation) { Conversation.create() }
+
+ describe 'scopes' do
+   it 'return conversation between users' do
+     conversation.users << sender << recipient
+     expect(described_class.between_users([sender.id, recipient.id]).first.id).to eq(conversation.id)
+   end
+ end
 end

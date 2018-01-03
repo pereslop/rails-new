@@ -34,8 +34,4 @@ class Account::ConversationsController < ApplicationController
     end
     return collection.find(params[:id])
   end
-
-  def companions
-    collection.for_users([current_user.id, ])
-  end
 end
