@@ -18,7 +18,7 @@ RSpec.describe Message, type: :model do
   describe 'scope' do
     it 'return messages for conversation' do
       Message.create(conversation_id: conversation.id, user_id: sender.id, body: Faker::Lorem.sentence  )
-      expect(Message.for_conversation.count).to eq(1)
+      expect(Message.for_conversation(conversation).count).to eq(1)
     end
   end
 end
