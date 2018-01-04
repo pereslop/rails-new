@@ -12,6 +12,13 @@ class Account::ConversationsController < ApplicationController
     common
   end
 
+  def recipient
+    @conversation = recipient_conversation
+
+    common
+
+    render :chat
+  end
   private
 
   def common
@@ -25,13 +32,15 @@ class Account::ConversationsController < ApplicationController
   end
 
   def resource
-    unless params[:user_id].nil?
-      if Conversation.between_users([current_user.id, params[:user_id]]).empty?
-        conversation = current_user.conversations.create()
-        conversation.users << User.find(params[:user_id])
-        return conversation
-      end
-    end
-    return collection.find(params[:id])
+    collection.find(params[:id])
+  end
+
+  def recipient_conversation
+    conversation = Conversation.between_users([current_user.id, params[:id]]).first
+    return conversation if conversation.present?
+
+    new_conversation = current_user.conversations.create()
+    new_conversation.users << User.find(params[:id])
+    return new_conversation
   end
 end
