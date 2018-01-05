@@ -23,7 +23,7 @@
 #
 
 class User < ApplicationRecord
-  ROLES = %i(user, admin).freeze
+  ROLES = %i(user admin).freeze
 
   SOCIALS = {
       facebook: 'Facebook',
@@ -36,7 +36,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :authorizations, dependent: :destroy
   has_and_belongs_to_many :conversations
-  
+
   acts_as_liker
   acts_as_followable
   acts_as_follower
