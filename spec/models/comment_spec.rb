@@ -17,4 +17,10 @@ RSpec.describe Comment, type: :model do
   context 'validations' do
     it { FactoryGirl.build(:comment).should be_valid }
   end
+  context 'queries' do
+    it 'returns count of comments for one day' do
+      FactoryGirl.create(:comment)
+      expect(Comment.count_per_day(Time.now)).to eq(1)
+    end
+  end
 end

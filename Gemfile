@@ -45,6 +45,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.6'
+  gem 'rspec-html-matchers'
   gem 'database_cleaner'
   gem 'pry-rails'
   gem 'better_errors'

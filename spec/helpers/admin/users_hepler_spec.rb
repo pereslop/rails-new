@@ -10,6 +10,14 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe Account::UsersHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Admin::UsersHelper, type: :helper do
+  include RSpecHtmlMatchers
+  let!(:user) { FactoryGirl.create(:user) }
+
+
+
+  it 'comments graph have svg' do
+    FactoryGirl.create_list(:comment, 5, user_id: user.id)
+    expect(comments_graph(user.comments)).to have_tag('svg')
+  end
 end

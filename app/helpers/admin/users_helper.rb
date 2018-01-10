@@ -1,11 +1,11 @@
 module Admin::UsersHelper
   require 'user_statistic'
   include Statistic::UserStatistic
-  def comments_graph(comments, user)
+
+  def comments_graph(comments)
     require 'rubyvis'
     comments_data = comment_statistic_graph_data(comments)
     days = last_days
-    data = pv.range(10).map {|d| rand + 0.1 }
 
 
 #/* Sizing and scales. *
@@ -55,6 +55,6 @@ module Admin::UsersHelper
         .text(x.tick_format);
 
     vis.render();
-    raw vis.to_svg
+    vis.to_svg.html_safe
   end
 end
