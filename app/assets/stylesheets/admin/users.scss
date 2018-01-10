@@ -1,3 +1,34 @@
 // Place all the styles related to the admin/users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.table-container-outer {
+  height: 100%;
+  width: 100%;
+  display: table;
+  .table-container-inner {
+    vertical-align: middle;
+    display: table-cell;
+    height: 100%;
+  }
+}
+table.statistic {
+  margin: 0 auto;
+}
+td:first-child {
+  font: 20px solid;
+}
+td:last-child {
+  font: 25px solid;
+  padding-left: 15px;
+}
+tr:nth-child(even) {
+  background-color: lightgrey;
+}
+.graph {
+  display: inline-block;
+  border: 1px solid lightgrey;
+  canvas {
+    width: 100%;
+    border: 1px solid black;
+  }
+}

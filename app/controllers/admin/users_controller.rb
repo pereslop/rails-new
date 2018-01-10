@@ -5,6 +5,7 @@ class Admin::UsersController < AdminController
 
   def show
     @user = resource
+    @last_comments = @user.comments.last_week.ordered
   end
 
   def edit
