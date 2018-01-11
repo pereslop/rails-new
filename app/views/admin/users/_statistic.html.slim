@@ -1,0 +1,17 @@
+h1=user.username
+.table-container-outer
+  .table-container-inner
+    table.statistic
+      tr
+        td.description Posts
+        td= user.posts.count
+      tr
+        td.description Commets
+        td=user.comments.count
+      tr
+        td.description Last week comments activity
+        td=last_comments.count
+.text-center
+  .graph
+    h5 Last week comments activity graph
+    =comments_graph(last_comments)

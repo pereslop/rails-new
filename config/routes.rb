@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'users#index'
 
-    resources :users, only: [:index, :edit, :update, :show, :delete, :destroy]
+    resources :users, only: [:index, :edit, :update, :show, :delete, :destroy] do
+      member do
+        get 'statistic', to: 'users#statistic', as: :statistic
+      end
+    end
   end
 
   namespace :account do

@@ -27,6 +27,11 @@ class Admin::UsersController < AdminController
     redirect_to admin_users_path
   end
 
+  def statistic
+    UserMailer.statistic(resource).deliver
+    render body: nil
+  end
+
   private
 
   def user_params
