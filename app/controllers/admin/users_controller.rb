@@ -5,7 +5,9 @@ class Admin::UsersController < AdminController
 
   def show
     @user = resource
-    @last_comments = @user.comments.last_week.ordered
+
+    last_comments
+
   end
 
   def edit
@@ -28,11 +30,16 @@ class Admin::UsersController < AdminController
   end
 
   def statistic
-    UserMailer.statistic(resource).deliver
+    last_comments
+
+    UserMailer.statistic(resource, @last_comments).deliver
     render body: nil
   end
 
   private
+  def last_comments
+    @last_comments = resource.comments.last_week.ordered
+  end
 
   def user_params
     parameters = params.require(:user).permit(:username, :role)

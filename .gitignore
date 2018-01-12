@@ -23,3 +23,5 @@
 /try_ruby.rb
 /coverage/*
 /vendor/bundle/*
+# Ignore application configuration
+/config/application.yml

@@ -5,9 +5,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.statistic.subject
   #
-  def statistic(user)
+  def statistic(user, last_comments)
     @user = user
-
+    @last_comments = last_comments
     mail to: user.email, subject: 'Statistic'
   end
 end

@@ -17,7 +17,7 @@ class Comment < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
 
   scope :ordered, -> { order(created_at: :desc) }
-  scope :last_week, -> { where('created_at >= ?', 1.week.ago) }
+  scope :last_week, -> { where('updated_at >= ?', 1.week.ago) }
 
   validates :content, presence: true
 
