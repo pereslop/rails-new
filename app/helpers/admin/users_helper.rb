@@ -1,5 +1,5 @@
+require 'user_statistic'
 module Admin::UsersHelper
-  require 'user_statistic'
   include Statistic::UserStatistic
 
   def comments_graph(comments)
@@ -56,5 +56,12 @@ module Admin::UsersHelper
 
     vis.render();
     vis.to_svg.html_safe
+  end
+
+  def png(svg)
+    img, data = Magick::Image.from_blob(svg) do
+       self.format = 'SVG'
+     end
+     img.to_blob {self.format = 'PNG'}
   end
 end
