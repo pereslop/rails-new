@@ -15,7 +15,4 @@ class UserMailer < ApplicationMailer
     attachments.inline['name.png'] = png(comments_graph(@last_comments))
     mail to: user.email, subject: 'Statistic'
   end
-
-  private
-
 end
