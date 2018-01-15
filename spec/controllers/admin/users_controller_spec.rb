@@ -19,7 +19,8 @@ RSpec.describe Admin::UsersController, type: :controller do
 
 
   context 'user is logged as admin' do
-    let(:admin) { FactoryGirl.create(:user, :admin) }
+    let!(:admin) { FactoryGirl.create(:user, :admin) }
+    let!(:comment) { FactoryGirl.create(:comment, user_id: admin.id)}
     before(:each) do
       sign_in admin
     end
@@ -30,6 +31,11 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     it 'GET #show' do
       get :show, params: {id: admin.id }
+      expect(response.status).to eq(200)
+    end
+
+    it 'Get #statists'do
+      get :statistic, params: { id: User.all.pluck(:id).sample }, xhr: true
       expect(response.status).to eq(200)
     end
 

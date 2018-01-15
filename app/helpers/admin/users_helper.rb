@@ -55,7 +55,7 @@ module Admin::UsersHelper
         .text(x.tick_format);
 
     vis.render();
-    vis.to_svg.html_safe
+    vis.to_svg
   end
 
   def png(svg)
