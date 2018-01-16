@@ -1,9 +1,9 @@
 require 'user_statistic'
+require 'rubyvis'
 module Admin::UsersHelper
   include Statistic::UserStatistic
 
   def comments_graph(comments)
-    require 'rubyvis'
     comments_data = comment_statistic_graph_data(comments)
     days = last_days
 
@@ -21,7 +21,7 @@ module Admin::UsersHelper
               .bottom(20)
               .left(60)
               .right(10)
-              .top(5);
+              .top(9);
 
 #/* The bars. */
     bar = vis.add(pv.Bar)
@@ -46,7 +46,7 @@ module Admin::UsersHelper
     vis.add(pv.Rule)
         .data(x.ticks(5))
         .left(x)
-        .stroke_style(lambda {|d|  d!=0 ? "rgba(255,255,255,.3)" : "#000"})
+        .stroke_style(lambda { |d|  d.zero? ? "#000" : "rgba(255,255,255,.3)" })
         .add(pv.Rule)
         .bottom(0)
         .height(5)

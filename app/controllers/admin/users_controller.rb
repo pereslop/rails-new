@@ -6,7 +6,7 @@ class Admin::UsersController < AdminController
   def show
     @user = resource
 
-    last_comments
+    set_last_comments
 
   end
 
@@ -30,14 +30,14 @@ class Admin::UsersController < AdminController
   end
 
   def statistic
-    last_comments
+    set_last_comments
 
     UserMailer.statistic(resource, @last_comments).deliver
     render body: nil
   end
 
   private
-  def last_comments
+  def set_last_comments
     @last_comments = resource.comments.last_week.ordered
   end
 

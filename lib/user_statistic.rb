@@ -3,11 +3,7 @@ module Statistic
     DAYS_IN_WEEK = 7
 
     def last_days
-      days = []
-      DAYS_IN_WEEK.times do |index|
-        days << Time.now - index.days
-      end
-      days.reverse
+      (1..7).to_a.map { |i| i.days.ago }.reverse
     end
 
     def comment_statistic_graph_data(user_comments)
