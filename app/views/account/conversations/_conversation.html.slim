@@ -1,4 +1,4 @@
 .messenger-user data-companion-id=conversation.id
   .username
     = link_to chat_account_conversation_path(conversation.id), remote: true do
-      span= conversations_users(conversation).first.username
+      span= conversations_users(conversation)

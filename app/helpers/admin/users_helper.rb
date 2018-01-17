@@ -21,7 +21,7 @@ module Admin::UsersHelper
               .bottom(20)
               .left(60)
               .right(10)
-              .top(9);
+              .top(9)
 
 #/* The bars. */
     bar = vis.add(pv.Bar)
@@ -52,9 +52,9 @@ module Admin::UsersHelper
         .height(5)
         .stroke_style("#000")
         .anchor("bottom").add(pv.Label)
-        .text(x.tick_format);
+        .text(x.tick_format)
 
-    vis.render();
+    vis.render()
     vis.to_svg
   end
 

@@ -22,6 +22,6 @@ class Comment < ApplicationRecord
   validates :content, presence: true
 
   def self.count_per_day(day)
-    self.where(updated_at: day.all_day).count
+    where(updated_at: day.all_day).count
   end
 end

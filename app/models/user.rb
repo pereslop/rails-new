@@ -59,6 +59,7 @@ class User < ApplicationRecord
   scope :ordered, -> { order(username: :asc) }
   scope :without_user, ->(user) { where.not(id: user) }
   scope :companions, ->(current_user) { joins(:conversations).merge(current_user.conversations).distinct.where.not(id: current_user.id) }
+  scope :without_user, ->(user) { where.not(id: user.id) }
 
   def self.from_omniauth(auth)
     authorization = Authorization.where(provider: auth[:provider],

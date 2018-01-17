@@ -10,6 +10,11 @@ end
 gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
+
+gem 'cequel'
+gem 'activemodel-serializers-xml'
+
+gem 'mongoid'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
@@ -81,8 +86,6 @@ gem 'skim'
 gem 'ransack'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'cequel'
-gem 'activemodel-serializers-xml'
 gem 'rubyvis'
 gem 'figaro'
 gem 'rmagick'

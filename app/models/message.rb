@@ -24,6 +24,10 @@ class Message
   validates :body, presence: true
 
   def self.for_conversation(conversation)
-   self.where(conversation_id: conversation.id).to_a.sort_by{|e| e[:updated_at]}.reverse!
- end
+   where(conversation_id: conversation.id).to_a.sort_by{|e| e[:updated_at]}.reverse!
+  end
+
+  def body
+
+  end
 end
