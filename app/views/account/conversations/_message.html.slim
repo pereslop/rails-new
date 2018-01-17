@@ -2,4 +2,4 @@
   .message-info
     p.companion-usermane= User.find(message.user_id).username
     p.time= "#{time_ago_in_words(message.updated_at)} ago"
-  p.body= message.body
+  p.body= message_body(message)
