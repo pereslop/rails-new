@@ -17,7 +17,7 @@ RSpec.describe Message, type: :model do
   let!(:conversation) { FactoryGirl.create(:conversation) }
   describe 'scope' do
     it 'return messages for conversation' do
-      Message.create(conversation_id: conversation.id, user_id: sender.id, body: Faker::Lorem.sentence  )
+      Message.create(conversation_id: conversation.id, user_id: sender.id)
       expect(Message.for_conversation(conversation).count).to eq(1)
     end
   end

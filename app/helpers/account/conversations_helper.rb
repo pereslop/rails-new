@@ -3,7 +3,7 @@ module Account::ConversationsHelper
    conversation.users.without_user(current_user)
  end
 
- def message_body(message)
+ def message_text(message)
    MessageBody.for_message(message).body
  end
 end

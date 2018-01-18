@@ -10,19 +10,17 @@ if User.count < 16
   FactoryGirl.create_list(:user, 15, :with_content)
 end
 
-users_ids = User.all.pluck(:id)
-
 User.all.each do |user|
   users_collection = User.all.without(user)
-  # User.count.times { user.follow!(users_collection.sample) }
+  User.count.times { user.follow!(users_collection.sample) }
   users_collection.each do |recipient|
     unless User.companions(user).include?(recipient)
       conversation = user.conversations.create()
       message = Message.create(user_id: user.id, conversation_id: conversation.id)
-      MessageBody.create(body: Faker::Lorem.sentence, sender_id: message.user_id, message_id: message.id)
+      MessageBody.create(body: Faker::Lorem.sentence, message_id: message.id)
       conversation.users << recipient
       message = Message.create(user_id: recipient.id, conversation_id: conversation.id)
-      MessageBody.create(body: Faker::Lorem.sentence, sender_id: message.user_id, message_id: message.id)
+      MessageBody.create(body: Faker::Lorem.sentence, message_id: message.id)
     end
   end
 end

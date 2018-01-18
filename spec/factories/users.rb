@@ -40,13 +40,13 @@ FactoryGirl.define do
                                       user_id: User.pluck(:id).sample,
                                       commentable_type: 'Post',
                                       commentable_id: post.id,
-                                      updated_at: Time.now - rand(11).days)
+                                      updated_at: Time.zone.now - rand(11).days)
         comments.each do |comment|
             FactoryGirl.create_list(:comment, rand(5..20),
                                     user_id: User.pluck(:id).sample,
                                     commentable_type: 'Comment',
                                     commentable_id: comment.id,
-                                    updated_at: Time.now - rand(11).days)
+                                    updated_at: Time.zone.now - rand(11).days)
         end
       end
     end

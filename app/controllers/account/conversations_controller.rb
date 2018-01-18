@@ -24,7 +24,7 @@ class Account::ConversationsController < ApplicationController
   def common
     @conversations = collection
     @messages = Message.for_conversation(@conversation)
-    @message = Message.new(conversation_id: @conversation_id)
+    @message_body = MessageBody.new()
   end
 
   def collection
