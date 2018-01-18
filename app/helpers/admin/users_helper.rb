@@ -8,13 +8,13 @@ module Admin::UsersHelper
     days = last_days
 
 
-#/* Sizing and scales. *
+# Sizing and scales
     w = 600
     h = 250
     x = pv.Scale.linear(0, comments_data.max).range(0, w)
     y = pv.Scale.ordinal(pv.range(comments_data.count)).split_banded(0, h, 4/5.0)
 
-#/* The root panel. */
+# The root panel
     vis = pv.Panel.new()
               .width(w)
               .height(h)
@@ -23,7 +23,7 @@ module Admin::UsersHelper
               .right(10)
               .top(9)
 
-#/* The bars. */
+# The bars
     bar = vis.add(pv.Bar)
               .data(comments_data)
               .top(lambda { y.scale(self.index)})
@@ -31,18 +31,18 @@ module Admin::UsersHelper
               .left(0)
               .width(x)
 
-#/* The value label. */
+# The value label.
     bar.anchor("right").add(pv.Label)
         .text_style("white")
         .text(lambda { |d| d })
 
-#/* The variable label. */
+# The variable label
     bar.anchor("left").add(pv.Label)
         .text_margin(3)
         .text_align("right")
-        .text(lambda { days[self.index].strftime('%F') });
+        .text(lambda { days[self.index].strftime('%F') })
 
-#/* X-axis ticks. */
+# X-axis ticks
     vis.add(pv.Rule)
         .data(x.ticks(5))
         .left(x)
@@ -54,7 +54,7 @@ module Admin::UsersHelper
         .anchor("bottom").add(pv.Label)
         .text(x.tick_format)
 
-    vis.render()
+    vis.render
     vis.to_svg
   end
 

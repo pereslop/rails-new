@@ -19,12 +19,13 @@ class Account::ConversationsController < ApplicationController
 
     render :chat
   end
+
   private
 
   def common
     @conversations = collection
     @messages = Message.for_conversation(@conversation)
-    @message = Message.new(conversation_id: @conversation_id)
+    @message_body = MessageBody.new()
   end
 
   def collection
@@ -41,6 +42,7 @@ class Account::ConversationsController < ApplicationController
 
     new_conversation = current_user.conversations.create()
     new_conversation.users << User.find(params[:id])
+
     return new_conversation
   end
 end
