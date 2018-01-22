@@ -1,4 +1,4 @@
-= simple_form_for [:account, conversation, message_body], remote: true do |f|
-  = f.input :body, label: false
-  = f.hidden_field :conversation_id, value: conversation.id
-  = f.button :submit, 'SEND', class: 'send-message no-padding'
+= simple_form_for [:account, conversation] do |f|
+  = f.input :title
+  = f.association :users, collection: User.all, label_method: :username, value_method: :id, as: :check_boxes
+  = f.button :submit

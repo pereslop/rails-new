@@ -7,6 +7,20 @@ class Account::ConversationsController < ApplicationController
     render :chat
   end
 
+  def new
+    @conversation = current_user.conversations.new()
+    @followers = followers
+  end
+
+  def create
+    @conversation = current_user.conversations.new(conversation_params)
+    if @conversation.save
+      @conversation.users << User.find(params[:user_ids])
+      redirect_to chat_account_conversation_path
+    end
+    render body: nil
+  end
+
   def chat
     @conversation = resource
     common
@@ -25,7 +39,7 @@ class Account::ConversationsController < ApplicationController
   def common
     @conversations = collection
     @messages = Message.for_conversation(@conversation)
-    @message_body = MessageBody.new()
+    @message = MessageBody.new()
   end
 
   def collection
@@ -36,6 +50,10 @@ class Account::ConversationsController < ApplicationController
     collection.find(params[:id])
   end
 
+  def conversation_params
+    params.require(:conversation).permit(:title)
+  end
+
   def recipient_conversation
     conversation = Conversation.between_users([current_user.id, params[:id]]).first
     return conversation if conversation.present?
@@ -44,5 +62,9 @@ class Account::ConversationsController < ApplicationController
     new_conversation.users << User.find(params[:id])
 
     return new_conversation
+  end
+
+  def followers
+    current_user.followers(User)
   end
 end

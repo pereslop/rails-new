@@ -5,9 +5,14 @@ $white-color: #ffffff;
 $grey-color: #808080;
 $light-grey-color: #D3D3D3;
 $blue-color: #486090;
+$red-color: #D33135;
 .active-message-companion.active {
   background-color: $active-companion-color;
-  a {
+  .active-conversation {
+    color: $white-color;
+  }
+  .dropdown  span .fa{
+    visibility: visible;
     color: $white-color;
   }
 }
@@ -101,4 +106,25 @@ $blue-color: #486090;
 .show-on-hover {
   visibility: hidden;
   padding-right: 2px;
+}
+
+#new-conversation {
+  background-color: $blue-color;
+  margin: 0 auto;
+  padding: 4px;
+  span {
+    font-size: 15px;
+    color: $white-color;
+  }
+}
+.chat-member-avatar {
+  height: 60px;
+  width: 60px;
+}
+
+.remove-companion {
+  background-color: $red-color;
+  span .fa {
+    color: $white-color;
+  }
 }
