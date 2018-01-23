@@ -1,1 +1,6 @@
-=render partial: 'account/conversations/chat_members/chat_member', collection: @chat_members, as: :chat_member, locals: { conversation: @conversation }
+.row
+  h4.text-center Chat members
+  .col-xs-4
+  .col-md-5
+    table.table
+      =render partial: 'account/conversations/chat_members/chat_member', collection: @chat_members, as: :chat_member, locals: { conversation: @conversation }

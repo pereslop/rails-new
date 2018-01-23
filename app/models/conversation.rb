@@ -9,8 +9,12 @@
 #
 
 class Conversation < ApplicationRecord
+  TYPES = %i(pair chat).freeze
+
   has_many :conversations_users
-  has_many :users, through: :conversations_users, counter_cache: true
+  has_many :users, through: :conversations_users
+
+  enum type: TYPES
 
   scope :between_users, ->(user_ids) do
     joins(:users).where('users.id': user_ids).group('conversations.id').having('count(*) = ?', user_ids.count)

@@ -1,10 +1,15 @@
 .messenger-user data-companion-id=conversation.id
   .username
-    = link_to chat_account_conversation_path(conversation.id), class: 'active-conversation', remote: true do
-      span= conversations_users(conversation).first.username
+    - if conversation.title
+      = link_to chat_account_conversation_path(conversation.id), class: 'active-conversation', remote: true do
+        span= conversation.title
+    - else
+      = link_to chat_account_conversation_path(conversation.id), class: 'active-conversation', remote: true do
+        span= conversations_users(conversation).username
   .dropdown
     span#dropdownMenuButtondropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
       i.show-on-hover.fa.fa-cog[aria-hidden="true"]
     .dropdown-menu aria-labelledby="dropdownMenuButton"
-      = link_to 'show members', account_conversation_chat_members_path(conversation.id), remote: true
-      a.dropdown-item href="#"  Sometahing else here
+      = link_to 'show members', account_conversation_chat_members_path(conversation.id), remote: true, class: 'dropdown-item'
+      .dropdown-divider
+      = link_to 'leave chat', account_conversation_chat_member_path(conversation, current_user.id), method: :delete, remote: true, class: 'dropdown-item'

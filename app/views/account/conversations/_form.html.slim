@@ -1,4 +1,4 @@
 = simple_form_for [:account, conversation] do |f|
   = f.input :title
-  = f.association :users, collection: User.all, label_method: :username, value_method: :id, as: :check_boxes
+  = f.association :users, collection: User.all, label_method: :username, value_method: :id, as: :check_boxes, include_hidden: false
   = f.button :submit

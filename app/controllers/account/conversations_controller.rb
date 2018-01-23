@@ -13,12 +13,13 @@ class Account::ConversationsController < ApplicationController
   end
 
   def create
-    @conversation = current_user.conversations.new(conversation_params)
+    @conversation = Conversation.new(conversation_params)
     if @conversation.save
-      @conversation.users << User.find(params[:user_ids])
-      redirect_to chat_account_conversation_path
+      @conversation.users << conversation_users << current_user
+
+      common
+      render :chat
     end
-    render body: nil
   end
 
   def chat
@@ -52,6 +53,10 @@ class Account::ConversationsController < ApplicationController
 
   def conversation_params
     params.require(:conversation).permit(:title)
+  end
+
+  def conversation_users
+    User.find(params[:conversation][:user_ids])
   end
 
   def recipient_conversation
