@@ -1,5 +1,5 @@
 class AddTypeToConversations < ActiveRecord::Migration[5.1]
   def change
-    add_column :conversations, :type, :integer, default: 0
+    add_column :conversations, :kind, :integer, default: 0
   end
 end

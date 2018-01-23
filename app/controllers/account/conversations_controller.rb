@@ -14,6 +14,7 @@ class Account::ConversationsController < ApplicationController
 
   def create
     @conversation = Conversation.new(conversation_params)
+    byebug
     if @conversation.save
       @conversation.users << conversation_users << current_user
 
@@ -38,7 +39,7 @@ class Account::ConversationsController < ApplicationController
   private
 
   def common
-    @conversations = collection
+    @conversations = collection.ordered
     @messages = Message.for_conversation(@conversation)
     @message = MessageBody.new()
   end
@@ -52,7 +53,7 @@ class Account::ConversationsController < ApplicationController
   end
 
   def conversation_params
-    params.require(:conversation).permit(:title)
+    params.require(:conversation).permit(:title, :kind)
   end
 
   def conversation_users
@@ -60,7 +61,7 @@ class Account::ConversationsController < ApplicationController
   end
 
   def recipient_conversation
-    conversation = Conversation.between_users([current_user.id, params[:id]]).first
+    conversation = Conversation.between_users([current_user.id, params[:id]]).pair.first
     return conversation if conversation.present?
 
     new_conversation = current_user.conversations.create()

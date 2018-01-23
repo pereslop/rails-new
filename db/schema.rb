@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20180123132910) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "type", default: 0
+    t.integer "kind", default: 0
   end
 
   create_table "conversations_users", id: false, force: :cascade do |t|

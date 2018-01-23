@@ -1,11 +1,7 @@
 .messenger-user data-companion-id=conversation.id
   .username
-    - if conversation.title
-      = link_to chat_account_conversation_path(conversation.id), class: 'active-conversation', remote: true do
-        span= conversation.title
-    - else
-      = link_to chat_account_conversation_path(conversation.id), class: 'active-conversation', remote: true do
-        span= conversations_users(conversation).username
+    = link_to chat_account_conversation_path(conversation.id), class: 'active-conversation', remote: true do
+      span= conversation_name(conversation)
   .dropdown
     span#dropdownMenuButtondropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
       i.show-on-hover.fa.fa-cog[aria-hidden="true"]
