@@ -1,0 +1,7 @@
+.dropdown
+  span#dropdownMenuButtondropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
+    i.show-on-hover.fa.fa-cog[aria-hidden="true"]
+  .dropdown-menu aria-labelledby="dropdownMenuButton"
+    = link_to 'show members', account_conversation_chat_members_path(conversation.id), remote: true, class: 'dropdown-item'
+    .dropdown-divider
+    = link_to 'leave chat', account_conversation_chat_member_path(conversation, current_user.id), method: :delete, remote: true, class: 'dropdown-item'

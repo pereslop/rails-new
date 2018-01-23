@@ -5,6 +5,6 @@
   = render 'account/conversations/messages/form', companion: current_user, message: message, conversation: conversation
 #messages-list
   = render 'account/conversations/messages',  messages: messages
-javascript:
-    let active_user_id = $('span[data-companion-id]').attr('data-companion-id');
-    $ ("div[data-companion-id='${active_user_id}']").addClass('active-message-companion active');
+  javascript:
+      var active_user_id = $('span[data-companion-id]').attr('data-companion-id')
+      $(`div[data-companion-id='${active_user_id}']`).addClass('active-message-companion active')

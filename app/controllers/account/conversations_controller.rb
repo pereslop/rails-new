@@ -14,13 +14,12 @@ class Account::ConversationsController < ApplicationController
 
   def create
     @conversation = Conversation.new(conversation_params)
-    byebug
     if @conversation.save
       @conversation.users << conversation_users << current_user
 
       common
-      render :chat
     end
+      render :chat
   end
 
   def chat
@@ -39,13 +38,13 @@ class Account::ConversationsController < ApplicationController
   private
 
   def common
-    @conversations = collection.ordered
+    @conversations = collection
     @messages = Message.for_conversation(@conversation)
     @message = MessageBody.new()
   end
 
   def collection
-    current_user.conversations
+    current_user.conversations.ordered
   end
 
   def resource
