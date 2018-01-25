@@ -1,6 +1,6 @@
-.messenger-user data-companion-id=conversation.id
+.messenger-user data-companion-id=conversation.id class=('unread not_read' unless UserConversation.seen?(conversation, current_user))
   .username
-    = link_to chat_account_conversation_path(conversation.id), class: 'active-conversation', remote: true do
+    = link_to chat_account_conversation_path(conversation.id), class: 'active-conversation' do
       span= conversation_name(conversation)
   - if conversation.chat?
     = render 'account/conversations/chat_conversation_settings', conversation: conversation

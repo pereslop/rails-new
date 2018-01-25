@@ -3,11 +3,11 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 return unless Rails.env.development?
 
-if User.count < 16
+if User.count < 2
   User.create_with(FactoryGirl.attributes_for(:user,
                                               :with_content,
                                               :admin)).find_or_create_by(role: 'admin')
-  FactoryGirl.create_list(:user, 15, :with_content)
+  FactoryGirl.create_list(:user, 1, :with_content)
 end
 
 User.all.each do |user|
@@ -17,10 +17,10 @@ User.all.each do |user|
     unless User.companions(user).include?(recipient)
       conversation = user.conversations.create()
       message = Message.create(user_id: user.id, conversation_id: conversation.id)
-      MessageBody.create(body: Faker::Lorem.sentence, message_id: message.id)
+      MessageBody.create(body: Faker::Lorem.sentence, message_id: message.id, user_id: user.id, conversation_id: conversation.id)
       conversation.users << recipient
       message = Message.create(user_id: recipient.id, conversation_id: conversation.id)
-      MessageBody.create(body: Faker::Lorem.sentence, message_id: message.id)
+      MessageBody.create(body: Faker::Lorem.sentence, message_id: message.id, user_id: user.id, conversation_id: conversation.id)
     end
   end
 end

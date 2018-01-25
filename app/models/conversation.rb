@@ -11,8 +11,8 @@
 class Conversation < ApplicationRecord
   TYPES = %i(pair chat).freeze
 
-  has_many :conversations_users
-  has_many :users, through: :conversations_users
+  has_many :user_conversations, dependent: :destroy
+  has_many :users, -> { distinct }, through: :user_conversations
 
   enum kind: TYPES
 
@@ -21,4 +21,5 @@ class Conversation < ApplicationRecord
   end
 
   scope :ordered, -> { order(created_at: :desc) }
+
 end

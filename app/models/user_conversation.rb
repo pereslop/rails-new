@@ -1,0 +1,27 @@
+class UserConversation < ApplicationRecord
+  belongs_to :user
+  belongs_to :conversation
+
+  scope :for_conversation, ->(conversation) { find_by!(conversation_id: conversation.id) }
+
+  def self.read_conversation(conversation)
+    for_conversation(conversation).touch
+  end
+
+  def self.seen?(conversation, user)
+    user_user_conversation(conversation, user).updated_at <= last_activity_time(conversation) ? false : true
+  end
+
+  def self.user_user_conversation(conversation, user)
+    user.user_conversations.for_conversation(conversation)
+  end
+
+  def self.last_activity_time(conversation)
+    messages = MessageBody.for_conversation(conversation)
+    if messages.empty?
+      conversation.created_at
+    else
+      messages.asc(:created_at).last.created_at
+    end
+  end
+end

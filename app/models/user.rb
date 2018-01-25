@@ -35,8 +35,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :authorizations, dependent: :destroy
-  has_many :conversations_users, dependent: :destroy
-  has_many :conversations, through: :conversations_users
+  has_many :user_conversations, dependent: :destroy
+  has_many :conversations, -> { distinct }, through: :user_conversations
 
 
   acts_as_liker

@@ -17,6 +17,9 @@ $red-color: #D33135;
   }
 }
 
+.unread.not_read {
+  background-color: $blue-color;
+}
 .messenger-user {
   background-color: $messages-background-color;
   margin: 5px 0;

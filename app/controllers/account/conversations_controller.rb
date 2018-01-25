@@ -2,6 +2,7 @@ class Account::ConversationsController < ApplicationController
   def index
     @conversation = collection.first
 
+    read_conversation
     common
 
     render :chat
@@ -16,20 +17,24 @@ class Account::ConversationsController < ApplicationController
     @conversation = Conversation.new(conversation_params)
     if @conversation.save
       @conversation.users << conversation_users << current_user
+      read_conversation
 
       common
     end
-      render :chat
+    render :chat
   end
 
   def chat
     @conversation = resource
+
+    read_conversation
     common
   end
 
   def recipient
     @conversation = recipient_conversation
 
+    read_conversation
     common
 
     render :chat
@@ -37,8 +42,12 @@ class Account::ConversationsController < ApplicationController
 
   private
 
+  def read_conversation
+    current_user.user_conversations.read_conversation(@conversation)
+  end
+
   def common
-    @conversations = collection
+    @conversations = current_user.conversations.ordered
     @messages = Message.for_conversation(@conversation)
     @message = MessageBody.new()
   end

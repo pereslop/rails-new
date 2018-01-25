@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123132910) do
+ActiveRecord::Schema.define(version: 20180124090641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,12 +39,6 @@ ActiveRecord::Schema.define(version: 20180123132910) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "kind", default: 0
-  end
-
-  create_table "conversations_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "conversation_id", null: false
-    t.index ["user_id", "conversation_id"], name: "index_conversations_users_on_user_id_and_conversation_id"
   end
 
   create_table "follows", force: :cascade do |t|
@@ -79,6 +73,15 @@ ActiveRecord::Schema.define(version: 20180123132910) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "user_conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "conversation_id"
+    t.index ["conversation_id"], name: "index_user_conversations_on_conversation_id"
+    t.index ["user_id"], name: "index_user_conversations_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -104,4 +107,6 @@ ActiveRecord::Schema.define(version: 20180123132910) do
 
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "user_conversations", "conversations"
+  add_foreign_key "user_conversations", "users"
 end

@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :conversations_user do
+  factory :user_conversation do
     
   end
 end
