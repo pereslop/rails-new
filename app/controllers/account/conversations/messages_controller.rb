@@ -7,15 +7,11 @@ class Account::Conversations::MessagesController < ApplicationController
       current_user.user_conversations.read_conversation(conversation)
       redirect_to chat_account_conversation_path(conversation), remote:true
     else
-      empty_responce
+      render body: nil
     end
   end
 
   private
-  def empty_responce
-    render body: nil
-  end
-
 
   def conversation
     Conversation.find(@message.conversation_id)

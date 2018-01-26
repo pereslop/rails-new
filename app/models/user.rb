@@ -38,7 +38,6 @@ class User < ApplicationRecord
   has_many :user_conversations, dependent: :destroy
   has_many :conversations, -> { distinct }, through: :user_conversations
 
-
   acts_as_liker
   acts_as_followable
   acts_as_follower
@@ -55,6 +54,8 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: { case_sensitive: false },
             length: { minimum: 3 }
+
+  accepts_nested_attributes_for :user_conversations
 
   enum role: ROLES
 

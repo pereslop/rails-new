@@ -65,7 +65,7 @@ class Account::ConversationsController < ApplicationController
   end
 
   def conversation_users
-    User.find(params[:conversation][:user_ids])
+    User.where(id: params[:conversation][:user_ids])
   end
 
   def recipient_conversation

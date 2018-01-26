@@ -2,6 +2,8 @@ class UserConversation < ApplicationRecord
   belongs_to :user
   belongs_to :conversation
 
+  accepts_nested_attributes_for :conversation
+
   scope :for_conversation, ->(conversation) { find_by!(conversation_id: conversation.id) }
 
   def self.read_conversation(conversation)
@@ -9,10 +11,10 @@ class UserConversation < ApplicationRecord
   end
 
   def self.seen?(conversation, user)
-    user_user_conversation(conversation, user).updated_at <= last_activity_time(conversation) ? false : true
+    personal_for(conversation, user).updated_at <= last_activity_time(conversation) ? false : true
   end
 
-  def self.user_user_conversation(conversation, user)
+  def self.personal_for(conversation, user)
     user.user_conversations.for_conversation(conversation)
   end
 

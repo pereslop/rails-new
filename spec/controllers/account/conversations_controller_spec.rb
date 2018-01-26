@@ -28,5 +28,17 @@ RSpec.describe Account::ConversationsController, type: :controller do
       get :recipient, params: { id: recipient.id }
       expect(response).to have_http_status(:success)
     end
+    it 'Get#new' do
+      get :new
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'Get#post' do
+    it 'creates new conversation' do
+      expect do
+        post :create, params: { conversation: FactoryGirl.attributes_for(:conversation) }
+      end.to change(Conversation, :count).by(1)
+    end
   end
 end

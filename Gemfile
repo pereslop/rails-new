@@ -24,6 +24,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
+gem 'pry-byebug'
 gem 'premailer-rails'
 gem 'rails', '~> 5.1.4'
 gem 'rails-backbone'
@@ -41,15 +42,16 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-rails'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.6'
   gem 'rspec-html-matchers'
   gem 'database_cleaner'
-  gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'mongoid-rspec'
   gem 'simplecov', require: false
 end
 
@@ -58,8 +60,6 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rack-livereload'
-  gem 'guard-livereload', '~> 2.5', require: false
   gem 'any_login'
 end
 
