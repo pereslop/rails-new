@@ -16,11 +16,9 @@ User.all.each do |user|
   users_collection.each do |recipient|
     unless User.companions(user).include?(recipient)
       conversation = user.conversations.create()
-      message = Message.create(user_id: user.id, conversation_id: conversation.id)
-      MessageBody.create(body: Faker::Lorem.sentence, message_id: message.id, user_id: user.id, conversation_id: conversation.id)
+      Message.create(body: Faker::Lorem.sentence, user_id: user.id, conversation_id: conversation.id)
       conversation.users << recipient
-      message = Message.create(user_id: recipient.id, conversation_id: conversation.id)
-      MessageBody.create(body: Faker::Lorem.sentence, message_id: message.id, user_id: user.id, conversation_id: conversation.id)
+      Message.create(body: Faker::Lorem.sentence, user_id: user.id, conversation_id: conversation.id)
     end
   end
 end

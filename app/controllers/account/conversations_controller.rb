@@ -49,7 +49,7 @@ class Account::ConversationsController < ApplicationController
   def common
     @conversations = current_user.conversations.ordered
     @messages = Message.for_conversation(@conversation)
-    @message = MessageBody.new()
+    @message = Message.new()
   end
 
   def collection

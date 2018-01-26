@@ -1,27 +1,19 @@
-# == Schema Information
-#
-# Table name: messages
-#
-#  id              :integer          not null, primary key
-#  body            :text
-#  conversation_id :integer
-#  user_id         :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#
-#
 class Message
-  include Cequel::Record
-  key :id, :timeuuid, auto: true
-  column :user_id, :int, index: true
-  column :conversation_id, :int, index: true
+  include Mongoid::Document
+  include Mongoid::Timestamps::Created
 
-  timestamps
+  field :body, type: String
+  field :conversation_id, type: Integer
+  field :user_id, type: Integer
 
-  validates :user_id, presence: true
-  validates :conversation_id, presence: true
+  scope :for_conversation, ->(conversation) { where(conversation_id: conversation.id) }
+  scope :created_after, ->(start_time) { where(:created_at.gte => start_time) }
 
-  def self.for_conversation(conversation)
-    self.where(conversation_id: conversation.id).to_a.sort_by{|e| e[:updated_at]}.reverse!
+  validates_presence_of :body, :user_id, :conversation_id
+  validates :body, length: { maximum: 20 }
+
+  def self.last_for_conversation(conversation)
+      for_conversation(conversation).asc(:created_at).last
   end
+
 end

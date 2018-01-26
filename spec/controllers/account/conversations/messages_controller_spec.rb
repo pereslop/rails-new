@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Account::Conversations::MessageBodiesController, type: :controller do
+RSpec.describe Account::Conversations::MessagesController, type: :controller do
   let!(:conversation) { FactoryGirl.create(:conversation) }
   let!(:user) { conversation.users.first }
   let!(:body) { Faker::Lorem.sentence }

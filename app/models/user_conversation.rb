@@ -17,7 +17,7 @@ class UserConversation < ApplicationRecord
   end
 
   def self.last_activity_time(conversation)
-    messages = MessageBody.for_conversation(conversation)
+    messages = Message.for_conversation(conversation)
     if messages.empty?
       conversation.created_at
     else
