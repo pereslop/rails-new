@@ -8,6 +8,7 @@ class Message
 
   scope :for_conversation, ->(conversation) { where(conversation_id: conversation.id) }
   scope :created_after, ->(start_time) { where(:created_at.gte => start_time) }
+  scope :created_in, ->(day) { where(created_at: day.midnight..day.end_of_day) }
 
   validates_presence_of :body, :user_id, :conversation_id
   validates :body, length: { maximum: 120 }
@@ -16,13 +17,11 @@ class Message
       for_conversation(conversation).asc(:created_at).last
   end
 
-  def self.unread_for_user(user)
-    messages = []
-    user.conversations.each do |conversation|
-      unless UserConversation.seen?(conversation, user)
-        messages << self.for_conversation(conversation).created_after(UserConversation.personal_for(conversation, user).created_at).to_a
-      end
-    end
-    messages
+  def self.last_created_at
+    asc(:created_at).last
+  end
+
+  def self.count_for_day
+
   end
 end

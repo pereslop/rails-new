@@ -3,11 +3,11 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 return unless Rails.env.development?
 
-if User.count < 2
+if User.count < 5
   User.create_with(FactoryGirl.attributes_for(:user,
                                               :with_content,
                                               :admin)).find_or_create_by(role: 'admin')
-  FactoryGirl.create_list(:user, 1, :with_content)
+  FactoryGirl.create_list(:user, 4, :with_content)
 end
 
 User.all.each do |user|

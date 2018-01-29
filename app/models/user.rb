@@ -55,7 +55,6 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false },
             length: { minimum: 3 }
 
-  accepts_nested_attributes_for :user_conversations
 
   enum role: ROLES
 

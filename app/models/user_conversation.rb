@@ -2,8 +2,6 @@ class UserConversation < ApplicationRecord
   belongs_to :user
   belongs_to :conversation
 
-  accepts_nested_attributes_for :conversation
-
   scope :for_conversation, ->(conversation) { find_by!(conversation_id: conversation.id) }
 
   def self.read_conversation(conversation)
@@ -23,7 +21,7 @@ class UserConversation < ApplicationRecord
     if messages.empty?
       conversation.created_at
     else
-      messages.asc(:created_at).last.created_at
+      messages.last_created_at.created_at
     end
   end
 end
