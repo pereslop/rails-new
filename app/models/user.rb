@@ -63,6 +63,20 @@ class User < ApplicationRecord
   scope :companions, ->(current_user) { joins(:conversations).merge(current_user.conversations).distinct.where.not(id: current_user.id) }
   scope :without_user, ->(user) { where.not(id: user.id) }
 
+  def user_conversation_for(conversation)
+    UserConversation.personal_for(conversation, self)
+  end
+
+  def unread_messages_for(conversation)
+    Message.for_conversation(conversation)
+        .created_after(self.user_conversation_for(conversation).updated_at)
+  end
+
+  def read_messages_for(conversation)
+    Message.for_conversation(conversation)
+        .created_before(self.user_conversation_for(conversation).updated_at)
+  end
+
   def self.from_omniauth(auth)
     authorization = Authorization.where(provider: auth[:provider],
                                         uid: auth[:uid].to_s).first_or_create

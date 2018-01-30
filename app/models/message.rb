@@ -8,6 +8,7 @@ class Message
 
   scope :for_conversation, ->(conversation) { where(conversation_id: conversation.id) }
   scope :created_after, ->(start_time) { where(:created_at.gte => start_time) }
+  scope :created_before, ->(start_time) { where(:created_at.lt => start_time) }
   scope :created_in, ->(day) { where(created_at: day.midnight..day.end_of_day) }
 
   validates_presence_of :body, :user_id, :conversation_id
@@ -21,7 +22,7 @@ class Message
     asc(:created_at).last
   end
 
-  def self.count_for_day
+  def self.count_for_day()
 
   end
 end

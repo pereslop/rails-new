@@ -5,7 +5,7 @@ class MessageStatistic
   attr_accessor :user, :unread_messages, :read_messages, :start_time
 
   def initialize(user)
-    @start_time = Time.now - 7.days
+    @start_time = 1.week.ago
     @user = user
     @unread_messages = []
     @read_messages = []
@@ -32,13 +32,8 @@ class MessageStatistic
 
     def set_messages_collection
       user.conversations.each do |conversation|
-        if UserConversation.seen?(conversation, @user)
-          @read_messages << Message.for_conversation(conversation).created_after(@start_time)
-        else
-          @unread_messages << Message.for_conversation(conversation)
-                                .created_after(@start_time)
-                                .created_after(UserConversation.personal_for(conversation, @user).updated_at)
-        end
+        @unread_messages << @user.unread_messages_for(conversation)
+        @read_messages << @user.read_messages_for(conversation)
       end
     end
 end

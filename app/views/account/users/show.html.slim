@@ -27,6 +27,7 @@
         = render partial: 'account/users/follower', collection: @followees.first(6), as: :follower
         - if current_user.posts.any?
     .col-md-9
+      = line_chart(@user).html_safe
       .row
         - if @posts.any?
           #posts
