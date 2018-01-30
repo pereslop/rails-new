@@ -13,16 +13,4 @@ class Message
 
   validates_presence_of :body, :user_id, :conversation_id
   validates :body, length: { maximum: 120 }
-
-  def self.last_for_conversation(conversation)
-      for_conversation(conversation).asc(:created_at).last
-  end
-
-  def self.last_created_at
-    asc(:created_at).last
-  end
-
-  def self.count_for_day()
-
-  end
 end

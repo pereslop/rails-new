@@ -33,6 +33,7 @@ class Admin::UsersController < AdminController
     set_last_comments
 
     UserMailer.statistic(resource, @last_comments).deliver
+    UserMailer.messages_statistic(resource).deliver
     render body: nil
   end
 

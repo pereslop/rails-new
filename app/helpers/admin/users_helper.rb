@@ -62,6 +62,6 @@ module Admin::UsersHelper
     img, data = Magick::Image.from_blob(svg) do
        self.format = 'SVG'
      end
-     img.to_blob {self.format = 'PNG'}
+    img.to_blob {self.format = 'PNG'}
   end
 end

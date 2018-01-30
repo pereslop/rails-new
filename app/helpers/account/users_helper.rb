@@ -10,9 +10,7 @@ module Account::UsersHelper
   DOT_BOTTOM = -25
   DOT_LABEL_BOTTOM = -30
   DOT_LEFT = 150
-  # DAYS = last_days
   DAYS_COUNT = 7
-  DAY_START = -1
   COLORS = { files_scanned: '#83c9e9', ips_scanned: '#5096b6', connectors: '#14a792', unseen_connectors: '#e3edff' }
   CHART_LINE_COLOR = '#dfdfdf'
   DEFAULT_MAX_VALUE = 10
@@ -90,7 +88,6 @@ module Account::UsersHelper
         left 0
       end
     end
-
     panel.render
     panel.to_svg
   end
