@@ -76,7 +76,7 @@ class User < ApplicationRecord
     Message.for_conversation(conversation)
         .created_before(self.user_conversation_for(conversation).updated_at)
   end
-
+  
   def self.from_omniauth(auth)
     authorization = Authorization.where(provider: auth[:provider],
                                         uid: auth[:uid].to_s).first_or_create

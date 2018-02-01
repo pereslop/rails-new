@@ -37,7 +37,7 @@ gem 'skim'
 gem 'slim-rails'
 gem 'socialization'
 gem 'uglifier', '>= 1.3.0'
-
+gem 'whenever'
 
 
 group :development, :test do

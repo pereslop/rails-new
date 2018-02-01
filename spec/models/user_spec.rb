@@ -36,7 +36,7 @@ describe User, type: :model do
   describe 'User authorization' do
     it 'create new authorization and user' do
       expect do
-        described_class.from_omniauth(auth)
+         described_class.from_omniauth(auth)
       end.to change(Authorization, :count).by(1).and change(described_class, :count).by(1)
     end
 
@@ -55,6 +55,28 @@ describe User, type: :model do
   end
 
   describe 'user scopes' do
+    let! (:conversation) { Conversation.create() }
+    let! (:recipient) { FactoryGirl.create(:user) }
+    let! (:message) do
+      FactoryGirl.create(:message, conversation_id: conversation.id, user_id: user.id)
+    end
+    let! (:unread_message) do
+      FactoryGirl.create(:message, conversation_id: conversation.id, user_id: user.id, created_at: Time.now + 1.second)
+    end
 
+    it 'collection includes read message' do
+      conversation.users << user
+      expect(user.read_messages_for(conversation)).to include(message)
+    end
+
+    it 'collection includes unread message' do
+      conversation.users << user << recipient
+      expect(recipient.unread_messages_for(conversation)).to include(unread_message)
+    end
+
+    it 'user_conversation for user and conversation' do
+      conversation.users << user
+      expect(user.user_conversation_for(conversation)).to have_attributes(user_id: user.id, conversation_id: conversation.id )
+    end
   end
 end
