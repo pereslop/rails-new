@@ -12,7 +12,7 @@ module Admin::UsersHelper
     w = 600
     h = 250
     x = pv.Scale.linear(0, comments_data.max).range(0, w)
-    y = pv.Scale.ordinal(pv.range(comments_data.count)).split_banded(0, h, 4/5.0)
+    y = pv.Scale.ordinal(pv.range(comments_data.count)).split_banded(0, h, 5/5.0)
 
 # The root panel
     vis = pv.Panel.new()
@@ -22,7 +22,6 @@ module Admin::UsersHelper
               .left(60)
               .right(10)
               .top(9)
-
 # The bars
     bar = vis.add(pv.Bar)
               .data(comments_data)
@@ -59,9 +58,10 @@ module Admin::UsersHelper
   end
 
   def png(svg)
+    binding.pry
     img, data = Magick::Image.from_blob(svg) do
        self.format = 'SVG'
-     end
+    end
     img.to_blob {self.format = 'PNG'}
   end
 end

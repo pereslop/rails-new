@@ -22,7 +22,7 @@ Rails.application.routes.draw do
         get 'recipient', to: 'conversations#recipient', as: :recipient
       end
       resources :messages, module: :conversations, only: [:create]
-      resources :chat_members, module: :conversations
+      resources :chat_members, module: :conversations, only: [:index, :destroy]
     end
 
     resources :users do
