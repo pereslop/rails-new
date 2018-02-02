@@ -67,14 +67,14 @@ class User < ApplicationRecord
     UserConversation.personal_for(conversation, self)
   end
 
-  def unread_messages_for(conversation)
+  def unread_messages_for(conversation, day)
     Message.for_conversation(conversation)
-        .created_after(self.user_conversation_for(conversation).updated_at)
+        .created_between(self.user_conversation_for(conversation).updated_at, day)
   end
 
-  def read_messages_for(conversation)
+  def read_messages_for(conversation, day)
     Message.for_conversation(conversation)
-        .created_before(self.user_conversation_for(conversation).updated_at)
+        .created_between(day.beginning_of_day, self.user_conversation_for(conversation).updated_at)
   end
 
   def self.from_omniauth(auth)

@@ -10,7 +10,9 @@ class Message
   scope :created_after, ->(start_time) { where(:created_at.gte => start_time) }
   scope :created_before, ->(start_time) { where(:created_at.lt => start_time) }
   scope :created_in, ->(day) { where(created_at: day.midnight..day.end_of_day) }
+  scope :created_between, ->(start_time, end_time) { where( created_at: start_time..end_time) }
 
   validates_presence_of :body, :user_id, :conversation_id
   validates :body, length: { maximum: 120 }
+
 end
