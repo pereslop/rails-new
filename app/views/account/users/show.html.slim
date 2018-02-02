@@ -28,7 +28,6 @@
         - if current_user.posts.any?
     .col-md-9
       .row
-        = line_chart(@user).html_safe
         - if @posts.any?
           #posts
             = render partial: 'account/posts/post', collection: @user.posts.ordered, as: :post, locals: { user_post: true }
