@@ -32,11 +32,12 @@ class Admin::UsersController < AdminController
   def statistic
     set_last_comments
 
-    UserMailer.statistic(resource, @last_comments).deliver
+    UserMailer.statistic(resource, @last_comments).deliver!
     render body: nil
   end
 
   private
+
   def set_last_comments
     @last_comments = resource.comments.last_week.ordered
   end

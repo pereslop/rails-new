@@ -61,17 +61,19 @@ describe User, type: :model do
       FactoryGirl.create(:message, conversation_id: conversation.id, user_id: user.id)
     end
     let! (:unread_message) do
-      FactoryGirl.create(:message, conversation_id: conversation.id, user_id: user.id, created_at: Time.now + 1.second)
+      FactoryGirl.create(:message, conversation_id: conversation.id, user_id: user.id)
     end
 
     it 'collection includes read message' do
       conversation.users << user
-      expect(user.read_messages_for(conversation)).to include(message)
+      expect(user.read_messages_for(conversation, Time.now)).to include(message)
     end
 
     it 'collection includes unread message' do
       conversation.users << user << recipient
-      expect(recipient.unread_messages_for(conversation)).to include(unread_message)
+      UserConversation.personal_for(conversation, recipient).update(updated_at: Time.now.yesterday)
+      binding.pry
+      expect(recipient.unread_messages_for(conversation, Time.now).to_a).to include(unread_message)
     end
 
     it 'user_conversation for user and conversation' do

@@ -24,3 +24,7 @@
 every 1.minutes do
   rake "email:messages_report", environment: 'development', output: 'log/cron.log'
 end
+#
+# every 1.minutes do
+#   rake "messages:messages_activity", environment: 'development', output: 'log/cron.log'
+# end
