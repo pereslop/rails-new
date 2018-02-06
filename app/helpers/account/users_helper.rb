@@ -19,8 +19,9 @@ module Account::UsersHelper
 
 
   def line_chart(user)
-    message_statistic = MessageStatistic.new(user)
-    data = message_statistic.data_for_graph
+    message_statistic = MessageStatistic.new(user, Time.now)
+    # data = message_statistic.data_for_graph
+    data = [[2,3],[2,3],[2,3],[2,3],[2,3],[2,3],[2,3]]
     days = last_days
 
     colors = pv.colors(COLORS[:read], COLORS[:unread])

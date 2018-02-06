@@ -1,5 +1,5 @@
 namespace :messages do
-  desc "messages_activity"
+  desc "messages activity"
   task messages_activity: :environment do
     User.all.each do |user|
       message_statistic = MessageStatistic.new(user, Time.now)
