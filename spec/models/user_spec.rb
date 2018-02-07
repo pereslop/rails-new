@@ -36,7 +36,7 @@ describe User, type: :model do
   describe 'User authorization' do
     it 'create new authorization and user' do
       expect do
-         described_class.from_omniauth(auth)
+        described_class.from_omniauth(auth)
       end.to change(Authorization, :count).by(1).and change(described_class, :count).by(1)
     end
 

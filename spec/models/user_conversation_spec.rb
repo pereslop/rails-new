@@ -11,14 +11,6 @@ RSpec.describe UserConversation, type: :model do
     end
   end
 
-  # describe 'actions' do
-  #   it 'updates \'updated_at\' column' do
-  #     expect do
-  #       user.user_conversations.read_conversation(conversation)
-  #     end.to change(user_conversation, :updated_at)
-  #   end
-  # end
-
   describe 'validations' do
     it 'user_conversation for conversation must be uqiue' do
       UserConversation.new(conversation_id: conversation.id, user_id: user.id).should_not be_valid
