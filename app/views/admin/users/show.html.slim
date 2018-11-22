@@ -1,1 +1,4 @@
-= @user.username
+=stylesheet_link_tag 'mailers/user_statistic'
+= link_to 'send statistic', statistic_admin_user_path(id: @user.id), remote: true
+= render 'admin/users/statistic', user: @user, last_comments: @last_comments
+= render 'admin/users/comments_graph', last_comments: @last_comments

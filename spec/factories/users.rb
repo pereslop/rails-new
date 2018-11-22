@@ -15,31 +15,45 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  role                   :integer          default("user")
+#  role                   :integer          default("user,")
 #  username               :string
 #  avatar                 :string
+#  followees_count        :integer          default(0)
+#  followers_count        :integer          default(0)
 #
 
 FactoryGirl.define do
 
+
   factory :user do
     email { Faker::Internet.email }
-    username { Faker::Pokemon.name }
+    username { Faker::Name.name }
     password { Faker::Internet.password(8) }
-    avatar { Faker::Avatar.image("my-own-slug")}
+    avatar { Rack::Test::UploadedFile.new(Dir[Rails.root.join('spec', 'support', 'images', 'users_avatars', '*.*')].sample) }
   end
 
-  trait :with_posts do
+  trait :with_content do
     after(:create) do |user|
-      create_list(:post, 5, user: user)
-    end
-
-    after(:build) do |user|
-      build_list(:post, 5, user: user)
+      posts = create_list(:post, 5, user: user)
+      posts.each do |post|
+        comments = FactoryGirl.create_list(:comment, rand(5..10),
+                                      user_id: User.pluck(:id).sample,
+                                      commentable_type: 'Post',
+                                      commentable_id: post.id,
+                                      updated_at: Time.zone.now - rand(11).days)
+        comments.each do |comment|
+            FactoryGirl.create_list(:comment, rand(5..20),
+                                    user_id: User.pluck(:id).sample,
+                                    commentable_type: 'Comment',
+                                    commentable_id: comment.id,
+                                    updated_at: Time.zone.now - rand(11).days)
+        end
+      end
     end
   end
 
   trait :admin  do
     role :admin
+    email 'pereslop@gmail.com'
   end
 end

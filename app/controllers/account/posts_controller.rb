@@ -7,31 +7,30 @@ class Account::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    flash[:danger] = "Post #{@post.errors.messages}" unless @post.save
-    redirect_to account_user_path(current_user)
+    if @post.save
+      flash.now[:danger] = "Post #{@post.errors.messages}"
+    else
+      flash[:danger] = @post.errors.messages
+    end
+      redirect_to account_user_path(current_user)
   end
 
   def show
     @post = resource
     @posts = collection
-    respond_to do |format|
-      format.js { render 'account/posts/update_gallery' }
-    end
+
+    render 'account/posts/update_gallery'
   end
 
   def edit
     @post = resource
-    respond_to do |format|
-      format.js { render 'account/posts/edit'}
-    end
   end
 
   def update
     @post = resource
+
     if @post.update(post_update_params)
-      respond_to do |format|
-        format.js { render 'account/posts/update' }
-      end
+      render 'account/posts/update'
     else
       flash[:alert] = 'Updating canceled'
     end
@@ -41,11 +40,8 @@ class Account::PostsController < ApplicationController
   def destroy
     @post = resource
     @post_for_show = @post.next ? @post.next : @post.prev
-    @posts = collection.page(params[:page]).per(24)
+    @posts = collection.page(params[:page]).per(LIST_OF_ENTITIES)
     @post.destroy
-    respond_to do |format|
-      format.js { render 'account/posts/destroy' }
-    end
   end
 
   def toggle_like
@@ -53,9 +49,7 @@ class Account::PostsController < ApplicationController
     current_user.toggle_like!(@post)
     @post.reload
 
-    respond_to do |format|
-      format.js { render 'account/posts/update_button' }
-    end
+    render :update_button
   end
 
   private

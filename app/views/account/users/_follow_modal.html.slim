@@ -1,0 +1,7 @@
+.modal.fade.bd-example-modal-lg#follows-modal aria-hidden="true" aria-labelledby="myLargeModalLabel" role="dialog" tabindex="-1"
+  .modal-body
+    .container
+      span.close[type="button" data-dismiss="modal" aria-label="Close"]
+        i.fa.fa-window-close
+      .row#follows-list.no-margin
+        = render partial: 'account/users/follower', collection: follows, as: :follower

@@ -5,7 +5,8 @@ body
       nav
         ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
-            li= link_to 'users', account_users_path
+            li= link_to "messages", account_conversations_path, method: :get
+            li= render 'account/users/serch_form'
             -if current_user.admin?
               li= link_to "admin panel", admin_users_path, method: :get
             li.dropdown
@@ -18,4 +19,12 @@ body
                 li.divider
                 li= link_to "Sign Out", destroy_user_session_path, method: :delete
           - else
-            li= link_to "Login", new_user_session_path, method: :get
+            li.dropdown
+              a.dropdown-toggle data-toggle="dropdown" href="#"
+                | login
+                b.caret
+              ul.dropdown-menu
+                li= link_to "sign in", new_user_session_path, method: :get
+                li.social= link_to "sign up", new_user_registration_path, method: :get
+                li= link_to "facebook", user_facebook_omniauth_authorize_path, id: 'facebook-auth'
+                li= link_to "google", user_google_oauth2_omniauth_authorize_path, id: 'google-auth'

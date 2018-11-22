@@ -1,0 +1,6 @@
+let oldModal = $('#follows-modal');
+let newModal = "<%= j render 'account/users/follow_modal', follows: @users.sort_by(&:username) %>";
+
+oldModal.replaceWith(newModal);
+
+$('#follows-modal').modal('show')

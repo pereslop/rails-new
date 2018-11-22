@@ -2,13 +2,13 @@
 #
 # Table name: comments
 #
-#  id              :integer          not null, primary key
-#  content         :text
-#  user_id         :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  comentable_type :string
-#  comentable_id   :integer
+#  id               :integer          not null, primary key
+#  content          :text
+#  user_id          :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  commentable_type :string
+#  commentable_id   :integer
 #
 
 class Comment < ApplicationRecord
@@ -17,6 +17,11 @@ class Comment < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
 
   scope :ordered, -> { order(created_at: :desc) }
+  scope :last_week, -> { where('updated_at >= ?', 1.week.ago) }
 
-  validates :content, presence: true, length: { maximum: 120}
+  validates :content, presence: true
+
+  def self.count_per_day(day)
+    where(updated_at: day.all_day).count
+  end
 end

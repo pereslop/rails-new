@@ -1,0 +1,133 @@
+$messages-background-color: #f6f6f6;
+$sent-messages-background-color: #b9dbfa;
+$active-companion-color: #333333;
+$white-color: #ffffff;
+$grey-color: #808080;
+$light-grey-color: #D3D3D3;
+$blue-color: #486090;
+$red-color: #D33135;
+.active-message-companion.active {
+  background-color: $active-companion-color;
+  .active-conversation {
+    color: $white-color;
+  }
+  .dropdown  span .fa{
+    visibility: visible;
+    color: $white-color;
+  }
+}
+
+.unread.not_read {
+  background-color: $blue-color;
+}
+.messenger-user {
+  background-color: $messages-background-color;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: row;
+  &:hover {
+    background-color: $light-grey-color;
+    .show-on-hover {
+      visibility: visible;
+      color: $grey-color;
+    }
+  }
+  .user-avatar {
+    .img-companion {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+    }
+  }
+  .username {
+    display: flex;
+    margin-left: 5px;
+    padding-right: 5px;
+    width: 100%;
+    a {
+      width: 100%;
+    }
+  }
+}
+#messages-content {
+  a.username-link {
+    color: $active-companion-color;
+    font: 25px bold;
+    font-weight: bold;
+    span {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+.message {
+  background-color: $messages-background-color;
+  margin: 1px 0;
+  .message-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .companion-username  {
+      display: block;
+      font-size: smaller;
+    }
+    .time {
+      display: block;
+      text-align: right;
+      color: $grey-color;
+      padding-right: 5px;
+      font-size: 12px;
+      margin-bottom: 0;
+    }
+    color: black;
+    padding-left: 5px;
+  }
+}
+.companions-list {
+  border-right: 2px solid $light-grey-color;
+}
+#new_message {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  .message_body {
+    width: 94%;
+  }
+  .send-message {
+    display: flex;
+    align-self: center;
+    background-color: $blue-color;
+    height: 53px;
+    margin-top: -14px;
+    margin-left: 5px;
+  }
+}
+.sender-message.sender-message-background {
+  background-color: $sent-messages-background-color;
+}
+
+.show-on-hover {
+  visibility: hidden;
+  padding-right: 2px;
+}
+
+#new-conversation {
+  background-color: $blue-color;
+  margin: 0 auto;
+  padding: 4px;
+  span {
+    font-size: 15px;
+    color: $white-color;
+  }
+}
+.chat-member-avatar {
+  height: 60px;
+  width: 60px;
+}
+
+.remove-companion {
+  background-color: $red-color;
+  span .fa {
+    color: $white-color;
+  }
+}

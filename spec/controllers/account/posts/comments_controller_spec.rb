@@ -21,30 +21,47 @@ RSpec.describe Account::Posts::CommentsController, type: :controller do
       end
 
       it 'get#new' do
-        get :new, params: { post_id: post_for_user.id}, xhr: true
+        get :new, params: { post_id: post_for_user.id }, xhr: true
         expect(response).to have_http_status(:success)
       end
     end
 
-    describe 'actions' do
-      let(:create_action) { post :create, params: { comment: FactoryGirl.attributes_for(:comment), post_id: post_for_user.id }, xhr: true  }
-      let(:destroy_action) { delete :destroy, params: { post_id: post_for_user.id, id: post_comment.id }, xhr: true }
-
-      it 'post#create' do
-        expect { create_action }.to change(Comment, :count).by(1)
+    context 'comment actions' do
+      let!(:invalid_content ) { '' }
+      let!(:valid_content) {  Faker::Lorem.sentence(5) }
+      describe '#create' do
+        it 'create new comment' do
+          expect do
+            post :create, params: { comment: { content: valid_content }, post_id: post_for_user.id }, xhr: true
+          end.to change(Comment, :count).by(1)
+        end
+        it 'does not create comment' do
+          expect do
+            post :create, params: {  comment: { content: invalid_content }, post_id: post_for_user.id, xhr: true }
+          end.to change(Comment, :count).by(0)
+        end
       end
 
-      it 'patch#update' do
-        new_content = 'aaaaaaaaaaaaaaaaaaaaaaa'
-        patch :update, params: { comment: { content: new_content }, post_id: post_for_user.id, id: post_comment.id,  xhr: true, format: :js }
-        post_comment.reload
-        expect(post_comment.content).to eq(new_content)
-      end
+      describe '#update' do
+        it 'change comment content' do
+          patch :update, params: { comment: { content: valid_content }, post_id: post_for_user.id, id: post_comment.id,  xhr: true, format: :js }
+          post_comment.reload
+          expect(post_comment.content).to eq(valid_content)
+        end
 
-      it 'delete#destroy' do
-        expect { destroy_action }.to change(Comment, :count).by_at_least(-1)
+        it 'does not change comment content' do
+          patch :update, params: { comment: { content: invalid_content }, post_id: post_for_user.id, id: post_comment.id,  xhr: true, format: :js }
+          post_comment.reload
+          expect(post_comment.content).to eq(post_comment.content)
+        end
       end
-
+      describe '#destroy' do
+        it 'delete comment from database' do
+          expect do
+            delete :destroy, params: { post_id: post_for_user.id, id: post_comment.id }, xhr: true
+          end.to change(Comment, :count).by(-1)
+        end
+      end
     end
   end
 end

@@ -1,0 +1,9 @@
+tr
+  td
+    = image_tag chat_member.avatar.url, class: 'img-responsive chat-member-avatar'
+  td
+    = link_to account_user_path(chat_member) do
+      span= chat_member.username
+  td
+    button.btn.btn-danger.btn-sm
+      = link_to 'remove', account_conversation_chat_member_path(conversation, chat_member.id), method: :delete, remote: true

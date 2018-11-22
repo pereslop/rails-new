@@ -22,30 +22,48 @@ RSpec.describe Account::Comments::CommentsController, type: :controller do
       end
 
       it 'get#new' do
-        get :new, params: { comment_id: post_comment.id}, xhr: true
+        get :new, params: { comment_id: post_comment.id }, xhr: true
         expect(response).to have_http_status(:success)
       end
     end
 
-    describe 'actions' do
-      let(:create_action) { post :create, params: { comment: FactoryGirl.attributes_for(:comment), comment_id: post_comment.id }, xhr: true  }
-      let(:destroy_action) { delete :destroy, params: { comment_id: post_comment.id, id: nested_comment.id }, xhr: true }
+    context 'comment actions' do
+      let!(:invalid_content ) { '' }
+      let!(:valid_content) {  Faker::Lorem.sentence(5) }
 
-      it 'post#create' do
-        expect { create_action }.to change(Comment, :count).by(1)
+      describe '#create' do
+        it 'create new comment' do
+          expect do
+            post :create, params: { comment: { content: valid_content }, comment_id: post_comment.id }, xhr: true
+          end.to change(Comment, :count).by(1)
+        end
+
+        it 'does not create new comment' do
+          expect do
+            post :create, params: {  comment: { content: invalid_content }, comment_id: post_comment.id, xhr: true }
+          end.to change(Comment, :count).by(0)
+        end
       end
+      describe '#update' do
+        it 'change comment content' do
+          patch :update, params: {  comment: {content: valid_content }, comment_id: post_comment.id, id: nested_comment.id,  xhr: true, format: :js }
+          nested_comment.reload
+          expect(nested_comment[:content]).to eq(valid_content)
+        end
 
-      it 'patch#update' do
-        new_content = 'aaaaaaaaaaaaaaaaaaaaaaa'
-        patch :update, params: { comment: { content: new_content }, comment_id: post_comment.id, id: nested_comment.id,  xhr: true, format: :js }
-        nested_comment.reload
-        expect(nested_comment.content).to eq(new_content)
+        it 'does not create comment content' do
+          patch :update, params: {  comment: {content: invalid_content }, comment_id: post_comment.id, id: nested_comment.id,  xhr: true, format: :js }
+          nested_comment.reload
+          expect(nested_comment.content).to eq(nested_comment.content)
+        end
       end
-
-      it 'delete#destroy' do
-        expect { destroy_action }.to change(Comment, :count).by(-1)
+      describe '#destroy' do
+        it 'delete comment from database' do
+          expect do
+            delete :destroy, params: { comment_id: post_comment.id, id: nested_comment.id }, xhr: true
+          end.to change(Comment, :count).by(-1)
+        end
       end
-
     end
   end
 end

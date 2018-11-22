@@ -1,0 +1,40 @@
+body {
+    color: #4a4a4a;
+}
+h1 {
+    text-align: center;
+}
+.table-container-outer {
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+.table-container-inner {
+    vertical-align: middle;
+    display: table-cell;
+    height: 100%;
+    margin: 0 auto;
+}
+
+table.statistic {
+    margin: 0 auto;
+}
+
+td:first-child {
+    font: 20px solid;
+}
+
+td:last-child {
+    font: 25px solid;
+    padding-left: 15px;
+}
+
+h5 {
+    text-align: center;
+}
+
+.graph {
+    width: 670px;
+    margin: 0 auto;
+    border: 1px solid lightgrey;
+}

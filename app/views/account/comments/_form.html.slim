@@ -1,3 +1,15 @@
-= simple_form_for [:account, comment.commentable, comment], remote: true do |f|
-  = f.text_area :content
-  = f.submit
+.form-container
+  .user-avatar
+    - if current_user.avatar.url
+      = image_tag current_user.avatar.url, class: 'img-responsive img-circle form-avatar'
+    - else
+      = image_tag 'britni.png', class: 'img-responsive img-circle form-avatar'
+  .form
+    = simple_form_for [:account, comment.commentable, comment], remote: true do |f|
+      = f.text_area :content, placeholder: 'type comment here and press enter'
+coffee:
+  $('textarea').keypress (event) ->
+    if event.which == 13
+      event.preventDefault()
+      $(this).closest('form').submit();
+    return

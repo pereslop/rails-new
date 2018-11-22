@@ -1,10 +1,13 @@
 class Admin::UsersController < AdminController
   def index
-    @users = collection.page(params[:page]).per(24)
+    @users = collection.page(params[:page]).per(LIST_OF_ENTITIES)
   end
 
   def show
     @user = resource
+
+    set_last_comments
+
   end
 
   def edit
@@ -26,7 +29,17 @@ class Admin::UsersController < AdminController
     redirect_to admin_users_path
   end
 
+  def statistic
+    set_last_comments
+
+    UserMailer.statistic(resource, @last_comments).deliver
+    render body: nil
+  end
+
   private
+  def set_last_comments
+    @last_comments = resource.comments.last_week.ordered
+  end
 
   def user_params
     parameters = params.require(:user).permit(:username, :role)

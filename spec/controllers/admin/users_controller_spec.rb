@@ -8,8 +8,19 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
   end
 
+  context 'user logged as user' do
+    let!(:user) { FactoryGirl.create(:user) }
+    it 'redirect to the root path' do
+      sign_in user
+      get :index
+      expect(response.status).to eq(302)
+    end
+  end
+
+
   context 'user is logged as admin' do
-    let(:admin) { FactoryGirl.create(:user, :admin) }
+    let!(:admin) { FactoryGirl.create(:user, :admin) }
+    let!(:comment) { FactoryGirl.create(:comment, user_id: admin.id)}
     before(:each) do
       sign_in admin
     end
@@ -20,6 +31,11 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     it 'GET #show' do
       get :show, params: {id: admin.id }
+      expect(response.status).to eq(200)
+    end
+
+    it 'Get #statists'do
+      get :statistic, params: { id: User.all.pluck(:id).sample }, xhr: true
       expect(response.status).to eq(200)
     end
 

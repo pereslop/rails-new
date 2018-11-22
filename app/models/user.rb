@@ -15,35 +15,83 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  role                   :integer          default("user")
+#  role                   :integer          default("user,")
 #  username               :string
 #  avatar                 :string
+#  followees_count        :integer          default(0)
+#  followers_count        :integer          default(0)
 #
 
 class User < ApplicationRecord
+  ROLES = %i(user admin).freeze
+
+  SOCIALS = {
+      facebook: 'Facebook',
+      google_oauth2: 'Google'
+  }.freeze
+
   mount_uploader :avatar, AvatarUploader
+
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :authorizations, dependent: :destroy
+  has_many :user_conversations, dependent: :destroy
+  has_many :conversations, -> { distinct }, through: :user_conversations
+
+  acts_as_liker
+  acts_as_followable
+  acts_as_follower
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: SOCIALS.keys
 
   validates_integrity_of  :avatar
   validates_processing_of :avatar
+  validates :username,
+            presence: true,
+            uniqueness: { case_sensitive: false },
+            length: { minimum: 3 }
 
-  ROLES = [:user, :admin]
 
-  has_many :posts, dependent: :destroy
-  has_many :comments, dependent: :destroy
   enum role: ROLES
 
-  validates :username,
-    presence: true,
-    uniqueness: { case_sensitive: false },
-    length: { minimum: 3 }
-
   scope :ordered, -> { order(username: :asc) }
+  scope :without_user, ->(user) { where.not(id: user) }
+  scope :companions, ->(current_user) { joins(:conversations).merge(current_user.conversations).distinct.where.not(id: current_user.id) }
+  scope :without_user, ->(user) { where.not(id: user.id) }
 
-  acts_as_liker
+  def user_conversation_for(conversation)
+    UserConversation.personal_for(conversation, self)
+  end
+
+  def unread_messages_for(conversation)
+    Message.for_conversation(conversation)
+        .created_after(self.user_conversation_for(conversation).updated_at)
+  end
+
+  def read_messages_for(conversation)
+    Message.for_conversation(conversation)
+        .created_before(self.user_conversation_for(conversation).updated_at)
+  end
+  
+  def self.from_omniauth(auth)
+    authorization = Authorization.where(provider: auth[:provider],
+                                        uid: auth[:uid].to_s).first_or_create
+    return authorization.user if authorization.user
+    user = User.find_or_create_by(email: auth[:info][:email]) do |u|
+      u.password = Devise.friendly_token[0, 20]
+      u.fetch_details(auth)
+    end
+    user.authorizations << authorization
+    user
+  end
+
+  def fetch_details(auth)
+    self.username = auth[:info][:name]
+    self.email = auth[:info][:email]
+    self.remote_avatar_url = auth[:info][:image]
+  end
 end

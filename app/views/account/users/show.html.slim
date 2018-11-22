@@ -1,17 +1,34 @@
 .container
   .row
-    .col-md-3.text-center
-      h1=  @user.username
+    .col-md-3
+      .user-username
+        h1.no-margin=  @user.username
+        -unless @user == current_user
+          =render 'account/users/follow_btn', user: @user
       - if @user.avatar.url
         = image_tag @user.avatar.url, class: 'img-responsive'
       - else
         = image_tag ('britni.png'), class: 'img-responsive'
       - if @user.id == current_user.id
         = link_to "Edit profile", edit_user_registration_path, method: :get
-        = render 'account/posts/form'
+        #post-form
+          = render 'account/posts/form', remote: false
+      - unless current_user == @user
+        = link_to 'send a massage', recipient_account_conversation_path(id: @user.id), method: :get
+      .followers
+        = link_to followers_account_user_path(@user), method: :get, remote: true do
+          span= "followers #{@user.followers_count}"
+      .row
+        = render partial: 'account/users/follower', collection: @followers.first(6), as: :follower
+      .followees
+        = link_to followees_account_user_path(@user), method: :get, remote: true do
+          span= "followees #{@user.followees_count}"
+      .row
+        = render partial: 'account/users/follower', collection: @followees.first(6), as: :follower
         - if current_user.posts.any?
     .col-md-9
       .row
+        = line_chart(@user).html_safe
         - if @posts.any?
           #posts
             = render partial: 'account/posts/post', collection: @user.posts.ordered, as: :post, locals: { user_post: true }
@@ -19,4 +36,4 @@
         -else
           h3 There no posts, your can be first!!!
 = render 'account/posts/modal', post: @posts.last, posts: @posts.ordered,  user_post: true if @posts.any?
-
+= render 'account/users/follow_modal', follows: @followers

@@ -1,0 +1,7 @@
+.col-xs-4
+  = link_to account_user_path(follower), method: :get do
+    - if follower.avatar.url
+      = image_tag follower.avatar.url, class: 'img-responsive img-circle'
+    - else
+      = image_tag ('britni.png'), class: 'img-responsive img-circle'
+  = link_to "#{follower.username}",  account_user_path(follower), method: :get

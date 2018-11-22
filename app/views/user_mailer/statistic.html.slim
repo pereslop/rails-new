@@ -1,0 +1,4 @@
+h1 statistic
+= render 'admin/users/statistic', user: @user, last_comments: @last_comments
+.graph
+  = image_tag attachments['name.png'].url

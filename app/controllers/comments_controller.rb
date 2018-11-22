@@ -1,51 +1,46 @@
 class CommentsController < ApplicationController
-
   def index
-    @comments = @commentable.comments.ordered.page(params[:page]).per(3)
-    respond_to do |format|
-      format.js { render 'account/comments/index' }
-    end
+    @comments = @commentable.comments.includes(:user).ordered.page(params[:page]).per(5)
   end
 
   def new
     @comment = @commentable.comments.new
-    respond_to do |format|
-      format.js { render 'account/comments/new' }
-    end
+
+    render 'account/comments/new'
   end
 
   def create
     @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
+
     if @comment.save
-      respond_to do |format|
-        format.js { render 'account/comments/create' }
-      end
+      render 'account/comments/create'
+    else
+      render body: nil
     end
   end
 
   def edit
     @comment = resource
-    respond_to do |format|
-      format.js { render 'account/comments/edit' }
-    end
+
+    render 'account/comments/edit'
   end
 
   def update
     @comment = resource
     if @comment.update(comment_params)
-      respond_to do |format|
-        format.js { render 'account/comments/update' }
-      end
+      @comment.reload
+      render 'account/comments/update'
+    else
+      render 'account/comments/edit'
     end
   end
 
   def destroy
    @comment = resource
    @comment.destroy
-   respond_to do |format|
-     format.js { render 'account/comments/destroy' }
-   end
+
+   render 'account/comments/destroy'
   end
 
   private
